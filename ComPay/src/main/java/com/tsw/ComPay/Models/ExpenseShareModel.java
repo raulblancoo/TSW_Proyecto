@@ -1,0 +1,27 @@
+package com.tsw.ComPay.Models;
+
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name="expenses_share")
+public class ExpenseShareModel {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @ManyToOne
+    @JoinColumn(name = "expense_id")
+    private ExpensesModel expense;
+    @ManyToOne
+    @JoinColumn(name = "destinyUser_id")
+    private UserModel destinyUser;
+
+}
