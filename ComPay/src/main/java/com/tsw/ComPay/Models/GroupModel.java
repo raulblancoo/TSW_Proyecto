@@ -15,6 +15,6 @@ import lombok.NoArgsConstructor;
 public class GroupModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String groupname;
 }
