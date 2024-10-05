@@ -13,8 +13,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="groups")
 public class GroupModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private long id;
+
+    @Column(name="groupname")
     private String groupname;
 }

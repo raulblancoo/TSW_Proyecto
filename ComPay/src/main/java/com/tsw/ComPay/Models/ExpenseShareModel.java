@@ -14,12 +14,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="expenses_share")
 public class ExpenseShareModel {
+
+    @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToOne
     @JoinColumn(name = "expense_id")
     private ExpensesModel expense;
+
     @ManyToOne
     @JoinColumn(name = "destinyUser_id")
     private UserModel destinyUser;

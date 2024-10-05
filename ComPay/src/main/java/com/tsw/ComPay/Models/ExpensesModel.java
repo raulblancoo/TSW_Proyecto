@@ -13,10 +13,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="expenses")
 public class ExpensesModel {
+
+    @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name="amount")
     private double amount;
+
+    @Column(name="expenses_name")
     private String expenses_name;
 
     @ManyToOne

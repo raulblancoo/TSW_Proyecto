@@ -13,13 +13,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="groupmembers")
 public class GroupMembersModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserModel user;
+
     @ManyToOne
     @JoinColumn(name = "group_id")
     private GroupModel group;

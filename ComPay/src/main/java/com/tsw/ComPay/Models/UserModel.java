@@ -14,12 +14,18 @@ import org.antlr.v4.runtime.misc.NotNull;
 @Entity
 @Table(name="users")
 public class UserModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private long id;
-    @Column(unique=true)
+
+    @Column(unique=true, name="username")
     private String username;
-    @Column(unique=true)
+
+    @Column(unique=true, name="email")
     private String email;
+
+    @Column(name="password")
     private String password;
 }
