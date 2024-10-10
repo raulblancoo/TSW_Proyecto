@@ -20,10 +20,10 @@ public class UserModel {
     @Column(name="id")
     private long id;
 
-    @Column(unique=true, name="username")
+    @Column(name="username")
     private String username;
 
-    @Column(unique=true, name="email")
+    @Column(/*unique=true, */name="email")
     private String email;
 
     @Column(name="password")
