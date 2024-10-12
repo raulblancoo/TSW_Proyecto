@@ -1,0 +1,55 @@
+/* General layout styles */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2.5rem;
+    border-bottom: 1px solid #27313A;
+    background-color: #141414;
+}
+
+/* Button styles */
+.btn-search, .btn-notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #27313A;
+    color: white;
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Avatar styles */
+.user-avatar {
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
+
+/* Text and link styles */
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #359EFF;
+}
+
+/* Button style for "Settle up" */
+button.btn-settle {
+    background-color: #359EFF;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
