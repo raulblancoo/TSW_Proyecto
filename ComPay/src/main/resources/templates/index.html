@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- Aquí puedes incluir metas y estilos comunes -->
     <title>Dashboard</title>
-    <!-- <link rel="stylesheet" href="/static/css/tailwind.css"-->>
+    <link rel="stylesheet" th:href="@{/static/css/tailwind.css}">
 </head>
 <body>
 
 <!-- Incluir el encabezado (start.html) -->
-<!--<div th:replace="base/start :: start"></div>-->
+<div th:replace="~{base/start :: start}"></div>
 
 <!-- Incluir la barra de navegación (navbar.html) -->
-<div th:replace="base/navbar :: navbar"></div>
+<div th:replace="~{base/navbar :: navbar}"></div>
 
 <!-- Contenedor principal -->
 <div class="h-screen flex flex-row flex-wrap">
 
     <!-- Incluir el sidebar (sidebar.html) -->
-    <div th:replace="base/sidebar :: sidebar"></div>
+    <div th:replace="~{base/sidebar :: sidebar}"></div>
 
     <!-- Contenido principal -->
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
+        <!-- Incluir el informe general (generalReport.html) -->
+        <div th:replace="~{general/generalReport :: generalReport}"></div>
 
     </div>
     <!-- Fin del contenido principal -->
@@ -30,7 +31,7 @@
 <!-- Fin del contenedor principal -->
 
 <!-- Incluir el pie de página (end.html) -->
-<!--<div th:replace="base/end :: end"></div>-->
+<!--<div th:replace="~{base/end :: end}"></div>-->
 
 </body>
 </html>

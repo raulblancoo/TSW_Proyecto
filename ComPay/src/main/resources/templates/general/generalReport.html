@@ -1,0 +1,32 @@
+<!-- index/generalReport.html -->
+<div th:fragment="generalReport" class="grid grid-cols-4 gap-6 xl:grid-cols-1">
+
+    <!-- card -->
+    <div class="report-card" th:each="report : ${generalReports}">
+        <div class="card">
+            <div class="card-body flex flex-col">
+
+                <!-- top -->
+                <div class="flex flex-row justify-between items-center">
+                    <div class="h6" th:classappend="${report.iconColor} + ' ' + ${report.icon}"></div>
+                    <span th:text="${report.percentage}"
+                          th:classappend="${report.badgeColor} + ' rounded-full text-white badge text-xs'">
+                        <i th:class="${report.directionIcon} ml-1"></i>
+                    </span>
+                </div>
+                <!-- end top -->
+
+                <!-- bottom -->
+                <div class="mt-8">
+                    <h1 class="h5 num-4" th:text="${report.value}">0</h1>
+                    <p th:text="${report.description}">Description</p>
+                </div>
+                <!-- end bottom -->
+
+            </div>
+        </div>
+        <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+    </div>
+    <!-- end card -->
+
+</div>
