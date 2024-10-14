@@ -21,4 +21,7 @@ public class GroupModel {
 
     @Column(name="groupname")
     private String groupname;
+
+    @Column(name="currency")
+    private String currency;
 }

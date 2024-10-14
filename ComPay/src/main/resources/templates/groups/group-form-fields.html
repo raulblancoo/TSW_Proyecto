@@ -1,0 +1,17 @@
+<!-- fragments/form-fields.html -->
+<div th:fragment="formFields">
+    <form th:action="@{/groups/create}" method="post" th:object="${group}">
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" for="group-name">Group name</label>
+            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   id="group-name" name="groupName" placeholder="Enter a group name" type="text" required/>
+        </div>
+        <p class="text-xs text-gray-400 mb-4">You can change this later</p>
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" for="email">Search by email</label>
+            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   id="email" name="email" placeholder="Enter an email address" type="email" required/>
+            <p class="text-xs text-gray-400 mt-2">We'll send them an invite</p>
+        </div>
+    </form>
+</div>
