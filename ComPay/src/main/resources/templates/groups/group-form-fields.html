@@ -1,25 +1,17 @@
 <!-- fragments/form-fields.html -->
 <div th:fragment="formFields">
-    <div class="mb-4">
-        <label class="block text-sm font-medium mb-2" for="group-name">Group name</label>
-        <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-               id="group-name" placeholder="Enter a group name" type="text"/>
-    </div>
-    <!--<div class="mb-6">
-        <div class="w-full h-48 bg-gray-700 rounded-lg flex items-center justify-center mb-2">
-            <img alt="Illustration of people hiking in a scenic mountain landscape"
-                 class="rounded-lg" height="200"
-                 src="https://storage.googleapis.com/a1aa/image/Oe7vmcHWJgyvUyt0RCBO6IxAfRmsT1sM4THhm70JoielLuMnA.jpg"
-                 width="400"/>
+    <form th:action="@{/groups/create}" method="post" th:object="${group}">
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" for="group-name">Group name</label>
+            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   id="group-name" name="groupName" placeholder="Enter a group name" type="text" required/>
         </div>
-        <p class="text-center text-sm font-medium">Add a group image</p>
-        <p class="text-center text-xs text-gray-400">Make it easier to find your group in the future by adding an image</p>
-    </div>-->
-    <p class="text-xs text-gray-400 mb-4">You can change this later</p>
-    <div class="mb-4">
-        <label class="block text-sm font-medium mb-2" for="email">Search by email</label>
-        <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-               id="email" placeholder="Enter an email address" type="email"/>
-        <p class="text-xs text-gray-400 mt-2">We'll send them an invite</p>
-    </div>
+        <p class="text-xs text-gray-400 mb-4">You can change this later</p>
+        <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" for="email">Search by email</label>
+            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                   id="email" name="email" placeholder="Enter an email address" type="email" required/>
+            <p class="text-xs text-gray-400 mt-2">We'll send them an invite</p>
+        </div>
+    </form>
 </div>

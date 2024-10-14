@@ -22,15 +22,6 @@ public class GroupModel {
     @Column(name="groupname")
     private String groupname;
 
-    @Column(name="imgURL")
-    private String imageURL;
-
-    @Column(name="amount")
-    private Double amount; // Nuevo atributo para almacenar la deuda
-
-    public GroupModel(String groupname, String imageURL, Double amount) {
-        this.groupname = groupname;
-        this.imageURL = imageURL;
-        this.amount = amount;
-    }
+    @Column(name="currency")
+    private String currency;
 }

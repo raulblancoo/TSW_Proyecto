@@ -1,48 +1,43 @@
+
 package com.tsw.ComPay.Controllers;
 
-import com.tsw.ComPay.Models.GroupModel;
+import com.tsw.ComPay.Dto.NewGroupDto;
+import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequestMapping("/groups")
 public class GroupController {
 
     @Autowired
     private GroupService groupService;
 
-    @GetMapping("/groups")
+    @GetMapping("/show")
     public String showGroups(Model model) {
-        // Creamos una lista de grupos con datos
-        List<GroupModel> groups = Arrays.asList(
-                new GroupModel("Apartment", "https://storage.googleapis.com/a1aa/image/XCkJBoQley1uWq3prH1oFpVZvg9ZInicHRo7A8pSelkrsEmTA.jpg", 25.00),
-                new GroupModel("Vacation", "https://storage.googleapis.com/a1aa/image/QoHrxe9fcaj4UEXtveNxWl1B6AD7mfnACovKFSMd5ZQpySYOB.jpg", 50.00),
-                new GroupModel("Birthday party", "https://storage.googleapis.com/a1aa/image/BKvv1izsfuSEQChO41XJaFNZnvdRRya8ClKUbm8fr1ZosEmTA.jpg", 75.00)
-        );
-
-        if(groups == null){
-            int a = 2;
-        }
-
-        // Nos aseguramos de que la lista de grupos no sea nula
-        if (groups == null || groups.isEmpty()) {
-            // Si no hay grupos, pasamos una lista vacía o un mensaje de error
-            model.addAttribute("groups", Arrays.asList());
-        } else {
-            model.addAttribute("groups", groups);
-        }
-
-        return "groups/groups-layout"; // Retornamos la vista principal
+        return "groups/groups"; // Retornamos la vista principal
     }
 
-    @GetMapping("/create-group")
-    public String createGroup() {
+    @GetMapping("/create")
+    public String createGroup(Model model) {
+        //List<String> currency = Arrays.asList(CurrencyEnum.values().toString());
+        model.addAttribute("currency", new NewGroupDto());
         return "groups/create-group"; // Retorna la vista principal con los fragmentos
+    }
+
+    @PostMapping("/create")
+    public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+        model.addAttribute("group", newGroupDto);
+        return "";
     }
 
     @GetMapping("/view-group")

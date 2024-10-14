@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="bg-gray-900 text-white font-sans">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div th:replace="~{base/sidebar :: sidebar}"></div>
+    <!-- Main Content -->
+    <div class="w-3/4 p-8">
+        <h1 class="text-3xl font-bold mb-8">Grupos</h1>
+        <div th:replace="~{groups/groups-list :: groups}"></div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -40,11 +40,6 @@ public class LoginController {
     @PostMapping("/login")
     public String loginPost(Model model, @ModelAttribute("login") LoginDto loginDto) {
         model.addAttribute("login", loginDto);
-        UserModel user = userService.findByEmailPassword(loginDto.getEmail(), loginDto.getPassword());
-
-        if (user != null) {
-            int a = 1;
-        }
-        return "index";
+        return userService.findByEmailPassword(loginDto.getEmail(), loginDto.getPassword()) != null ? "redirect:/groups/show" : "index";
     }
 }
