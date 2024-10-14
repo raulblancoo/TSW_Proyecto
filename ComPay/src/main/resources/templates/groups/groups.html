@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body class="bg-gray-900 text-white font-sans">
+<div th:replace="~{base/navbar :: navbar}"></div>
 <div class="flex h-screen">
-    <!-- Sidebar -->
-    <div th:replace="~{base/sidebar :: sidebar}"></div>
     <!-- Main Content -->
     <div class="w-3/4 p-8">
         <h1 class="text-3xl font-bold mb-8">Grupos</h1>
         <div th:replace="~{groups/groups-list :: groups}"></div>
     </div>
+
+    <a th:href="@{/groups/create}">
+        <button class="bg-blue-600 text-white py-2 px-4 rounded mt-auto">Nuevo grupo</button>
+    </a>
 
 </div>
 </body>
