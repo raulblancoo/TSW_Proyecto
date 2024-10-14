@@ -11,7 +11,6 @@ import lombok.Setter;
 @Builder
 public class GroupDto {
     private long id;
-    private String groupname;
-    private String imageURL;
-    private double amount;
+    private String groupName;
+    private String currency;
 }

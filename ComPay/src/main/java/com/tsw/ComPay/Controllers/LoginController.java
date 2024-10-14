@@ -31,11 +31,12 @@ public class LoginController {
         return "index";
     }
 
+    /*
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new LoginDto());
         return "index";
-    }
+    }*/
 
     @PostMapping("/login")
     public String loginPost(Model model, @ModelAttribute("login") LoginDto loginDto) {

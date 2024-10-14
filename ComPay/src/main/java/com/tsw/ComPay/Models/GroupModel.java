@@ -19,8 +19,8 @@ public class GroupModel {
     @Column(name="id")
     private long id;
 
-    @Column(name="groupname")
-    private String groupname;
+    @Column(name="groupName")
+    private String groupName;
 
     @Column(name="currency")
     private String currency;
