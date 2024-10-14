@@ -17,13 +17,14 @@
     <!-- Form Fields Fragment -->
     <div th:replace="~{groups/group-form-fields :: formFields}"></div>
 
-    <!-- Currency Selector Fragment -->
-    <div th:replace="~{groups/currency-selector :: currencySelector}"></div>
+<!--    <div th:replace="~{groups/currency-selector :: currencySelector}"></div>-->
 
     <!-- Submit Button -->
-    <button class="w-full p-3 bg-blue-600 rounded-lg text-white font-medium focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Crear grupo
-    </button>
+    <div class="p-6 flex items justify-center">
+        <button class="text-gray-300 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Cancelar</button>
+        <button class="text-white bg-blue-500 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Crear grupo</button>
+    </div>
+
 </div>
 </body>
 </html>
