@@ -47,6 +47,6 @@ public class GroupController {
 
     @GetMapping("/view-group")
     public String viewGroup(Model model) {
-        return "index/expensesGroup"; // Retorna la vista principal con los fragmentos
+        return "groups/group-expense-layout"; // Retorna la vista principal con los fragmentos
     }
 }
