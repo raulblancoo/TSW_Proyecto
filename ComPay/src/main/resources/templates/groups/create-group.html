@@ -8,23 +8,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+
 <div class="w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg">
     <!-- fragments/header.html -->
     <div>
-        <h1 class="text-2xl font-bold mb-6">Crea un grupo</h1>
+        <h1 class="flex items-center justify-center text-2xl font-bold mb-6">Crea un grupo</h1>
     </div>
 
     <!-- Form Fields Fragment -->
     <div th:replace="~{groups/group-form-fields :: formFields}"></div>
-
-<!--    <div th:replace="~{groups/currency-selector :: currencySelector}"></div>-->
-
-    <!-- Submit Button -->
-    <div class="p-6 flex items justify-center">
-        <button class="text-gray-300 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Cancelar</button>
-        <button class="text-white bg-blue-500 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Crear grupo</button>
-    </div>
-
 </div>
+
+<!--<div class="max-w-4xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">-->
+<!--    &lt;!&ndash; Tu contenido aquí &ndash;&gt;-->
+<!--</div>-->
 </body>
 </html>

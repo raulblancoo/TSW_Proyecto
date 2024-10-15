@@ -3,47 +3,55 @@
     <form th:action="@{/groups/create}" method="post" th:object="${group}">
         <div class="mb-4">
             <label class="block text-sm font-medium mb-2" for="group-name">Group name</label>
-            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   id="group-name" name="groupName" placeholder="Enter a group name" type="text" field="*{groupName}" required/>
+            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" id="group-name" name="groupName" placeholder="Enter a group name" type="text" field="*{groupName}" required/>
         </div>
         <p class="text-xs text-gray-400 mb-4">You can change this later</p>
-        <div class="mb-4">
-            <label class="block text-sm font-medium mb-2" for="email">Add email</label>
-            <input class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                   id="email" placeholder="Enter an email address" type="email"/>
-            <button type="button" id="add-email-btn" class="mt-2 bg-blue-500 text-white p-2 rounded">Add Email</button>
-            <p class="text-xs text-gray-400 mt-2">The email will be added to the group</p>
+
+        <!--TODO: Hay que comprobar que no nos puedan mandar un grupo sin componentes en cuanto a email-->
+        <label class="block text-sm font-medium mb-2" for="group-name">Añadir miembros al grupo</label>
+        <div class="mb-4 flex items-center w-full">
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="email" id="search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Introduzca email"/>
+                <button type="button" id="add-email-btn" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Añadir</button>
+            </div>
         </div>
-        <!-- Campo oculto para almacenar los emails como una lista -->
+
+        <p class="text-xs text-gray-400 mt-2">The email will be added to the group</p>
+
+        <!--TODO: Hacer que la lista de emails no sea horrible-->
         <input type="hidden" id="emails" name="emails" field="*{emails}"/>
-        <!-- Lista de emails añadidos -->
-        <ul id="email-list" class="mb-4 text-white"></ul>
+        <ul id="email-list" class="mb-4 text-white bg-gray-700 rounded-lg border border-gray-600"></ul>
 
         <div th:replace="~{groups/currency-selector :: currencySelector}"></div>
 
-        <button type="submit" class="bg-blue-500 text-white p-3 rounded">Save</button>
+        <!--TODO: Hay que checkear la acción de volver atrás o cancelar-->
+        <div class="p-6 flex justify-center">
+            <button th:action="@{/groups/show}" class="text-gray-300 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-4">Cancelar</button>
+            <button type="submit" th:action="@{/groups/create}" class="text-white bg-blue-500 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Crear grupo</button>
+        </div>
     </form>
 
     <script>
         document.getElementById('add-email-btn').addEventListener('click', function() {
-            const emailInput = document.getElementById('email');
+            const emailInput = document.getElementById('search');
             const emailValue = emailInput.value;
             const emailList = document.getElementById('email-list');
             const emailsField = document.getElementById('emails');
 
-            // Validar que el campo de email no esté vacío
             if (emailValue) {
-                // Crear un nuevo elemento <li> para mostrar el email en la lista
                 const li = document.createElement('li');
                 li.textContent = emailValue;
                 emailList.appendChild(li);
 
-                // Actualizar el campo oculto con los emails (separados por comas)
                 let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
                 emailsArray.push(emailValue);
                 emailsField.value = emailsArray.join(',');
 
-                // Limpiar el campo de entrada después de añadir el email
                 emailInput.value = '';
             } else {
                 alert('Please enter a valid email address.');
