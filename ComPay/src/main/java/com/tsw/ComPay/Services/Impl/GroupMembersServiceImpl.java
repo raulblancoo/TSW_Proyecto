@@ -21,6 +21,7 @@ public class GroupMembersServiceImpl implements GroupMembersService {
     public void saveGroupMember(NewGroupDto group) {
         GroupMembersModel groupMember = new GroupMembersModel();
 
+        // TODO: logica para que inserte en cada tupla un email
         String[] emails = group.getEmails();
         for(int i = 0; i < emails.length;i++){
             System.out.println(emails[i]);
