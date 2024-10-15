@@ -1,16 +1,14 @@
 package com.tsw.ComPay.Dto;
 
-import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
-@Data
-@Builder
-public class GroupDto {
-    private long id;
+public class NewGroupDto {
     private String groupName;
+    private String[] emails;
     private String currency;
 }

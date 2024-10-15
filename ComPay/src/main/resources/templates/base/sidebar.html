@@ -1,29 +1,24 @@
 <!-- fragments/sidebar.html -->
 <div th:fragment="sidebar" class="w-1/4 bg-gray-800 p-4">
-  <div class="flex items-center mb-8">
-    <i class="fas fa-home text-xl mr-3"></i>
-    <a href="/groups">
-    <span class="text-lg">Inicio</span>
+    <div class="flex items-center mb-8"> <!--bg-gray-700 p-2 rounded hace que esté seleccionado (hacer addclass)-->
+        <i class="fas fa-users text-xl mr-3"></i>
+        <span class="text-lg">Grupos</span>
+    </div>
+    <div class="flex items-center mb-8">
+        <i class="fas fa-user-friends text-xl mr-3"></i>
+        <span class="text-lg">Amigos</span>
+    </div>
+    <div class="flex items-center mb-8">
+        <i class="fas fa-credit-card text-xl mr-3"></i>
+        <span class="text-lg">Deudas</span>
+    </div>
+    <div class="flex items-center mb-8">
+        <i class="fas fa-receipt text-xl mr-3"></i>
+        <span class="text-lg">Gastos</span>
+    </div>
+
+    <a th:href="@{/groups/create}">
+        <button class="bg-blue-600 text-white py-2 px-4 rounded mt-auto">Nuevo grupo</button>
     </a>
-  </div>
-  <div class="flex items-center mb-8">
-    <i class="fas fa-user-friends text-xl mr-3"></i>
-    <span class="text-lg">Amigos</span>
-  </div>
-  <div class="flex items-center mb-8 bg-gray-700 p-2 rounded"> <!--bg-gray hace que esté seleccionado (hacer addclass)-->
-    <i class="fas fa-users text-xl mr-3"></i>
-    <span class="text-lg">Grupos</span>
-  </div>
-  <div class="flex items-center mb-8">
-    <i class="fas fa-credit-card text-xl mr-3"></i>
-    <span class="text-lg">Deudas</span>
-  </div>
-  <div class="flex items-center mb-8">
-    <i class="fas fa-receipt text-xl mr-3"></i>
-    <span class="text-lg">Gastos</span>
-  </div>
-  <a href="/create-group">
-    <button class="bg-blue-600 text-white py-2 px-4 rounded mt-auto">Nuevo grupo</button>
-  </a>
 
 </div>
