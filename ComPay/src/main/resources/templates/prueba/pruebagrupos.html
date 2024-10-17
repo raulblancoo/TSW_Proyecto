@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos</title>
+    <!-- PARA CARGARLO SIN INSTALARLO LOCALMENTE
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+</head>
+<header>
+    <div th:replace="~{base/navbar :: navbar}"></div>
+</header>
+<body>
+    <div>
+        <div th:replace="~{prueba/contenidoListGrupos :: listGroupContent}"></div>
+    </div>
+</body>
+</html>

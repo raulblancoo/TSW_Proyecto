@@ -31,7 +31,7 @@ public class GroupController {
         //TODO: Mapper e implementar funciones para listar grupo
         //List<NewGroupDto> groups = groupService.getGroups(); // Assuming you have a method to retrieve the groups
         //model.addAttribute("groups", groups);
-        return "groups/groups"; // Retornamos la vista principal
+        return "prueba/pruebagrupos"; // Retornamos la vista principal
     }
 
     @GetMapping("/create")
