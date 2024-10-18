@@ -34,6 +34,11 @@ public class GroupController {
         return "prueba/pruebagrupos"; // Retornamos la vista principal
     }
 
+    @GetMapping("/show/payments")
+    public String showGroupPayments(Model model){
+        return "prueba/pruebapagos";
+    }
+
     @GetMapping("/create")
     public String createGroup(Model model) {
         model.addAttribute("currency", new NewGroupDto());
