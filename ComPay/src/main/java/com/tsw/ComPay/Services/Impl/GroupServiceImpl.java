@@ -8,20 +8,22 @@ import com.tsw.ComPay.Models.GroupModel;
 import com.tsw.ComPay.Repositories.GroupRepository;
 import com.tsw.ComPay.Services.GroupService;
 import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
 
     @Autowired
     private GroupRepository groupRepository;
 
 
-    private NewGroupMapper newGroupMapper;
+    private final NewGroupMapper newGroupMapper;
 
 
-    private GroupMapper groupMapper;
+    private final GroupMapper groupMapper;
 
     public void saveGroup(NewGroupDto groupDto) {
         groupRepository.save(newGroupMapper.toEntity(groupDto));

@@ -9,10 +9,12 @@ import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
 import com.tsw.ComPay.Services.UserService;
 import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class GroupMembersServiceImpl implements GroupMembersService {
 
     @Autowired
@@ -25,7 +27,7 @@ public class GroupMembersServiceImpl implements GroupMembersService {
     private UserService userService;
 
 
-    private GroupMembersMapper groupMembersMapper;
+    private final GroupMembersMapper groupMembersMapper;
 
     @Override
     public void saveGroupMember(String groupName, String email) {
