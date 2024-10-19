@@ -1,10 +1,7 @@
 package com.tsw.ComPay.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor
@@ -12,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="groups")
+@Getter
+@Setter
 public class GroupModel {
 
     @Id

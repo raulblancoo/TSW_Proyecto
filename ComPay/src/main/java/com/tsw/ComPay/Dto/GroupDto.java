@@ -7,10 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Data
-@Builder
 public class GroupDto {
-    private long id;
     private String groupName;
     private String currency;
 }

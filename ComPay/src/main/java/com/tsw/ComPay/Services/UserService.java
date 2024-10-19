@@ -1,12 +1,12 @@
 package com.tsw.ComPay.Services;
 
 import com.tsw.ComPay.Dto.UserDto;
-import com.tsw.ComPay.Models.UserModel;
-import com.tsw.ComPay.Repositories.UserRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface UserService {
 
-  void saveUser(UserDto user);
-  UserModel findByEmailPassword(String email, String password);
-
+  void saveUser(com.tsw.ComPay.Dto.UserDto user);
+  UserDto findByEmailPassword(String email, String password);
+  UserDto findByEmail(String email);
 }

@@ -47,7 +47,11 @@ public class GroupController {
     public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
         model.addAttribute("group", newGroupDto);
         groupService.saveGroup(newGroupDto);
-        groupMembersService.saveGroupMember(newGroupDto);
+
+        for(String email : newGroupDto.getEmails()) {
+            groupMembersService.saveGroupMember(newGroupDto.getGroupName(), email);
+        }
+
         return "redirect:/groups/show";
     }
 

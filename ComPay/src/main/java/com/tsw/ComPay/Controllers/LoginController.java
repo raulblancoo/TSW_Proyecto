@@ -3,14 +3,11 @@ package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.LoginDto;
 import com.tsw.ComPay.Dto.UserDto;
-import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.BindingResult;
-import java.text.AttributedString;
 
 
 @Controller
