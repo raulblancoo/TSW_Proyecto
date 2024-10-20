@@ -6,23 +6,27 @@
     <title>Grupos</title>
     <!-- PARA CARGARLO SIN INSTALARLO LOCALMENTE
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
-    <script src="https://cdn.tailwindcss.com"></script>
-<!--    <link th:href="@{/main.css}" rel="stylesheet"/>-->
+    <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
-<body class="bg-gray-900 text-white font-sans">
-<div th:replace="~{base/navbar :: navbar}"></div>
-<div class="flex h-screen">
-    <!-- Main Content -->
-    <div class="w-3/4
-    p-8">
-        <h1 class="text-3xl font-bold mb-8">Grupos</h1>
-        <div th:replace="~{groups/groups-list :: groups}"></div>
-    </div>
+<header>
+    <div th:replace="~{base/navbar :: navbar}"></div>
+</header>
+<body>
+<main class="flex-grow overflow-y-auto pb-24">
+    <div th:replace="~{groups/fragments/groupList :: groupList}"></div>
+</main>
 
-    <a th:href="@{/groups/create}">
-        <button class="bg-blue-600 text-white py-2 px-4 rounded mt-auto">Nuevo grupo</button>
-    </a>
-
+<!-- Botón Fijado al Centro Inferior de la Página -->
+<div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
+    <button class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 uppercase">
+        Añadir Grupo
+    </button>
 </div>
+
+<footer>
+    <div th:replace="~{base/footer :: footer}"></div>
+</footer>
 </body>
 </html>
+
+<script src="https://flowbite.com/docs/flowbite.min.js"></script>
