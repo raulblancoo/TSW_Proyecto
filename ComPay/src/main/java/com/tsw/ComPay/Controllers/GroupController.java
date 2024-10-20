@@ -2,6 +2,7 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.GroupDto;
+import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
@@ -46,7 +47,6 @@ public class GroupController {
 
     @PostMapping("/create")
     public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
-        model.addAttribute("group", newGroupDto);
         groupService.saveGroup(newGroupDto);
 
         for(String email : newGroupDto.getEmails()) {

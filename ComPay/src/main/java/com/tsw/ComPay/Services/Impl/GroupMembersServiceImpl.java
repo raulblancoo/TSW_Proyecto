@@ -1,7 +1,9 @@
 package com.tsw.ComPay.Services.Impl;
 
+import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
+import com.tsw.ComPay.Dto.UserDto;
 import com.tsw.ComPay.Mapper.GroupMembersMapper;
 import com.tsw.ComPay.Models.GroupMembersModel;
 import com.tsw.ComPay.Repositories.GroupMembersRepository;
@@ -18,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class GroupMembersServiceImpl implements GroupMembersService {
 
     @Autowired
-    private GroupMembersRepository groupMembersRepository ;
+    private GroupMembersRepository groupMembersRepository;
 
     @Autowired
     private GroupService groupService;
@@ -31,23 +33,12 @@ public class GroupMembersServiceImpl implements GroupMembersService {
 
     @Override
     public void saveGroupMember(String groupName, String email) {
-        GroupMembersDto groupMembersDto = null;
 
+        UserDto userDto = userService.findByEmail(email);
+        GroupDto groupDto = groupService.findGroupByName(groupName);
 
-        groupMembersDto.setUser(userService.findByEmail(email));
-        groupMembersDto.setGroup(groupService.findGroupByName(groupName));
+        GroupMembersDto groupMembersDto = new GroupMembersDto(userDto, groupDto);
 
         groupMembersRepository.save(groupMembersMapper.toEntity(groupMembersDto));
-
-        // TODO: logica para que inserte en cada tupla un email
-        //String[] emails = group.getEmails();
-        /*for(int i = 0; i < emails.length;i++){
-            System.out.println(emails[i]);
-        }*/
-
-        // hacer validacion de nombre de grupo distinto
-       // groupMember.setGroup(groupService.findGroupByName(group.getGroupName()));
-
-
     }
 }
