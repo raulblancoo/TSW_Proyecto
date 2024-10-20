@@ -1,30 +1,36 @@
 package com.tsw.ComPay.Services.Impl;
 
 import com.tsw.ComPay.Dto.UserDto;
-import com.tsw.ComPay.Models.UserModel;
+import com.tsw.ComPay.Mapper.UserMapper;
 import com.tsw.ComPay.Repositories.UserRepository;
 import com.tsw.ComPay.Services.UserService;
+import jakarta.annotation.Resource;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
+
+
+    private final UserMapper userMapper;
+
+
 
     public void saveUser(UserDto userDto) {
-        UserModel user = new UserModel();
-
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-
-        userRepository.save(user);
+        userRepository.save(userMapper.toEntity(userDto));
     }
 
-    public UserModel findByEmailPassword(String email, String password) {
-        UserModel user = userRepository.findUserModelByEmailAndPassword(email, password);
-        return user;
+    public UserDto findByEmailPassword(String email, String password) {
+        return userMapper.toDto(userRepository.findUserModelByEmailAndPassword(email, password));
+
+    }
+
+    public UserDto findByEmail(String email) {
+        return userMapper.toDto(userRepository.findByEmail(email));
     }
 }

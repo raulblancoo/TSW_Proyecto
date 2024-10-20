@@ -1,14 +1,13 @@
 package com.tsw.ComPay.Dto;
 
-import com.tsw.ComPay.Models.GroupModel;
 import com.tsw.ComPay.Models.UserModel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 public class GroupMembersDto {
-    private long id;
     private UserDto user;
     private GroupDto group;
+
 }

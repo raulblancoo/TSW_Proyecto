@@ -1,16 +1,12 @@
 package com.tsw.ComPay.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.antlr.v4.runtime.misc.NotNull;
 
-@Data
+import lombok.*;
+
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Data
 @Entity
 @Table(name="users")
 public class UserModel {
@@ -28,4 +24,5 @@ public class UserModel {
 
     @Column(name="password")
     private String password;
+
 }

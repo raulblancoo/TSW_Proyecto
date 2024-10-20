@@ -1,6 +1,8 @@
 
 package com.tsw.ComPay.Controllers;
 
+import com.tsw.ComPay.Dto.GroupDto;
+import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
@@ -29,14 +31,9 @@ public class GroupController {
     @GetMapping("/show")
     public String showGroups(Model model) {
         //TODO: Mapper e implementar funciones para listar grupo
-        //List<NewGroupDto> groups = groupService.getGroups(); // Assuming you have a method to retrieve the groups
-        //model.addAttribute("groups", groups);
-        return "prueba/pruebagrupos"; // Retornamos la vista principal
-    }
-
-    @GetMapping("/show/payments")
-    public String showGroupPayments(Model model){
-        return "prueba/pruebapagos";
+        List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
+        model.addAttribute("groups", groups);
+        return "groups/groups"; // Retornamos la vista principal
     }
 
     @GetMapping("/create")
@@ -50,9 +47,12 @@ public class GroupController {
 
     @PostMapping("/create")
     public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
-        model.addAttribute("group", newGroupDto);
         groupService.saveGroup(newGroupDto);
-        groupMembersService.saveGroupMember(newGroupDto);
+
+        for(String email : newGroupDto.getEmails()) {
+            groupMembersService.saveGroupMember(newGroupDto.getGroupName(), email);
+        }
+
         return "redirect:/groups/show";
     }
 
