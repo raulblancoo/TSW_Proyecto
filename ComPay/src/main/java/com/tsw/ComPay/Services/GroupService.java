@@ -5,9 +5,12 @@ import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Models.GroupModel;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface GroupService {
     void saveGroup(NewGroupDto group);
     GroupDto findGroupByName(String groupName);
+    List<GroupDto> findAllGroups();
 
 }

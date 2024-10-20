@@ -1,6 +1,7 @@
 
 package com.tsw.ComPay.Controllers;
 
+import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
@@ -29,8 +30,8 @@ public class GroupController {
     @GetMapping("/show")
     public String showGroups(Model model) {
         //TODO: Mapper e implementar funciones para listar grupo
-        //List<NewGroupDto> groups = groupService.getGroups(); // Assuming you have a method to retrieve the groups
-        //model.addAttribute("groups", groups);
+        List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
+        model.addAttribute("groups", groups);
         return "groups/groups"; // Retornamos la vista principal
     }
 

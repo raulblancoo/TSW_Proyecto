@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
@@ -19,9 +21,7 @@ public class GroupServiceImpl implements GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-
     private final NewGroupMapper newGroupMapper;
-
 
     private final GroupMapper groupMapper;
 
@@ -31,6 +31,10 @@ public class GroupServiceImpl implements GroupService {
 
     public GroupDto findGroupByName(String groupName){
         return groupMapper.toDto(groupRepository.findByGroupName(groupName));
+    }
+
+    public List<GroupDto> findAllGroups() {
+        return groupMapper.toListDto(groupRepository.findAll());
     }
 
 }
