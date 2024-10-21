@@ -12,5 +12,5 @@ public interface GroupService {
     void saveGroup(NewGroupDto group);
     GroupDto findGroupByName(String groupName);
     List<GroupDto> findAllGroups();
-
+    GroupDto existingGroup(GroupDto groupDto);
 }

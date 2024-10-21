@@ -10,4 +10,5 @@ import java.util.List;
 public interface GroupRepository extends JpaRepository<GroupModel, Long> {
     GroupModel findByGroupName(String name);
     List<GroupModel> findAll();
+    GroupModel findGroupModelById(Long id);
 }

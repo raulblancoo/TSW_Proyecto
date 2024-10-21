@@ -6,7 +6,6 @@ import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
-import com.tsw.ComPay.Services.Impl.UserServiceImpl;
 import com.tsw.ComPay.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +31,6 @@ public class GroupController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserServiceImpl userServiceImpl;
-
     @GetMapping("/show")
     public String showGroups(Model model) {
         //TODO: Mapper e implementar funciones para listar grupo
@@ -57,7 +53,7 @@ public class GroupController {
         groupService.saveGroup(newGroupDto);
 
         for(String email : newGroupDto.getEmails()) {
-            groupMembersService.saveGroupMember(newGroupDto.getGroupName(), userService.findByEmail(email));
+            groupMembersService.saveGroupMember(groupService.findGroupByName(newGroupDto.getGroupName()), userService.findByEmail(email));
         }
 
         return "redirect:/groups/show";

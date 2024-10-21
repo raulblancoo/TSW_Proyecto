@@ -37,4 +37,12 @@ public class GroupServiceImpl implements GroupService {
         return groupMapper.toListDto(groupRepository.findAll());
     }
 
+    public GroupDto existingGroup(GroupDto groupDto) {
+        return groupMapper.toDto(existingGroupModel(groupDto));
+    }
+
+    public GroupModel existingGroupModel(GroupDto groupDto) {
+        return groupRepository.findGroupModelById(groupDto.getId());
+    }
+
 }
