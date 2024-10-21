@@ -9,4 +9,5 @@ public interface UserService {
   void saveUser(com.tsw.ComPay.Dto.UserDto user);
   UserDto findByEmailPassword(String email, String password);
   UserDto findByEmail(String email);
+  UserDto existingUser(UserDto userDto);
 }

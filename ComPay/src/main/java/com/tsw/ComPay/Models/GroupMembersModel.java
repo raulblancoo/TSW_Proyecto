@@ -19,11 +19,11 @@ public class GroupMembersModel {
     @Column(name="id")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private UserModel user;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private GroupModel group;
 }

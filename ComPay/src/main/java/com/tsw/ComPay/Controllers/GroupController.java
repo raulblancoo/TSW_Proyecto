@@ -2,11 +2,12 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.GroupDto;
-import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
+import com.tsw.ComPay.Services.Impl.UserServiceImpl;
+import com.tsw.ComPay.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,12 @@ public class GroupController {
 
     @Autowired
     private GroupMembersService groupMembersService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserServiceImpl userServiceImpl;
 
     @GetMapping("/show")
     public String showGroups(Model model) {
@@ -50,7 +57,7 @@ public class GroupController {
         groupService.saveGroup(newGroupDto);
 
         for(String email : newGroupDto.getEmails()) {
-            groupMembersService.saveGroupMember(newGroupDto.getGroupName(), email);
+            groupMembersService.saveGroupMember(newGroupDto.getGroupName(), userService.findByEmail(email));
         }
 
         return "redirect:/groups/show";

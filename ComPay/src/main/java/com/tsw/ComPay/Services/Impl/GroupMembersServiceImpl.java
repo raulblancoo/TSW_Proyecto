@@ -32,12 +32,17 @@ public class GroupMembersServiceImpl implements GroupMembersService {
     private final GroupMembersMapper groupMembersMapper;
 
     @Override
-    public void saveGroupMember(String groupName, String email) {
+    public void saveGroupMember(String groupName, UserDto userDto) {
 
-        UserDto userDto = userService.findByEmail(email);
+        GroupMembersDto groupMembersDto = new GroupMembersDto(null, null);
+
+        UserDto user = userService.existingUser(userDto);
         GroupDto groupDto = groupService.findGroupByName(groupName);
 
-        GroupMembersDto groupMembersDto = new GroupMembersDto(userDto, groupDto);
+        groupMembersDto.setUser(user);
+
+        groupMembersDto.setGroup(groupDto);
+
 
         groupMembersRepository.save(groupMembersMapper.toEntity(groupMembersDto));
     }
