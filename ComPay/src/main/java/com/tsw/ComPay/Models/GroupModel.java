@@ -12,7 +12,6 @@ import lombok.*;
 @Getter
 @Setter
 public class GroupModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")

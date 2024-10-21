@@ -1,0 +1,24 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Compay aplication",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./styles.css -o ../resources/static/main.css",
+    "watch": "tailwindcss --watch -i ./styles.css -o ../resources/static/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raulblancoo/TSW_Proyecto.git"
+  },
+  "author": "Raul Blanco, Anxo Rodriguez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raulblancoo/TSW_Proyecto/issues"
+  },
+  "homepage": "https://github.com/raulblancoo/TSW_Proyecto#readme",
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.14"
+  }
+}

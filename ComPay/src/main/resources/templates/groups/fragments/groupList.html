@@ -1,0 +1,15 @@
+<!-- groups/fragments/groupsList.html -->
+<div th:fragment="groupList" class="max-w-6xl mx-auto my-8">
+    <div class="container mx-auto px-6">
+        <div class="mt-16">
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase">Mis grupos</h3>
+            <!-- COMPONENTE DE GRUPO -->
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 mt-6">
+                <!-- Iteramos sobre la lista de grupos y llamamos al fragmento de grupo para cada uno -->
+                <div th:each="group : ${groups}">
+                    <div th:replace="~{groups/fragments/groupList-Item :: groupCard(${group})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

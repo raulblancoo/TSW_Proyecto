@@ -1,0 +1,112 @@
+<!-- Modal para Añadir Pago -->
+<div th:fragment="paymentModal" id="paymentModal" tabindex="-1" aria-hidden="true"
+     class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden">
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-2xl max-h-[100vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-5 border-b border-gray-200 rounded-t">
+            <h3 class="text-xl font-medium text-gray-900">Añadir Pago</h3>
+            <button type="button" class="text-gray-400 hover:text-gray-900" data-modal-hide="paymentModal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                </svg>
+
+            </button>
+        </div>
+        <!-- Modal Body -->
+        <div class="p-6 space-y-4">
+            <form id="paymentForm">
+                <div class="mb-4">
+                    <label for="payer_select" class="block text-sm font-medium text-gray-700">SELECCIONA EL
+                        PAGADOR</label>
+                    <select required id="payer_select"
+                            class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
+                        <option hidden selected></option>
+                        <option value="RB">Raúl Blanco</option>
+                        <option value="JR">Jorge Rodríguez</option>
+                        <option value="AA">Anxo Alonso</option>
+                        <option value="AD">Anxo Deportivo</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
+                    <input type="text" name="payment_concept" id="payment_concept"
+                           class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+                           placeholder="Escriba un concepto" required/>
+                </div>
+
+                <div class="mb-4">
+                    <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
+                    <div class="flex items-center">
+                        <input type="number" name="payment_amount" id="payment_amount"
+                               class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+                               placeholder="Introduzca la cantidad" required/>
+                        <div class="ml-2 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-700">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 7.756a4.5 4.5 0 1 0 0 8.488M7.5 10.5h5.25m-5.25 3h5.25M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <div>
+                        <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
+                        <select required id="divided_payment"
+                                class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
+                            <option hidden selected></option>
+                            <option class="uppercase" value="">A PARTES IGUALES</option>
+                            <option class="uppercase" value="">A PARTES DESIGUALES</option>
+                            <option class="uppercase" value="">POR PORCENTAJES</option>
+                            <option class="uppercase" value="">POR AJUSTE</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <!-- Modal Footer -->
+        <div class="flex justify-end p-5 border-t border-gray-200">
+            <button data-modal-hide="paymentModal"
+                    class="text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg px-4 py-2 mr-2">
+                Cancelar
+            </button>
+            <button id="submitPayment"
+                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                Guardar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script src="https://flowbite.com/docs/flowbite.min.js"></script>
+<script>
+    // Seleccionar el botón y el formulario
+    const submitButton = document.getElementById('submitPayment');
+    const paymentForm = document.getElementById('paymentForm');
+
+    // Manejar el envío del formulario
+    submitButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Evitar el envío tradicional del formulario
+        if (paymentForm.checkValidity()) {
+            // Simular envío del formulario (puede ser un fetch para AJAX)
+            console.log('Form data:', {
+                payer: paymentForm.payer_select.value,
+                concept: paymentForm.payment_concept.value,
+                amount: paymentForm.payment_amount.value
+            });
+
+            // Aquí podrías enviar los datos con fetch o AJAX
+            // fetch('/your-endpoint', { method: 'POST', body: new FormData(paymentForm) })
+            //     .then(response => response.json())
+            //     .then(data => console.log(data));
+
+            // Ocultar el modal después de enviar
+            document.querySelector('[data-modal-hide="paymentModal"]').click();
+        } else {
+            paymentForm.reportValidity(); // Mostrar validaciones del formulario
+        }
+    });
+</script>

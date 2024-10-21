@@ -64,9 +64,9 @@ public class GroupController {
     }
 
     // pasarle el nombre del grupo directamente
-    @GetMapping("/view-group")
+    @GetMapping("/show/payments")
     public String viewGroup(Model model) {
-        return "groups/group-expense-layout"; // Retorna la vista principal con los fragmentos
+        return "prueba/pruebapagos"; // Retorna la vista principal con los fragmentos
     }
 
 }
