@@ -36,26 +36,4 @@
         </div>
     </form>
 
-    <script>
-        document.getElementById('add-email-btn').addEventListener('click', function() {
-            const emailInput = document.getElementById('search');
-            const emailValue = emailInput.value;
-            const emailList = document.getElementById('email-list');
-            const emailsField = document.getElementById('emails');
-
-            if (emailValue) {
-                const li = document.createElement('li');
-                li.textContent = emailValue;
-                emailList.appendChild(li);
-
-                let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
-                emailsArray.push(emailValue);
-                emailsField.value = emailsArray.join(',');
-
-                emailInput.value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        });
-    </script>
 </div>
