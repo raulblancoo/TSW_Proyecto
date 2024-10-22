@@ -8,6 +8,28 @@ document.getElementById("addGroupBtn").addEventListener("click", function () {
         .then(html => {
             // Insertar el HTML cargado dentro del modal
             document.getElementById("modalContent").innerHTML = html;
+
+            // Reasignar el evento para el botón de agregar email después de cargar el contenido
+            document.getElementById('add-email-btn').addEventListener('click', function() {
+                const emailInput = document.getElementById('search');
+                const emailValue = emailInput.value;
+                const emailList = document.getElementById('email-list');
+                const emailsField = document.getElementById('emails');
+
+                if (emailValue) {
+                    const li = document.createElement('li');
+                    li.textContent = emailValue;
+                    emailList.appendChild(li);
+
+                    let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
+                    emailsArray.push(emailValue);
+                    emailsField.value = emailsArray.join(',');
+
+                    emailInput.value = '';
+                } else {
+                    alert('Please enter a valid email address.');
+                }
+            });
         })
         .catch(error => {
             console.error('Error al cargar el contenido del modal:', error);
@@ -21,28 +43,13 @@ document.getElementById("modal").addEventListener("click", function (event) {
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Utiliza delegación de eventos para manejar el botón que se carga dinámicamente
-    document.body.addEventListener('click', function(event) {
-        if (event.target && event.target.id === 'add-email-btn') {
-            const emailInput = document.getElementById('search');
-            const emailValue = emailInput.value;
-            const emailList = document.getElementById('email-list');
-            const emailsField = document.getElementById('emails');
+document.getElementById('addGroupBtn').addEventListener('click', function() {
+    document.getElementById('modal').classList.remove('hidden');  // Muestra la modal
+    this.classList.add('hidden');  // Oculta el botón
+});
 
-            if (emailValue) {
-                const li = document.createElement('li');
-                li.textContent = emailValue;
-                emailList.appendChild(li);
-
-                let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
-                emailsArray.push(emailValue);
-                emailsField.value = emailsArray.join(',');
-
-                emailInput.value = '';
-            } else {
-                alert('Please enter a valid email address.');
-            }
-        }
-    });
+// Cerrar modal
+document.getElementById('modalCloseBtn').addEventListener('click', function() {
+    document.getElementById('modal').classList.add('hidden');  // Oculta la modal
+    document.getElementById('addGroupBtn').classList.remove('hidden');  // Vuelve a mostrar el botón
 });
