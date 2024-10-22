@@ -31,7 +31,7 @@
 
         <!--TODO: Hay que checkear la acción de volver atrás o cancelar-->
         <div class="p-6 flex justify-center">
-            <button th:action="@{/groups/show}" class="text-gray-300 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-4">Cancelar</button>
+            <button type="button" id="cancel-btn" class="text-gray-300 bg-gray-700 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-4">Cancelar</button>
             <button type="submit" th:action="@{/groups/create}" class="text-white bg-blue-500 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Crear grupo</button>
         </div>
     </form>

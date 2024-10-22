@@ -30,6 +30,15 @@ document.getElementById("addGroupBtn").addEventListener("click", function () {
                     alert('Please enter a valid email address.');
                 }
             });
+
+            document.getElementById("cancel-btn").addEventListener("click", function () {
+                // Cerrar la modal
+                document.getElementById("modal").classList.add("hidden");
+
+                // Mostrar el botón de "Añadir Grupo" nuevamente si lo ocultaste
+                document.getElementById("addGroupBtn").classList.remove("hidden");
+            });
+
         })
         .catch(error => {
             console.error('Error al cargar el contenido del modal:', error);
