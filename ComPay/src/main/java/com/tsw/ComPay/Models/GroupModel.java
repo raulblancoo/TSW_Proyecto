@@ -20,6 +20,12 @@ public class GroupModel {
     @Column(name="groupName")
     private String groupName;
 
+    @Column(name="imgURL")
+    private String imgURL;
+
+    @Column(name="amount")
+    private Float amount;
+
     @Column(name="currency")
     private String currency;
 }
