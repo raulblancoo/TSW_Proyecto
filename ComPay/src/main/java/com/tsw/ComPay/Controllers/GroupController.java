@@ -10,10 +10,7 @@ import com.tsw.ComPay.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,38 +29,27 @@ public class GroupController {
     private UserService userService;
 
 
-    // TODO: cambiar endpoint para groups solo
-    @GetMapping("/show")
+    @GetMapping("")
     public String showGroups(Model model) {
-        //TODO: Mapper e implementar funciones para listar grupo
         List<GroupDto> groups = groupService.findAllGroups();
         model.addAttribute("groups", groups);
 
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
         model.addAttribute("currencies", currencies);
 
-        return "groups/groups"; // Retornamos la vista principal
+        return "groups/groups"; 
     }
 
-    // TODO: revisar si esta funcion hace falta
-    @GetMapping("/create")
-    public String createGroup(Model model) {
-        model.addAttribute("currency", new NewGroupDto());
-        List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
-        model.addAttribute("currencies", currencies);
-
-        return "groups/create-group"; // Retorna la vista principal con los fragmentos
-    }
-
+    //TODO: Revisar si el atributo model hace falta aquí
     @PostMapping("/create")
-    public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
         groupService.saveGroup(newGroupDto);
 
         for(String email : newGroupDto.getEmails()) {
             groupMembersService.saveGroupMember(groupService.findGroupByName(newGroupDto.getGroupName()), userService.findByEmail(email));
         }
 
-        return "redirect:/groups/show";
+        return "redirect:/groups";
     }
 
     // pasarle el nombre del grupo directamente
