@@ -38,6 +38,6 @@ public class LoginController {
     @PostMapping("/login")
     public String loginPost(Model model, @ModelAttribute("login") LoginDto loginDto) {
         model.addAttribute("login", loginDto);
-        return userService.findByEmailPassword(loginDto.getEmail(), loginDto.getPassword()) != null ? "redirect:/groups/show" : "index";
+        return userService.findByEmailPassword(loginDto.getEmail(), loginDto.getPassword()) != null ? "redirect:/groups" : "index";
     }
 }
