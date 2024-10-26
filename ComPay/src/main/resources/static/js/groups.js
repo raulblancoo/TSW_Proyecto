@@ -1,64 +1,82 @@
-document.getElementById("addGroupBtn").addEventListener("click", function () {
-    // Mostrar el modal
-    document.getElementById("modal").classList.remove("hidden");
+document.addEventListener("DOMContentLoaded", function () {
+    // Evento para añadir un email a la lista
+    document.getElementById('add-email-btn').addEventListener('click', function() {
+        const emailInput = document.getElementById('search');
+        const emailValue = emailInput.value.trim();
+        const emailList = document.getElementById('email-list');
+        const emailsField = document.getElementById('emails');
 
-    // Cargar el contenido del modal desde el backend (fetch a la URL)
-    fetch('/groups/create')
-        .then(response => response.text())
-        .then(html => {
-            // Insertar el HTML cargado dentro del modal
-            document.getElementById("modalContent").innerHTML = html;
+        // Expresión regular para validar el email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            // Reasignar el evento para el botón de agregar email después de cargar el contenido
-            document.getElementById('add-email-btn').addEventListener('click', function() {
-                const emailInput = document.getElementById('search');
-                const emailValue = emailInput.value;
-                const emailList = document.getElementById('email-list');
-                const emailsField = document.getElementById('emails');
+        if (emailValue && emailRegex.test(emailValue)) {
+            // Verifica que el email no esté ya en la lista
+            const existingEmails = Array.from(emailList.children).map(li => li.firstChild.textContent);
+            if (!existingEmails.includes(emailValue)) {
+                // Crear un nuevo elemento de lista para el email
+                const li = document.createElement('li');
+                li.classList.add('flex', 'justify-between', 'items-center', 'text-sm', 'text-slate-700', 'bg-gray-100', 'border', 'border-slate-300', 'p-2', 'rounded-md', 'mb-2');
+                li.innerHTML = `
+                    <span class="flex-1">${emailValue}</span>
+                    <button class="remove-email-btn text-slate-500 hover:text-red-600 px-2" title="Eliminar">&times;</button>
+                `;
+                emailList.appendChild(li);
+                emailList.classList.remove('hidden'); // Mostrar la lista cuando haya emails
 
-                if (emailValue) {
-                    const li = document.createElement('li');
-                    li.textContent = emailValue;
-                    emailList.appendChild(li);
+                // Actualizar el campo oculto con los emails añadidos
+                let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
+                emailsArray.push(emailValue);
+                emailsField.value = emailsArray.join(',');
 
-                    let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
-                    emailsArray.push(emailValue);
+                // Limpiar el input de email
+                emailInput.value = '';
+
+                // Evento para eliminar el email de la lista y del campo oculto
+                li.querySelector('.remove-email-btn').addEventListener('click', function() {
+                    li.remove();
+                    emailsArray = emailsArray.filter(email => email !== emailValue);
                     emailsField.value = emailsArray.join(',');
 
-                    emailInput.value = '';
-                } else {
-                    alert('Please enter a valid email address.');
-                }
-            });
+                    // Ocultar la lista solo si no quedan emails
+                    if (!emailsArray.length) {
+                        emailList.classList.add('hidden');
+                    }
+                });
+            } else {
+                alert('Este email ya ha sido añadido.');
+            }
+        } else {
+            alert('Por favor, introduce una dirección de correo válida.');
+        }
 
-            document.getElementById("cancel-btn").addEventListener("click", function () {
-                // Cerrar la modal
-                document.getElementById("modal").classList.add("hidden");
+        // Solo mostrar la lista si tiene elementos
+        if (emailList.children.length > 0) {
+            emailList.classList.remove('hidden');
+        }
+    });
 
-                // Mostrar el botón de "Añadir Grupo" nuevamente si lo ocultaste
-                document.getElementById("addGroupBtn").classList.remove("hidden");
-            });
+    // Validar antes de enviar el formulario
+    document.getElementById('group-form').addEventListener('submit', function(event) {
+        const emailList = document.getElementById('email-list');
+        if (emailList.children.length === 0) {
+            event.preventDefault(); // Evita que se envíe el formulario
+            alert('Debes añadir al menos un email antes de enviar el formulario.');
+        }
+    });
 
-        })
-        .catch(error => {
-            console.error('Error al cargar el contenido del modal:', error);
-        });
-});
+    // Limpiar el formulario y los emails al cerrar la modal
+    document.querySelector('[data-modal-hide="groupModal"]').addEventListener('click', function() {
+        // Restablecer el formulario
+        const form = document.getElementById('group-form');
+        form.reset(); // Esto vaciará todos los inputs
 
-// Cerrar el modal cuando se haga clic fuera del contenido
-document.getElementById("modal").addEventListener("click", function (event) {
-    if (event.target === this) {
-        this.classList.add("hidden");
-    }
-});
+        // Limpiar la lista de emails y el campo oculto
+        const emailList = document.getElementById('email-list');
+        const emailsField = document.getElementById('emails');
 
-document.getElementById('addGroupBtn').addEventListener('click', function() {
-    document.getElementById('modal').classList.remove('hidden');  // Muestra la modal
-    this.classList.add('hidden');  // Oculta el botón
-});
-
-// Cerrar modal
-document.getElementById('modalCloseBtn').addEventListener('click', function() {
-    document.getElementById('modal').classList.add('hidden');  // Oculta la modal
-    document.getElementById('addGroupBtn').classList.remove('hidden');  // Vuelve a mostrar el botón
+        // Limpiar la lista de emails y el campo oculto
+        emailList.innerHTML = ''; // Elimina todos los elementos de la lista
+        emailsField.value = ''; // Vaciar el campo oculto
+        emailList.classList.add('hidden'); // Ocultar la lista
+    });
 });

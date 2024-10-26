@@ -31,14 +31,21 @@ public class GroupController {
     @Autowired
     private UserService userService;
 
+
+    // TODO: cambiar endpoint para groups solo
     @GetMapping("/show")
     public String showGroups(Model model) {
         //TODO: Mapper e implementar funciones para listar grupo
-        List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
+        List<GroupDto> groups = groupService.findAllGroups();
         model.addAttribute("groups", groups);
+
+        List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
+        model.addAttribute("currencies", currencies);
+
         return "groups/groups"; // Retornamos la vista principal
     }
 
+    // TODO: revisar si esta funcion hace falta
     @GetMapping("/create")
     public String createGroup(Model model) {
         model.addAttribute("currency", new NewGroupDto());
