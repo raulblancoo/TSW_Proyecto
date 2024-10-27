@@ -12,5 +12,5 @@ public class NewGroupDto {
     private String[] emails;
     private String currency;
     private String imgURL;
-    private float amount;
+    private double amount;
 }

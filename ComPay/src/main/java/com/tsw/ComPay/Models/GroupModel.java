@@ -24,7 +24,7 @@ public class GroupModel {
     private String imgURL;
 
     @Column(name="amount")
-    private Float amount;
+    private double amount;
 
     @Column(name="currency")
     private String currency;
