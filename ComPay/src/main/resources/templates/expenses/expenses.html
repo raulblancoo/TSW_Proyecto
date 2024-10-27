@@ -1,19 +1,21 @@
+<!-- templates/groups/viewGroup.html -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagos</title>
     <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
+
 <body class="min-h-screen flex flex-col">
 <header>
     <div th:replace="~{base/navbar :: navbar}"></div>
 </header>
 
 <main class="flex-grow overflow-y-auto pb-24">
-    <div th:replace="~{prueba/contenidoHeaderPagos :: headerPagos}"></div>
-    <div th:replace="~{prueba/contenidoListPagos :: listPagosContent}"></div>
+    <div th:replace="~{expenses/fragments/expensesHeader :: expensesHeader}"></div>
+    <div th:replace="~{expenses/fragments/expensesList :: expensesList}"></div>
 </main>
 
 <!-- Botón Fijado al Centro Inferior de la Página -->
@@ -23,16 +25,18 @@
     </button>
 </div>
 
-<div th:replace="~{prueba/paymentModal :: paymentModal}"></div>
+<div th:replace="~{expenses/fragments/expensesModal :: expensesModal}"></div>
 
+</body>
 
 <footer>
     <div th:replace="~{base/footer :: footer}"></div>
 </footer>
-</body>
 </html>
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
+
+<!--TODO: comprobar scripts-->
 <script>
     // Seleccionar el botón y el formulario
     const submitButton = document.getElementById('submitPayment');
@@ -61,3 +65,28 @@
         }
     });
 </script>
+
+
+
+
+<!--<body class="bg-gray-100">-->
+<!--<div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">-->
+<!--    <h1 class="text-2xl font-bold text-gray-800 mb-4" th:text="${group.groupName}">Nombre del Grupo</h1>-->
+
+<!--    <div class="mb-6">-->
+<!--        <p><strong>Moneda:</strong> <span th:text="${group.currency}">Moneda</span></p>-->
+<!--        <p><strong>Cantidad:</strong> <span th:text="${group.amount}">0</span></p>-->
+<!--    </div>-->
+
+<!--    <div class="mb-4">-->
+<!--        <h2 class="text-xl font-semibold text-gray-700">Miembros del Grupo</h2>-->
+<!--        <ul class="list-disc pl-6 mt-2">-->
+<!--&lt;!&ndash;            <li th:each="member : ${group.members}" th:text="${member.name}">Nombre del Miembro</li>&ndash;&gt;-->
+<!--        </ul>-->
+<!--    </div>-->
+
+<!--    <a href="/groups" class="mt-6 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">-->
+<!--        Volver a Grupos-->
+<!--    </a>-->
+<!--</div>-->
+<!--</body>-->
