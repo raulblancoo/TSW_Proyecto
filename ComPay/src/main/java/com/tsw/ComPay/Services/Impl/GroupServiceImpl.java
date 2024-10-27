@@ -8,7 +8,6 @@ import com.tsw.ComPay.Models.GroupModel;
 import com.tsw.ComPay.Repositories.GroupRepository;
 import com.tsw.ComPay.Services.GroupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -37,8 +36,7 @@ public class GroupServiceImpl implements GroupService {
     private static final AtomicInteger imageIndex = new AtomicInteger(0);
 
     public void saveGroup(NewGroupDto groupDto) {
-        String imgURL = getNextImageUrl();
-        groupDto.setImgURL(imgURL);
+        groupDto.setImgURL(getNextImageUrl());
 
         groupRepository.save(newGroupMapper.toEntity(groupDto));
     }
@@ -47,8 +45,14 @@ public class GroupServiceImpl implements GroupService {
         return groupMapper.toDto(groupRepository.findByGroupName(groupName));
     }
 
+    @Override
     public List<GroupDto> findAllGroups() {
         return groupMapper.toListDto(groupRepository.findAll());
+    }
+
+    @Override
+    public GroupDto findGroupById(Long groupId) {
+        return groupMapper.toDto(groupRepository.findGroupModelById(groupId));
     }
 
     public GroupDto existingGroup(GroupDto groupDto) {

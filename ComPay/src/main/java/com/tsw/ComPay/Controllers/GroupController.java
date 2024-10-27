@@ -52,10 +52,20 @@ public class GroupController {
         return "redirect:/groups";
     }
 
-    // pasarle el nombre del grupo directamente
-    @GetMapping("/show/payments")
-    public String viewGroup(Model model) {
-        return "prueba/pruebapagos"; // Retorna la vista principal con los fragmentos
-    }
+    // TODO: función edit
+//    @GetMapping("/{groupId}/edit")
+//    public String editGroup(@PathVariable("groupId") Long groupId, Model model) {
+//        GroupDto group = groupService.findGroupById(groupId);
+//        model.addAttribute("group", group);
+//
+//        return "";
+//    }
 
+    // TODO: comprobar endpoint para luego hacer expenses
+    @GetMapping("/{groupId}")
+    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
+        GroupDto group = groupService.findGroupById(groupId);
+        model.addAttribute("group", group);
+        return "expenses/expenses";
+    }
 }
