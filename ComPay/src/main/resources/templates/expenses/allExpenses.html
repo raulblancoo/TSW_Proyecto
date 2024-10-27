@@ -1,0 +1,34 @@
+<!-- templates/expenses/allExpenses.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Gastos</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+</head>
+
+
+<body class="min-h-screen flex flex-col">
+<header>
+    <div th:replace="~{base/navbar :: navbar}"></div>
+</header>
+
+<main>
+    <div class="max-w-6xl mx-auto my-8">
+        <div class="container mx-auto px-6">
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Lista de Gastos</h3>
+
+            <!-- Componente de gastos -->
+            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+                <div th:each="expense : ${expenses}">
+                    <div th:replace="~{expenses/fragments/expenseItem :: expenseCard(${expense})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div th:replace="~{base/footer :: footer}"></div>
+</footer>
+</body>
+</html>

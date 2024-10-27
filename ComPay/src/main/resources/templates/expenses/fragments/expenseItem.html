@@ -1,0 +1,11 @@
+<!-- templates/expenses/fragments/expenseItem.html -->
+<div th:fragment="expenseCard(expense)" th:if="${expense != null}"
+     class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
+    <div class="px-5 py-3">
+        <h3 class="text-gray-700 uppercase" th:text="${expense.expense_name}">Nombre del gasto</h3>
+        <p class="text-sm text-gray-600 mt-1">Fecha: <span th:text="${expense.expense_date}" name="expense_date">Fecha</span></p>
+        <p class="text-sm text-gray-600 mt-1">Pagador: <span th:text="${expense.originUser.id}" name="originUser">Pagador</span></p>
+        <p class="text-sm text-gray-600 mt-1">División: <span th:text="${expense.share_method}" name="share_method">División</span></p>
+        <p class="text-sm text-gray-600 mt-1">División: <span th:text="${expense.amount}" name="amount">Cantidad</span></p>
+    </div>
+</div>
