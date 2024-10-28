@@ -6,6 +6,7 @@
         <p class="text-sm text-gray-600 mt-1">Fecha: <span th:text="${expense.expense_date}" name="expense_date">Fecha</span></p>
         <p class="text-sm text-gray-600 mt-1">Pagador: <span th:text="${expense.originUser.id}" name="originUser">Pagador</span></p>
         <p class="text-sm text-gray-600 mt-1">División: <span th:text="${expense.share_method}" name="share_method">División</span></p>
-        <p class="text-sm text-gray-600 mt-1">División: <span th:text="${expense.amount}" name="amount">Cantidad</span></p>
+        <p class="text-sm text-gray-600 mt-1">Cantidad: <span th:text="${expense.amount}" name="amount">Cantidad</span></p>
+        <p class="text-sm text-gray-600 mt-1">Grupo: <span th:text="${expense.group.id}" name="group">Grupo</span></p>
     </div>
 </div>

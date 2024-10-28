@@ -14,8 +14,8 @@
 </header>
 
 <main class="flex-grow overflow-y-auto pb-24">
-    <div th:replace="~{expenses/fragments/expensesHeader :: expensesHeader}"></div>
-    <div th:replace="~{expenses/fragments/expensesList :: expensesList}"></div>
+    <div th:replace="~{expenses/fragments/expensesHeader :: expensesHeader(${group})}"></div>
+    <div th:replace="~{expenses/fragments/expensesList :: expenseList(${expenses})}"></div>
 </main>
 
 <!-- Botón Fijado al Centro Inferior de la Página -->

@@ -1,0 +1,9 @@
+<!-- templates/expenses/fragments/expenseDate.html -->
+<div th:fragment="expenseDate(expense)">
+  <div class="flex items-center my-8">
+    <hr class="flex-grow border-gray-300">
+    <span class="px-4 bg-white text-gray-500" th:text="${#dates.format(expense.expense_date, 'dd MMM yyyy')}">Fecha de gasto</span>
+    <hr class="flex-grow border-gray-300">
+  </div>
+</div>
+
