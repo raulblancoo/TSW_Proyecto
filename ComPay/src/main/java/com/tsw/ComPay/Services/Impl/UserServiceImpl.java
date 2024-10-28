@@ -8,12 +8,15 @@ import com.tsw.ComPay.Services.UserService;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
 
@@ -24,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     public void saveUser(UserDto userDto) {
 
-        userRepository.save(userMapper.toEntity(userDto));
+        userRepository.save(userMapper.toNewEntity(userDto, passwordEncoder.encode(userDto.getPassword())));
     }
 
     public UserDto findByEmailPassword(String email, String password) {
@@ -38,6 +41,11 @@ public class UserServiceImpl implements UserService {
 
     public UserDto existingUser(UserDto userDto) {
         return userMapper.toDto( existingUserModel(userDto));
+    }
+
+    @Override
+    public UserDto findByUsernameAndPassword(String username, String password) {
+        return userMapper.toDto(userRepository.findByUsernameAndPassword(username, password));
     }
 
     public UserModel existingUserModel(UserDto userDto) {

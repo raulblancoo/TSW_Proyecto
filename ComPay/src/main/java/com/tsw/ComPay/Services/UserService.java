@@ -10,4 +10,5 @@ public interface UserService {
   UserDto findByEmailPassword(String email, String password);
   UserDto findByEmail(String email);
   UserDto existingUser(UserDto userDto);
+  UserDto findByUsernameAndPassword(String username, String password);
 }

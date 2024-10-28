@@ -7,7 +7,9 @@ import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
 import com.tsw.ComPay.Services.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,27 +17,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/groups")
 public class GroupController {
 
-    @Autowired
-    private GroupService groupService;
 
-    @Autowired
-    private GroupMembersService groupMembersService;
+    private final GroupService groupService;
 
-    @Autowired
-    private UserService userService;
+
+    private final GroupMembersService groupMembersService;
+
+
+    private final  UserService userService;
 
     @GetMapping("/show")
     public String showGroups(Model model) {
         //TODO: Mapper e implementar funciones para listar grupo
         List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
         model.addAttribute("groups", groups);
+        model.addAttribute("usuario", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "groups/groups"; // Retornamos la vista principal
     }
 
