@@ -12,6 +12,7 @@ public class ExpensesDto {
     private double amount;
     private String expense_name;
     private UserDto originUser;
+    private GroupDto group;
     private Date expense_date;
     private String share_method;
 }

@@ -10,6 +10,6 @@ public interface ExpensesService {
     void saveExpense(ExpensesDto expenseDto0);
 
     List<ExpensesDto> findAllExpenses();
-    List<ExpensesDto> findExpensesByGroupId(Long groupId);
+    List<ExpensesDto> findAllExpensesByGroupId(Long groupId);
 
 }

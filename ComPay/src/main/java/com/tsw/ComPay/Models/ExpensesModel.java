@@ -31,8 +31,12 @@ public class ExpensesModel {
     private Date expense_date;
 
     @ManyToOne
-    @JoinColumn(name = "originUser_id")
+    @JoinColumn(name = "FK_USER")
     private UserModel originUser;
+
+    @ManyToOne
+    @JoinColumn(name="FK_GROUP")
+    private GroupModel group;
 
     @Column(name="share_method")
     private String share_method;

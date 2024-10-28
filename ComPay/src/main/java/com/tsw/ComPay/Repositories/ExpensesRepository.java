@@ -8,4 +8,5 @@ import java.util.List;
 public interface ExpensesRepository extends JpaRepository<ExpensesModel, Long> {
     //ExpensesModel findExpensesModelById(Long id);
     List<ExpensesModel> findExpensesModelById(Long id);
+    List<ExpensesModel> findExpensesModelByGroupId(Long id);
 }

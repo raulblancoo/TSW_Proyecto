@@ -2,6 +2,7 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.GroupDto;
+import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
@@ -66,6 +67,7 @@ public class GroupController {
     public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         model.addAttribute("group", group);
-        return "expenses/expenses";
+
+        return "redirect:/groups/{groupId}/expenses";
     }
 }
