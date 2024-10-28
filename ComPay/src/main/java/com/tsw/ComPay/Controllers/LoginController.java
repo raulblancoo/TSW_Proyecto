@@ -23,6 +23,8 @@ public class LoginController {
 
     @PostMapping("/register")
     public String registerPost(Model model, @ModelAttribute("user") UserDto userDto) {
+        String avatarURL = "https://ui-avatars.com/api?name=" + userDto.getName() + "+" + userDto.getSurname();
+        userDto.setAvatarURL(avatarURL);
         model.addAttribute("user", userDto);
         userService.saveUser(userDto);
         return "index";
