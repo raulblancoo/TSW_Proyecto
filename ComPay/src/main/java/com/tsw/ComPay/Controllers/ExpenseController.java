@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/groups/{groupId}")
 public class ExpenseController {
 
     @Autowired
@@ -34,7 +33,7 @@ public class ExpenseController {
         y tenga la lista de pagos asociada a cada fecha. Despues en el modelo se deben de recorrer todas las
         fechas e ir listando los pagos
     */
-    @GetMapping("/expenses")
+    @GetMapping("groups/{groupId}/expenses")
     public String showExpenses(@PathVariable("groupId") Long groupId, Model model){
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findAllExpensesByGroupId(groupId);
@@ -43,6 +42,11 @@ public class ExpenseController {
         model.addAttribute("expenses", expenses);
 
         return "expenses/expenses";
+    }
+
+    @GetMapping("/expenses")
+    public String showMyExpenses(Model model){
+        return "expenses/allExpenses";
     }
 
 
