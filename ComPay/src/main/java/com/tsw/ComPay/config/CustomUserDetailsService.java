@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +31,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    private final GroupRepository groupRepository;
-
-    private final GroupMapper groupMapper;
-
     private final UserMapper userMapper;
+
+    private final GroupMembersRepository groupMembersRepository;
+
+    private final GroupMembersMapper groupMembersMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -42,7 +43,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
         if(user != null) {
-            List<GroupDto> groups = groupMapper.toListDto(groupRepository.findAllByUserId(user.getId()));
+            List<GroupMembersDto> groupsMembers = groupMembersMapper.toListDto(groupMembersRepository.findByUser(userMapper.toEntity(user)));
+
+            List<GroupDto> groups = groupsMembers.stream().map(GroupMembersDto::getGroup).collect(Collectors.toList());
 
             UserAuthDto userAuth = new UserAuthDto(user, groups);
 

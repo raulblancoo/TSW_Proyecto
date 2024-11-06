@@ -37,12 +37,12 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) ->
                         {
-                            authorize.requestMatchers("/", "/login").permitAll()
+                            authorize.requestMatchers("/", "/login", "/register","/css/**", "/js/**", "/images/**").permitAll()
                             //        .requestMatchers("/perfil").hasAnyAuthority("ADMIN")
                                     .anyRequest().authenticated();
                         }
                 )
-                .httpBasic(Customizer.withDefaults())
+                //.httpBasic(Customizer.withDefaults())
                 .formLogin(form ->
                                 form.loginPage("/login").permitAll()
                                       .loginProcessingUrl("/login")
