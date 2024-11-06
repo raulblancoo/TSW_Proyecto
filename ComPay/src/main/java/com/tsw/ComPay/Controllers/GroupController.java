@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,13 +52,15 @@ public class GroupController {
     //TODO: Revisar si el atributo model hace falta aquí
     @PostMapping("/create")
     public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+        UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         groupService.saveGroup(newGroupDto);
+        List<String> emails = new ArrayList<>(List.of(newGroupDto.getEmails()));
+        emails.add(authenticatedUser.getEmail());
 
-        for(String email : newGroupDto.getEmails()) {
+        for(String email : emails) {
             groupMembersService.saveGroupMember(groupService.findGroupByName(newGroupDto.getGroupName()), userService.findByEmail(email));
         }
 
-        UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail())); // Actualiza la sesión con los grupos nuevos
 
         return "redirect:/groups";
