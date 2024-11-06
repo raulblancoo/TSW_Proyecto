@@ -38,8 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final GroupMembersMapper groupMembersMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDto user = userMapper.toDto(userRepository.findByUsername(username));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        UserDto user = userMapper.toDto(userRepository.findByEmail(email));
 
 
         if(user != null) {
