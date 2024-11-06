@@ -13,4 +13,5 @@ public interface GroupService {
     GroupDto findGroupByName(String groupName);
     List<GroupDto> findAllGroups();
     GroupDto existingGroup(GroupDto groupDto);
+    List<GroupDto> actualizarGrupos(String email);
 }
