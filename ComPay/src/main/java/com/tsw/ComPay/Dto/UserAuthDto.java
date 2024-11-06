@@ -14,11 +14,14 @@ public class UserAuthDto implements UserDetails {
      private  String username;
      private String password;
      private List<GroupDto> group;
+     private String email;
 
      public UserAuthDto(UserDto user, List<GroupDto> group) {
          this.username = user.getUsername();
          this.password = user.getPassword();
          this.group = group;
+         this.email = user.getEmail();
+
      }
 
     @Override

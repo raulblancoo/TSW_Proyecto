@@ -3,6 +3,7 @@ package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
+import com.tsw.ComPay.Dto.UserAuthDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
@@ -37,10 +38,10 @@ public class GroupController {
 
     @GetMapping("/show")
     public String showGroups(Model model) {
-        //TODO: Mapper e implementar funciones para listar grupo
-        List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
-        model.addAttribute("groups", groups);
-        model.addAttribute("usuario", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
+        model.addAttribute("groups", authenticatedUser.getGroup());
+        model.addAttribute("usuario", authenticatedUser);
         return "groups/groups"; // Retornamos la vista principal
     }
 
