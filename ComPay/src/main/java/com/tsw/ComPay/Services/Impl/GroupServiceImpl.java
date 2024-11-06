@@ -12,20 +12,20 @@ import com.tsw.ComPay.Repositories.GroupMembersRepository;
 import com.tsw.ComPay.Repositories.GroupRepository;
 import com.tsw.ComPay.Repositories.UserRepository;
 import com.tsw.ComPay.Services.GroupService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor
 public class GroupServiceImpl implements GroupService {
 
-    @Autowired
-    private GroupRepository groupRepository;
+    private final GroupRepository groupRepository;
 
     private final NewGroupMapper newGroupMapper;
 
@@ -38,17 +38,34 @@ public class GroupServiceImpl implements GroupService {
     private final UserMapper userMapper;
 
     private final UserRepository userRepository;
+    // Lista estática de URLs de imágenes
+    private static final List<String> IMG_URLS = Arrays.asList(
+            "/images/bg1.jpg", "/images/bg2.jpg", "/images/bg3.jpg", "/images/bg4.jpg",
+            "/images/bg5.jpg", "/images/bg6.jpg", "/images/bg7.jpg", "/images/bg8.jpg",
+            "/images/bg9.jpg", "/images/bg10.jpg"
+    );
+
+    // Índice cíclico para las URLs de imágenes
+    private static final AtomicInteger imageIndex = new AtomicInteger(0);
 
     public void saveGroup(NewGroupDto groupDto) {
+        groupDto.setImgURL(getNextImageUrl());
+
         groupRepository.save(newGroupMapper.toEntity(groupDto));
     }
 
-    public GroupDto findGroupByName(String groupName){
+    public GroupDto findGroupByName(String groupName) {
         return groupMapper.toDto(groupRepository.findByGroupName(groupName));
     }
 
+    @Override
     public List<GroupDto> findAllGroups() {
         return groupMapper.toListDto(groupRepository.findAll());
+    }
+
+    @Override
+    public GroupDto findGroupById(Long groupId) {
+        return groupMapper.toDto(groupRepository.findGroupModelById(groupId));
     }
 
     public GroupDto existingGroup(GroupDto groupDto) {
@@ -67,6 +84,12 @@ public class GroupServiceImpl implements GroupService {
         List<GroupDto> groups = groupsMembers.stream().map(GroupMembersDto::getGroup).collect(Collectors.toList());
 
         return groups;
+    }
+
+}
+    private String getNextImageUrl() {
+        int index = imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
+        return IMG_URLS.get(index);
     }
 
 }

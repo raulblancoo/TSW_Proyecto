@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupos</title>
-    <!-- PARA CARGARLO SIN INSTALARLO LOCALMENTE
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
 <header>
@@ -16,27 +14,22 @@
 
 <main class="flex-grow overflow-y-auto pb-24">
     <div th:replace="~{groups/fragments/groupList :: groupList}"></div>
+
+    <!-- Botón Fijado al Centro Inferior de la Página -->
+    <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
+        <button data-modal-target="groupModal" data-modal-toggle="groupModal"
+                class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+            Añadir Grupo
+        </button>
+    </div>
+
+    <div th:replace="~{groups/fragments/groupModal :: groupModal}"></div>
 </main>
 
-<!-- Botón Fijado al Centro Inferior de la Página -->
 <footer>
     <div th:replace="~{base/footer :: footer}"></div>
 </footer>
 
-<div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
-    <button id="addGroupBtn"
-            class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300 uppercase">
-        Añadir Grupo
-    </button>
-</div>
-
-<!-- Modal -->
-<div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-gray-800 text-white w-full max-w-md p-6 rounded-lg shadow-lg">
-        <!-- Contenido dinámico aquí -->
-        <div id="modalContent"></div>
-    </div>
-</div>
 </body>
 </html>
 

@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.Arrays;
@@ -36,8 +33,10 @@ public class GroupController {
 
     private final  UserService userService;
 
-    @GetMapping("/show")
+
+    @GetMapping("")
     public String showGroups(Model model) {
+
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
         model.addAttribute("groups", authenticatedUser.getGroup());
@@ -45,17 +44,16 @@ public class GroupController {
         return "groups/groups"; // Retornamos la vista principal
     }
 
-    @GetMapping("/create")
-    public String createGroup(Model model) {
-        model.addAttribute("currency", new NewGroupDto());
+
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
         model.addAttribute("currencies", currencies);
 
-        return "groups/create-group"; // Retorna la vista principal con los fragmentos
+        return "groups/groups"; 
     }
 
+    //TODO: Revisar si el atributo model hace falta aquí
     @PostMapping("/create")
-    public String createGroupPost(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
         groupService.saveGroup(newGroupDto);
 
         for(String email : newGroupDto.getEmails()) {
@@ -68,10 +66,20 @@ public class GroupController {
         return "redirect:/groups/show";
     }
 
-    // pasarle el nombre del grupo directamente
-    @GetMapping("/show/payments")
-    public String viewGroup(Model model) {
-        return "prueba/pruebapagos"; // Retorna la vista principal con los fragmentos
-    }
+    // TODO: función edit
+//    @GetMapping("/{groupId}/edit")
+//    public String editGroup(@PathVariable("groupId") Long groupId, Model model) {
+//        GroupDto group = groupService.findGroupById(groupId);
+//        model.addAttribute("group", group);
+//
+//        return "";
+//    }
 
+    // TODO: comprobar endpoint para luego hacer expenses
+    @GetMapping("/{groupId}")
+    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
+        GroupDto group = groupService.findGroupById(groupId);
+        model.addAttribute("group", group);
+        return "expenses/expenses";
+    }
 }

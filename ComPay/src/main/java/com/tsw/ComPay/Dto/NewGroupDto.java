@@ -11,4 +11,6 @@ public class NewGroupDto {
     private String groupName;
     private String[] emails;
     private String currency;
+    private String imgURL;
+    private float amount;
 }

@@ -11,11 +11,12 @@
     </select>
 </div>-->
 
-<div th:fragment="currencySelector" class="mb-6">
-    <label for="currency" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selecciona una divisa</label>
-    <select id="currency" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
-        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="currency" field="*{currency}">
-        <option value="" disabled selected>Selecciona una divisa</option>
+<div th:fragment="currencySelector" class="mb-4">
+    <label for="currency" class="block text-sm font-medium text-gray-700 uppercase">Selecciona una divisa</label>
+    <select id="currency" required
+            class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+            name="currency" field="*{currency}">
+        <option hidden selected></option>
         <option th:each="currency : ${currencies}"
                 th:value="${currency.name()}"
                 th:text="${currency.getCode()}">

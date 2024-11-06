@@ -37,5 +37,4 @@ public class LoginController {
         userService.saveUser(userDto);
         return "index";
     }
-
 }

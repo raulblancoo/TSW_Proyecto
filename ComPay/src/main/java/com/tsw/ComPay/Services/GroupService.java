@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public interface GroupService {
     void saveGroup(NewGroupDto group);
-    GroupDto findGroupByName(String groupName);
+
     List<GroupDto> findAllGroups();
+    GroupDto findGroupById(Long groupId);
+    GroupDto findGroupByName(String groupName);
+
     GroupDto existingGroup(GroupDto groupDto);
     List<GroupDto> actualizarGrupos(String email);
 }
