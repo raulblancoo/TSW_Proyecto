@@ -86,9 +86,9 @@ public class GroupServiceImpl implements GroupService {
         return groups;
     }
 
-}
+
     private String getNextImageUrl() {
-        int index = imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
+        int index = GroupServiceImpl.imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
         return IMG_URLS.get(index);
     }
 

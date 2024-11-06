@@ -40,10 +40,7 @@ public class GroupController {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //List<GroupDto> groups = groupService.findAllGroups(); // Assuming you have a method to retrieve the groups
         model.addAttribute("groups", authenticatedUser.getGroup());
-        model.addAttribute("usuario", authenticatedUser);
-        return "groups/groups"; // Retornamos la vista principal
-    }
-
+        model.addAttribute("usuario", authenticatedUser);// Retornamos la vista principal
 
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
         model.addAttribute("currencies", currencies);
@@ -63,7 +60,7 @@ public class GroupController {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail())); // Actualiza la sesión con los grupos nuevos
 
-        return "redirect:/groups/show";
+        return "redirect:/groups";
     }
 
     // TODO: función edit

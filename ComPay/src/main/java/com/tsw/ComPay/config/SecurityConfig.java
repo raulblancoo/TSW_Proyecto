@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .formLogin(form ->
                                 form.loginPage("/login").permitAll()
                                       .loginProcessingUrl("/login")
-                                        .defaultSuccessUrl("/groups/show", true)
+                                        .defaultSuccessUrl("/groups", true)
                           //        .failureForwardUrl("/login/error")
 
                 );
