@@ -22,10 +22,8 @@
                     <select required id="payer_select"
                             class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
                         <option hidden selected></option>
-                        <option value="RB">Raúl Blanco</option>
-                        <option value="JR">Jorge Rodríguez</option>
-                        <option value="AA">Anxo Alonso</option>
-                        <option value="AD">Anxo Deportivo</option>
+                        <th:block th:each="user : ${users}">
+                            <option th:value="${user.id}" th:text="${user.username}">
                     </select>
                 </div>
 
