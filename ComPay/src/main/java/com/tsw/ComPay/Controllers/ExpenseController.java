@@ -38,16 +38,18 @@ public class ExpenseController {
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
         model.addAttribute("users", users);
+        model.addAttribute("expense", new NewExpenseDto());
 
         return "expenses/expenses";
     }
 
-    @PostMapping("/create")
-    public String createGroup(@ModelAttribute("group") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
+    @PostMapping("/create/{groupId}")
+    public String createGroup(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
+        newExpenseDto.setGroup(groupService.findGroupById(groupId));
         ExpensesDto expense = expensesService.save(newExpenseDto);
 
-        for (UserDto user : newExpenseDto.getDestinationUsers()) {
-            expenseShareService.save(user, expense);
+        for (Long userId : newExpenseDto.getDestinationUsers()) {
+            expenseShareService.save(userService.findByUserId(userId), expense);
         }
 
         return "redirect:/group/expenses/" + groupId;

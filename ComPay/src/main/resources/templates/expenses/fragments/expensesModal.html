@@ -15,21 +15,20 @@
         </div>
         <!-- Modal Body -->
         <div class="p-6 space-y-4">
-            <form id="paymentForm">
+            <form id="paymentForm" th:action="@{/group/expenses/create/{groupId}(groupId=${group.id})}" method="post" th:object="${expense}">
                 <div class="mb-4">
-                    <label for="payer_select" class="block text-sm font-medium text-gray-700">SELECCIONA EL
-                        PAGADOR</label>
-                    <select required id="payer_select"
+                    <label for="payer_select" class="block text-sm font-medium text-gray-700">PARTICIPANTES</label>
+                    <select required multiple id="payer_select" field="*{destinationUsers}" name="destinationUsers"
                             class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
-                        <option hidden selected></option>
                         <th:block th:each="user : ${users}">
-                            <option th:value="${user.id}" th:text="${user.username}">
+                            <option th:value="${user.id}" th:text="${user.username}"></option>
+                        </th:block>
                     </select>
                 </div>
 
                 <div class="mb-4">
                     <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
-                    <input type="text" name="payment_concept" id="payment_concept"
+                    <input type="text" id="payment_concept" field="*{name}" name="name"
                            class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                            placeholder="Escriba un concepto" required/>
                 </div>
@@ -37,7 +36,7 @@
                 <div class="mb-4">
                     <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
                     <div class="flex items-center">
-                        <input type="number" name="payment_amount" id="payment_amount"
+                        <input type="number" name="amount" id="payment_amount" field="*{amount}"
                                class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                                placeholder="Introduzca la cantidad" required/>
                         <div class="ml-2 flex-shrink-0">
@@ -61,29 +60,29 @@
                         </select>
                     </div>
                 </div>
+                <!-- Modal Footer -->
 
-
+                <div class="flex justify-end p-5 border-t border-gray-200">
+                    <button data-modal-hide="paymentModal"
+                            class="text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg px-4 py-2 mr-2">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                            class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                        Guardar
+                    </button>
+                </div>
             </form>
-        </div>
-        <!-- Modal Footer -->
-        <div class="flex justify-end p-5 border-t border-gray-200">
-            <button data-modal-hide="paymentModal"
-                    class="text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 rounded-lg px-4 py-2 mr-2">
-                Cancelar
-            </button>
-            <button id="submitPayment"
-                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                Guardar
-            </button>
         </div>
     </div>
 </div>
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
 <script>
-    // Seleccionar el botón y el formulario
+   /* // Seleccionar el botón y el formulario
     const submitButton = document.getElementById('submitPayment');
     const paymentForm = document.getElementById('paymentForm');
+
 
     // Manejar el envío del formulario
     submitButton.addEventListener('click', function (event) {
@@ -106,5 +105,5 @@
         } else {
             paymentForm.reportValidity(); // Mostrar validaciones del formulario
         }
-    });
+    });*/
 </script>

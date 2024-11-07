@@ -31,6 +31,7 @@ public class ExpensesModel {
 
     @ManyToOne
     @JoinColumn(name = "group_id")
+
     private GroupModel group;
 
 }
