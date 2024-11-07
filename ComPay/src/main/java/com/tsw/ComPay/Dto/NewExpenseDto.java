@@ -8,9 +8,10 @@ import java.util.List;
 public class NewExpenseDto {
 
     private GroupDto group;
-    private UserDto originUser;
+    private Long originUserId;
     private Long[] destinationUsers;
     private String name;
     private double amount;
+    private UserDto originUser;
 
 }

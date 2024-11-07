@@ -46,6 +46,8 @@ public class ExpenseController {
     @PostMapping("/create/{groupId}")
     public String createGroup(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
         newExpenseDto.setGroup(groupService.findGroupById(groupId));
+        newExpenseDto.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
+
         ExpensesDto expense = expensesService.save(newExpenseDto);
 
         for (Long userId : newExpenseDto.getDestinationUsers()) {

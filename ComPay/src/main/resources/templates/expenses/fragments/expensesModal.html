@@ -17,8 +17,17 @@
         <div class="p-6 space-y-4">
             <form id="paymentForm" th:action="@{/group/expenses/create/{groupId}(groupId=${group.id})}" method="post" th:object="${expense}">
                 <div class="mb-4">
+                    <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
+                    <select required id="payer_select" field="*{originUserId}" name="originUserId"
+                            class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
+                        <th:block th:each="user : ${users}">
+                            <option th:value="${user.id}" th:text="${user.username}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="mb-4">
                     <label for="payer_select" class="block text-sm font-medium text-gray-700">PARTICIPANTES</label>
-                    <select required multiple id="payer_select" field="*{destinationUsers}" name="destinationUsers"
+                    <select required multiple id="destination_select" field="*{destinationUsers}" name="destinationUsers"
                             class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
                         <th:block th:each="user : ${users}">
                             <option th:value="${user.id}" th:text="${user.username}"></option>
