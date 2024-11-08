@@ -1,5 +1,6 @@
 package com.tsw.ComPay.Dto;
 
+import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -13,5 +14,5 @@ public class NewExpenseDto {
     private String name;
     private double amount;
     private UserDto originUser;
-
+    private ExpenseMethodEnum share_method;
 }

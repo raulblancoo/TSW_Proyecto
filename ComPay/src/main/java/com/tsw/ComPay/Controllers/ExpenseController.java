@@ -1,6 +1,8 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.*;
+import com.tsw.ComPay.Enums.CurrencyEnum;
+import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import com.tsw.ComPay.Mapper.NewExpenseMapper;
 import com.tsw.ComPay.Models.GroupMembersModel;
 import com.tsw.ComPay.Models.UserModel;
@@ -11,11 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -39,6 +39,9 @@ public class ExpenseController {
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
+
+        List<ExpenseMethodEnum> expenseMethods = Arrays.asList(ExpenseMethodEnum.values());
+        model.addAttribute("expenseMethods", expenseMethods);
 
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);

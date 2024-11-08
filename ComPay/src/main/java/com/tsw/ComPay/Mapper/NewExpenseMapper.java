@@ -19,10 +19,10 @@ import java.util.List;
 @Mapper(componentModel="spring")
 public interface NewExpenseMapper {
 
-    @Mapping(source = "expenses_name", target="name")
+    @Mapping(source = "expense_name", target="name")
     NewExpenseDto toDto(ExpensesModel expense);
 
 
-    @Mapping(source = "name", target="expenses_name")
+    @Mapping(source = "name", target="expense_name")
     ExpensesModel toEntity(NewExpenseDto expense);
 }
