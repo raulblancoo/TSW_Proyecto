@@ -23,10 +23,13 @@
                         Configuración</a>
                 </li>
                 <li>
-                    <a href="#"
-                       class="block px-4 py-2 text-sm text-gray-700 hover:bg-sky-500 hover:text-white">
-                        Cerrar sesión</a>
+                    <form id="logout-form" th:action="@{/logout}" method="post" class="block px-4 py-2 text-sm text-gray-700
+                            hover:bg-sky-500 hover:text-white">
+                        <button th:href="@{/logout}">
+                            Cerrar sesión</button>
+                    </form>
                 </li>
+
             </ul>
         </div>
     </div>
