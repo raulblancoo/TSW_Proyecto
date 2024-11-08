@@ -1,4 +1,4 @@
-<!-- Modal para Añadir Pago -->
+<!-- Modal para Crear Pago -->
 <div th:fragment="expensesModal" id="paymentModal" tabindex="-1" aria-hidden="true"
      class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden">
     <div class="relative bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-2xl max-h-[100vh] overflow-y-auto">
@@ -10,10 +10,15 @@
                      stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
                 </svg>
-
             </button>
         </div>
-        <!-- Modal Body -->
+        <!-- Modal Body
+        <div class="p-6 space-y-4"
+            th:replace="~{expenses/fragments/expenseFormFields :: expensesFormFields}"
+        ></div>
+    </div>
+</div>
+
         <div class="p-6 space-y-4">
             <form id="paymentForm" th:action="@{/group/expenses/create/{groupId}(groupId=${group.id})}" method="post" th:object="${expense}">
                 <div class="mb-4">
@@ -69,7 +74,7 @@
                         </select>
                     </div>
                 </div>
-                <!-- Modal Footer -->
+                
 
                 <div class="flex justify-end p-5 border-t border-gray-200">
                     <button data-modal-hide="paymentModal"
@@ -85,6 +90,8 @@
         </div>
     </div>
 </div>
+
+-->
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
 <script>
@@ -116,3 +123,4 @@
         }
     });*/
 </script>
+

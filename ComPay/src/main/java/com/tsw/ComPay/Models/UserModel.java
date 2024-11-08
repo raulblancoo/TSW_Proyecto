@@ -31,4 +31,6 @@ public class UserModel {
     @Column(name="password")
     private String password;
 
+    @Column(name="avatarURL")
+    private String avatarURL;
 }

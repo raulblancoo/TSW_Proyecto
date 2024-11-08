@@ -12,6 +12,6 @@ public class GroupDto {
     private Long id;
     private String groupName;
     private String currency;
-    private float amount;
+    private double amount;
     private String imgURL;
 }

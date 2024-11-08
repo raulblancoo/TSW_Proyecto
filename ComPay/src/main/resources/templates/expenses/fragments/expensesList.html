@@ -1,15 +1,25 @@
-<div th:fragment="expensesList" class="max-w-6xl mx-auto">
+<!-- templates/expenses/fragments/expensesList.html -->
+<div th:fragment="expenseList(expenses)" class="max-w-6xl mx-auto">
     <div class="container mx-auto px-6">
+        <div th:each="expense, stat : ${expenses}">
+            <!-- Mostrar el fragmento de fecha solo si es el primer gasto de un grupo por fecha -->
+            <div th:if="${stat.index == 0 or expense.expense_date != expenses[stat.index - 1].expense_date}">
+                <div th:replace="~{expenses/fragments/expenseDate :: expenseDate(${expense})}"></div>
+            </div>
 
-        <!-- FECHA -->
+             <!-- RBG      
+            
+            <div class="mt-8 h-100">
+                <div th:replace="~{expenses/fragments/expenseList-Item :: expenseCard(${expense})}"></div>
+              
         <div class="flex items-center my-8">
             <hr class="flex-grow border-gray-300">
             <span class="px-4 bg-white text-gray-500">10 Nov 2023</span>
             <hr class="flex-grow border-gray-300">
-        </div>
+        </div>--> 
 
         <!--COMPONENTE DE PAGO-->
-        <th:block th:each="expense : ${expenses}">
+        <!--<th:block th:each="expense : ${expenses}">
             <div class="mt-8 h-100">
                 <div class="h-35 lg:h-25 shadow rounded-lg bg-gray-200 flex justify-between items-center px-5 py-3 hover:bg-gray-400
             cursor-pointer transition duration-300 focus:bg-gray-500 mb-6">
@@ -22,7 +32,8 @@
                         por
                         <span class="font-bold uppercase" th:text="${expense.expenses_name}"></span>
                     </p>
-                    <!-- Grupo de imágenes para pantallas grandes -->
+                    
+
                     <div class="hidden lg:flex items-center">
                         <img class="object-cover w-8 h-8 -mx-1 rounded-full ring dark:ring-gray-900"
                              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
@@ -40,7 +51,8 @@
                              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=80"
                              alt="">
                     </div>
-                    <!-- Grupo de imagen con con numeros para pantallas pequeñas y medianas -->
+                    
+
                     <div class="hidden items-center mr-1 md:flex lg:hidden sm:ml-4">
                         <img class="object-cover w-8 h-8 rounded-full ring dark:ring-gray-900"
                              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
@@ -49,7 +61,7 @@
                            href="#">+99</a>
                     </div>
 
-                    <!-- Botón tres puntos opciones-->
+                   
                     <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots"
                             data-dropdown-placement="bottom-start"
                             class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50"
@@ -70,11 +82,13 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
         </th:block>
-    </div>
+    </div>-->
 
 </div>
+
 
 <!--  SCRIPT PARA BOTÓN DROPDOWN   -->
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
@@ -92,6 +106,4 @@
 <!--    </div>-->
 <!--    <a class="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-700 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+99</a>-->
 <!--</div>-->
-
-
 
