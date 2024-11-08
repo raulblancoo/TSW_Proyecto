@@ -15,6 +15,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class GroupMembersServiceImpl implements GroupMembersService {
@@ -45,5 +48,11 @@ public class GroupMembersServiceImpl implements GroupMembersService {
 
 
         groupMembersRepository.save(groupMembersMapper.toEntity(groupMembersDto));
+    }
+
+
+    public List<UserDto> getAllFromGroup(Long groupId) {
+        return groupMembersMapper.toListDto(groupMembersRepository.findByGroup_Id(groupId))
+                .stream().map(GroupMembersDto::getUser).toList();
     }
 }

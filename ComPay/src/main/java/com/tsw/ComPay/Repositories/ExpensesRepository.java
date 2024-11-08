@@ -9,4 +9,5 @@ public interface ExpensesRepository extends JpaRepository<ExpensesModel, Long> {
     //ExpensesModel findExpensesModelById(Long id);
     List<ExpensesModel> findExpensesModelById(Long id);
     List<ExpensesModel> findExpensesModelByGroupId(Long id);
+    List<ExpensesModel> findExpensesModelByGroup_Id(Long id);
 }
