@@ -43,6 +43,8 @@
       <form method="post" th:action="@{/register}" th:object="${user}" class="formulario__register">
         <h2>Regístrarse</h2>
         <!-- <input type="text" th:field="*{}" placeholder="Nombre completo"> -->
+        <input type="text" field="*{name}" placeholder="Nombre" name="name" required>
+        <input type="text" field="*{surname}" placeholder="Apellidos" name="surname" required>
         <input type="text" field="*{email}" placeholder="Correo Electronico" name="email" required>
         <input type="text" field="*{username}" placeholder="Usuario" name="username">
         <input type="password" field="*{password}" placeholder="Contraseña" name="password">

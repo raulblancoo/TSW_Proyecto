@@ -35,7 +35,7 @@
 <!--    </div>-->
 
     <!-- Botón tres puntos opciones con IDs únicos -->
-    <button th:id="'dropdownMenuIconButton-' + ${expense.id}" data-dropdown-toggle="'dropdownDots-' + ${expense.id}"
+    <button th:id="'dropdownMenuIconButton-' + ${expense.id}" th:data-dropdown-toggle="'dropdownDots-' + ${expense.id}"
             class="inline-flex self-center items-center p-2 text-sm font-medium text-center text-gray-900 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50"
             type="button">
         <svg class="w-4 h-4 text-black" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"

@@ -1,4 +1,3 @@
-<!-- templates/groups/viewGroup.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -15,12 +14,23 @@
 
 <main class="flex-grow overflow-y-auto pb-24">
     <div th:replace="~{expenses/fragments/expensesHeader :: expensesHeader(${group})}"></div>
-    <div th:replace="~{expenses/fragments/expensesList :: expenseList(${expenses})}"></div>
+
+    <!-- Mostrar solo uno de los fragmentos dependiendo de si la lista de expenses está vacía -->
+    <div>
+        <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
+        <div th:if="${expenses.isEmpty()}">
+            <div th:replace="~{expenses/fragments/expensesEmpty :: emptyMessage('No hay gastos registrados para este grupo.')}"></div>
+        </div>
+
+        <!-- Fragmento que muestra la lista cuando hay gastos -->
+        <div th:replace="~{expenses/fragments/expensesList :: expenseList(${expenses})}"></div>
+    </div>
 </main>
 
 <!-- Botón Fijado al Centro Inferior de la Página -->
 <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
-    <button data-modal-target="paymentModal" data-modal-toggle="paymentModal" class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+    <button data-modal-target="paymentModal" data-modal-toggle="paymentModal"
+            class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
         Añadir Pago
     </button>
 </div>
@@ -35,25 +45,3 @@
 </html>
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
-
-<!--<body class="bg-gray-100">-->
-<!--<div class="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg">-->
-<!--    <h1 class="text-2xl font-bold text-gray-800 mb-4" th:text="${group.groupName}">Nombre del Grupo</h1>-->
-
-<!--    <div class="mb-6">-->
-<!--        <p><strong>Moneda:</strong> <span th:text="${group.currency}">Moneda</span></p>-->
-<!--        <p><strong>Cantidad:</strong> <span th:text="${group.amount}">0</span></p>-->
-<!--    </div>-->
-
-<!--    <div class="mb-4">-->
-<!--        <h2 class="text-xl font-semibold text-gray-700">Miembros del Grupo</h2>-->
-<!--        <ul class="list-disc pl-6 mt-2">-->
-<!--&lt;!&ndash;            <li th:each="member : ${group.members}" th:text="${member.name}">Nombre del Miembro</li>&ndash;&gt;-->
-<!--        </ul>-->
-<!--    </div>-->
-
-<!--    <a href="/groups" class="mt-6 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">-->
-<!--        Volver a Grupos-->
-<!--    </a>-->
-<!--</div>-->
-<!--</body>-->

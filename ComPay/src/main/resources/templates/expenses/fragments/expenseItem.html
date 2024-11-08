@@ -1,12 +1,19 @@
 <!-- templates/expenses/fragments/expenseItem.html -->
+
 <div th:fragment="expenseCard(expense)" th:if="${expense != null}"
-     class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
-    <div class="px-5 py-3">
-        <h3 class="text-gray-700 uppercase" th:text="${expense.expense_name}">Nombre del gasto</h3>
-        <p class="text-sm text-gray-600 mt-1">Fecha: <span th:text="${expense.expense_date}" name="expense_date">Fecha</span></p>
-        <p class="text-sm text-gray-600 mt-1">Pagador: <span th:text="${expense.originUser.id}" name="originUser">Pagador</span></p>
-        <p class="text-sm text-gray-600 mt-1">División: <span th:text="${expense.share_method}" name="share_method">División</span></p>
-        <p class="text-sm text-gray-600 mt-1">Cantidad: <span th:text="${expense.amount}" name="amount">Cantidad</span></p>
-        <p class="text-sm text-gray-600 mt-1">Grupo: <span th:text="${expense.group.id}" name="group">Grupo</span></p>
-    </div>
+     class="mt-8 h-100 shadow rounded-lg bg-gray-200 flex justify-between items-center px-5 py-3 hover:bg-gray-400 cursor-pointer transition duration-300 focus:bg-gray-500 mb-6">
+
+    <img class="hidden md:flex w-9 rounded-full" th:src="${expense.originUser.avatarURL}" th:alt="${expense.originUser.username}">
+
+    <p class="text-gray-700 font-thin sm:me-6">
+        <span class="font-bold uppercase" th:text="${expense.originUser.username}">usuario</span>
+        pagó
+        <span class="text-green-600 font-bold" th:text="${expense.amount}">$0</span>
+        por
+        <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
+    </p>
+
+    <span th:text="${expense.expense_date}"></span>
 </div>
+
+<script src="https://flowbite.com/docs/flowbite.min.js"></script>

@@ -15,10 +15,10 @@
 <main>
     <div class="max-w-6xl mx-auto my-8">
         <div class="container mx-auto px-6">
-            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Lista de Gastos</h3>
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Historial de mis pagos</h3>
 
             <!-- Componente de gastos -->
-            <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6">
+            <div class="container mx-auto px-6 mt-8 h-100">
                 <div th:each="expense : ${expenses}">
                     <div th:replace="~{expenses/fragments/expenseItem :: expenseCard(${expense})}"></div>
                 </div>

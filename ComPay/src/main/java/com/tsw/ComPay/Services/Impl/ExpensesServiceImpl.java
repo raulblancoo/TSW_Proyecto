@@ -40,4 +40,11 @@ public class ExpensesServiceImpl implements ExpensesService {
     public List<ExpensesDto> findByGroup(Long groupId) {
         return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_Id(groupId));
     }
+
+    @Override
+    public List<ExpensesDto> findExpensesByPayerId_Username(String username) {
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_Username(username));
+    }
+
+
 }

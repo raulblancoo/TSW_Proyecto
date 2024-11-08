@@ -47,6 +47,8 @@ public class ExpenseController {
         model.addAttribute("users", users);
         model.addAttribute("expense", new NewExpenseDto());
 
+        expenses.isEmpty();
+
         return "expenses/expenses";
     }
 
