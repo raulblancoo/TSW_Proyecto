@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -88,8 +89,13 @@ public class GroupServiceImpl implements GroupService {
 
 
     private String getNextImageUrl() {
-        int index = GroupServiceImpl.imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
-        return IMG_URLS.get(index);
+//        int index = GroupServiceImpl.imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
+        return IMG_URLS.get(getRandomNumber(IMG_URLS.size()));
+    }
+
+    private int getRandomNumber(int size) {
+        Random random = new Random();
+        return random.nextInt(size) + 1;
     }
 
 }

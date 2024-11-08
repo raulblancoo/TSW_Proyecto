@@ -33,7 +33,7 @@
       <!--Login-->
       <form method="post" th:action="@{/login}" th:object="${login}" class="formulario__login">
         <h2>Iniciar Sesión</h2>
-        <input type="text" field="*{username}" placeholder="usuario" name="username">
+        <input type="text" field="*{email}" placeholder="Correo Electronico" name="email">
         <input type="password" field="*{password}" placeholder="Contraseña" name="password">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button>Entrar</button>

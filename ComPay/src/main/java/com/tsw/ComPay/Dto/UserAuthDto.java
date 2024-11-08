@@ -10,19 +10,23 @@ import java.util.List;
 
 @Data
 public class UserAuthDto implements UserDetails {
+    private String name;
+    private String surname;
+    private String username;
+    private String password;
+    private List<GroupDto> group;
+    private String email;
+    private String avatarURL;
 
-     private  String username;
-     private String password;
-     private List<GroupDto> group;
-     private String email;
-
-     public UserAuthDto(UserDto user, List<GroupDto> group) {
-         this.username = user.getUsername();
-         this.password = user.getPassword();
-         this.group = group;
-         this.email = user.getEmail();
-
-     }
+    public UserAuthDto(UserDto user, List<GroupDto> group) {
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.name = user.getName();
+        this.surname = user.getSurname();
+        this.group = group;
+        this.email = user.getEmail();
+        this.avatarURL = user.getAvatarURL();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

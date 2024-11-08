@@ -3,7 +3,7 @@ package com.tsw.ComPay.Dto;
 import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import lombok.Data;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 public class NewExpenseDto {
@@ -15,4 +15,5 @@ public class NewExpenseDto {
     private double amount;
     private UserDto originUser;
     private ExpenseMethodEnum share_method;
+    private Date expense_date;
 }
