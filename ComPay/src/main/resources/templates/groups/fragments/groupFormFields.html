@@ -5,7 +5,7 @@
             <label for="group-name" class="block text-sm font-medium text-gray-700 uppercase">Nombre del grupo</label>
             <input type="text" id="group-name" name="groupName" field="*{groupName}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                   placeholder="Introduzca un nombre" required/>
+                   placeholder="Introduzca un nombre" />
         </div>
 
         <!-- Añadir miembros al grupo -->
@@ -22,6 +22,7 @@
                 <button type="button" id="add-email-btn" class="absolute right-2.5 bottom-2.5 bg-sky-500 text-white font-medium text-sm px-4 py-1.5 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">Añadir</button>
             </div>
         </div>
+        <div id="userEmail" th:user-email="${usuario.email}"></div>
 
         <!-- Lista de emails -->
         <input type="hidden" id="emails" name="emails" field="*{emails}"/>

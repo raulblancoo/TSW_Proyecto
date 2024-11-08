@@ -1,82 +1,103 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Evento para añadir un email a la lista
-    document.getElementById('add-email-btn').addEventListener('click', function() {
-        const emailInput = document.getElementById('search');
-        const emailValue = emailInput.value.trim();
-        const emailList = document.getElementById('email-list');
-        const emailsField = document.getElementById('emails');
+    const form = document.getElementById("group-form");
+    const emailInput = document.getElementById("search");
+    const emailList = document.getElementById("email-list");
+    const emailsField = document.getElementById("emails");
+    const groupNameInput = document.getElementById("group-name");
 
-        // Expresión regular para validar el email
+    // Crear contenedor de errores al final del formulario
+    const generalErrorContainer = document.createElement("div");
+    generalErrorContainer.className = "text-red-500 text-sm mt-4";
+    form.appendChild(generalErrorContainer);
+
+    // Función para validar el campo de nombre del grupo
+    function validateGroupName() {
+        if (!groupNameInput.value.trim()) {
+            return "El nombre del grupo es obligatorio.";
+        } else if (groupNameInput.value.length > 20) {
+            return "El nombre del grupo no debe exceder 20 caracteres.";
+        }
+        return null;
+    }
+
+    // Evento para añadir un email a la lista
+    document.getElementById("add-email-btn").addEventListener("click", function () {
+        const emailValue = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        generalErrorContainer.textContent = ""; // Limpiar mensaje de error general
+
         if (emailValue && emailRegex.test(emailValue)) {
-            // Verifica que el email no esté ya en la lista
-            const existingEmails = Array.from(emailList.children).map(li => li.firstChild.textContent);
-            if (!existingEmails.includes(emailValue)) {
-                // Crear un nuevo elemento de lista para el email
-                const li = document.createElement('li');
-                li.classList.add('flex', 'justify-between', 'items-center', 'text-sm', 'text-slate-700', 'bg-gray-100', 'border', 'border-slate-300', 'p-2', 'rounded-md', 'mb-2');
+            const existingEmails = Array.from(emailList.children).map(li => li.querySelector("span").textContent);
+            var groupName = document.getElementById('userEmail').getAttribute('user-email');
+            if (!existingEmails.includes(emailValue) && !emailValue.includes(groupName)) {
+                const li = document.createElement("li");
+                li.classList.add("flex", "justify-between", "items-center", "text-sm", "text-slate-700", "bg-gray-100", "border", "border-slate-300", "p-2", "rounded-md", "mb-2");
                 li.innerHTML = `
                     <span class="flex-1">${emailValue}</span>
                     <button class="remove-email-btn text-slate-500 hover:text-red-600 px-2" title="Eliminar">&times;</button>
                 `;
                 emailList.appendChild(li);
-                emailList.classList.remove('hidden'); // Mostrar la lista cuando haya emails
+                emailList.classList.remove("hidden");
 
-                // Actualizar el campo oculto con los emails añadidos
-                let emailsArray = emailsField.value ? emailsField.value.split(',') : [];
+                let emailsArray = emailsField.value ? emailsField.value.split(",") : [];
                 emailsArray.push(emailValue);
-                emailsField.value = emailsArray.join(',');
+                emailsField.value = emailsArray.join(",");
 
-                // Limpiar el input de email
-                emailInput.value = '';
+                emailInput.value = "";  // Limpiar el input de email
 
-                // Evento para eliminar el email de la lista y del campo oculto
-                li.querySelector('.remove-email-btn').addEventListener('click', function() {
+                li.querySelector(".remove-email-btn").addEventListener("click", function () {
                     li.remove();
                     emailsArray = emailsArray.filter(email => email !== emailValue);
-                    emailsField.value = emailsArray.join(',');
-
-                    // Ocultar la lista solo si no quedan emails
+                    emailsField.value = emailsArray.join(",");
                     if (!emailsArray.length) {
-                        emailList.classList.add('hidden');
+                        emailList.classList.add("hidden");
                     }
                 });
-            } else {
-                alert('Este email ya ha sido añadido.');
+            } else if(existingEmails.includes(emailValue)){
+                generalErrorContainer.textContent = "Este email ya ha sido añadido.";
+            }
+            else if(emailValue.includes(groupName)){
+                generalErrorContainer.textContent = "No puedes añadirte a la lista de participantes.";
             }
         } else {
-            alert('Por favor, introduce una dirección de correo válida.');
-        }
-
-        // Solo mostrar la lista si tiene elementos
-        if (emailList.children.length > 0) {
-            emailList.classList.remove('hidden');
+            generalErrorContainer.textContent = "Por favor, introduce una dirección de correo válida.";
         }
     });
 
     // Validar antes de enviar el formulario
-    document.getElementById('group-form').addEventListener('submit', function(event) {
-        const emailList = document.getElementById('email-list');
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Detener envío para validar primero
+        generalErrorContainer.innerHTML = ""; // Limpiar errores previos
+        let errors = [];
+
+        // Validar nombre del grupo
+        const groupNameError = validateGroupName();
+        if (groupNameError) {
+            errors.push(groupNameError);
+        }
+
+        // Validar si hay al menos un email en la lista
         if (emailList.children.length === 0) {
-            event.preventDefault(); // Evita que se envíe el formulario
-            alert('Debes añadir al menos un email antes de enviar el formulario.');
+            errors.push("Debes añadir al menos un email antes de enviar el formulario.");
+        }
+
+        // Mostrar errores si hay alguno
+        if (errors.length > 0) {
+            generalErrorContainer.innerHTML = errors.map(error => `<p>${error}</p>`).join("");
+            generalErrorContainer.classList.add('text-red-600');
+        } else {
+            form.submit(); // Enviar formulario si no hay errores
         }
     });
 
     // Limpiar el formulario y los emails al cerrar la modal
-    document.querySelector('[data-modal-hide="groupModal"]').addEventListener('click', function() {
-        // Restablecer el formulario
-        const form = document.getElementById('group-form');
-        form.reset(); // Esto vaciará todos los inputs
+    document.querySelector('[data-modal-hide="groupModal"]').addEventListener("click", function () {
+        form.reset();
+        emailList.innerHTML = "";
+        emailsField.value = "";
+        emailList.classList.add("hidden");
 
-        // Limpiar la lista de emails y el campo oculto
-        const emailList = document.getElementById('email-list');
-        const emailsField = document.getElementById('emails');
-
-        // Limpiar la lista de emails y el campo oculto
-        emailList.innerHTML = ''; // Elimina todos los elementos de la lista
-        emailsField.value = ''; // Vaciar el campo oculto
-        emailList.classList.add('hidden'); // Ocultar la lista
+        generalErrorContainer.innerHTML = ""; // Limpiar mensajes de error
     });
 });
