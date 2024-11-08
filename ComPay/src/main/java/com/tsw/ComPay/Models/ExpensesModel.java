@@ -28,4 +28,10 @@ public class ExpensesModel {
     @ManyToOne
     @JoinColumn(name = "originUser_id")
     private UserModel originUser;
+
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+
+    private GroupModel group;
+
 }

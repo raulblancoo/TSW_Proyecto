@@ -9,5 +9,5 @@ import lombok.Setter;
 @Getter
 public class ExpensesShareDto {
     private ExpensesDto expense;
-    private UserModel destinyUser;
+    private UserDto destinyUser;
 }

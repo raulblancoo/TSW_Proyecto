@@ -51,4 +51,8 @@ public class UserServiceImpl implements UserService {
     public UserModel existingUserModel(UserDto userDto) {
         return userRepository.findByid(userDto.getId());
     }
+
+    public UserDto findByUserId(Long id) {
+        return userMapper.toDto(userRepository.findByid(id));
+    }
 }

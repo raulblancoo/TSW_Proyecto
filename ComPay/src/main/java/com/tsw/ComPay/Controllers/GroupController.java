@@ -32,7 +32,7 @@ public class GroupController {
     private final GroupMembersService groupMembersService;
 
 
-    private final  UserService userService;
+    private final UserService userService;
 
 
     @GetMapping("")
@@ -46,7 +46,7 @@ public class GroupController {
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
         model.addAttribute("currencies", currencies);
 
-        return "groups/groups"; 
+        return "groups/groups";
     }
 
     //TODO: Revisar si el atributo model hace falta aquí
@@ -57,7 +57,7 @@ public class GroupController {
         List<String> emails = new ArrayList<>(List.of(newGroupDto.getEmails()));
         emails.add(authenticatedUser.getEmail());
 
-        for(String email : emails) {
+        for (String email : emails) {
             groupMembersService.saveGroupMember(groupService.findGroupByName(newGroupDto.getGroupName()), userService.findByEmail(email));
         }
 
@@ -76,10 +76,4 @@ public class GroupController {
 //    }
 
     // TODO: comprobar endpoint para luego hacer expenses
-    @GetMapping("/{groupId}")
-    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
-        GroupDto group = groupService.findGroupById(groupId);
-        model.addAttribute("group", group);
-        return "expenses/expenses";
-    }
 }
