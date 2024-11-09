@@ -46,16 +46,15 @@ function updateSelectedUsers() {
 
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('flex', 'items-center', 'mb-2');
+            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');
             nameSpan.textContent = user.userName;
 
 
-            const userDebtInput = document.createElement('input');
-            userDebtInput.type = 'number';
-            userDebtInput.value = equalShare;
+            const userDebtInput = document.createElement('div');
+            userDebtInput.textContent = equalShare;
 
             userDebtInput.classList.add('py-2', 'px-0', 'w-40', 'text-sm', 'text-slate-700', 'bg-transparent',
                 'border-0', 'border-b-2', 'border-slate-400', 'appearance-none',
@@ -75,7 +74,7 @@ function updateSelectedUsers() {
     } else if (shareMethod === 'PARTESDESIGUALES') {
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('flex', 'items-center', 'mb-2', 'gap-4');
+            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');
@@ -114,7 +113,7 @@ function updateSelectedUsers() {
     } else if (shareMethod === 'PORCENTAJES') {
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('flex', 'items-center', 'mb-2', 'gap-4');
+            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');

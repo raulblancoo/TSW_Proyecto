@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 form.loginPage("/login").permitAll()
                                       .loginProcessingUrl("/login")
                                         .defaultSuccessUrl("/groups", true)
-                                 .failureForwardUrl("/")
+                                 .failureForwardUrl("/login")
 
                 )
                 .logout(logout -> logout
