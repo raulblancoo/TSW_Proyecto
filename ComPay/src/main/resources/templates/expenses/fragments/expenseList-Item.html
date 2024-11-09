@@ -13,14 +13,13 @@
         <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
     </p>
 
-
 <!--    TODO : cambiar el users por realmente aquellos usuarios que si están incluidos en el pago-->
 
     <!-- Grupo de imágenes para pantallas grandes -->
-    <div class="hidden lg:flex items-center">
+    <div class="hidden lg:flex items-center mr-1">
         <!-- Iterar solo sobre los dos primeros usuarios -->
         <div th:each="user : ${users.size() > 2 ? users.subList(0, 2) : users}">
-            <img class="object-cover w-8 h-8 -mx-1 rounded-full ring ring-green-500 hover:ring-gray-700"
+            <img class="object-cover w-8 h-8 rounded-full ring ring-green-500 hover:ring-gray-700"
                  th:src="${user.avatarURL}" th:alt="${user.name}">
         </div>
     </div>
@@ -53,7 +52,9 @@
          class="hidden bg-gray-200 divide-y divide-gray-100 rounded-lg shadow w-40">
         <ul class="py-2 text-sm text-gray-700" th:attr="aria-labelledby='dropdownMenuIconButton-' + ${expense.id}">
             <li>
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-black">Editar</a>
+<!--                TODO: LOGICA DE EDIT-->
+                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
+                   data-id="${expense.id}" onclick="openEditExpenseModal(this)">Editar</a>
             </li>
             <li>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-black">Borrar</a>

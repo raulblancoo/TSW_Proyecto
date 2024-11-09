@@ -70,6 +70,21 @@ public class ExpenseController {
 
         return "redirect:/group/expenses/" + groupId;
     }
+
+
+    // TODO : Logica del edit
+    @PutMapping("update/{groupId}/{expenseId}")
+    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute ExpensesDto expenses) {
+        // Redireccionar a la vista de gastos del grupo
+        return "redirect:/group/expenses/" + groupId;
+    }
+
+    // TODO : Logica del delete
+    @DeleteMapping("delete/{groupId}/{expenseId}")
+    public String deleteExpense(@PathVariable Long groupId, @PathVariable Long expenseId) {
+        return "redirect:/group/expenses/" + groupId;
+    }
+
 }
 
 

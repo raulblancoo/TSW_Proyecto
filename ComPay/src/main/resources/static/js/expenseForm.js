@@ -14,8 +14,6 @@ document.getElementById("paymentForm").addEventListener("submit", function(event
     this.submit();
 });
 
-
-
 function updateSelectedUsers() {
     const checkboxes = document.querySelectorAll('.user-checkbox');
     const selectedUsersContainer = document.getElementById('selected-users');
@@ -185,3 +183,25 @@ function validateAmountPorcentaje(totalEnteredAmount, amount) {
         document.getElementById('error-message').textContent = '';
     }
 }
+
+// Limpiar el formulario y los emails al cerrar la modal
+document.querySelector('[data-modal-hide="paymentModal"]').addEventListener('click', function() {
+    // Restablecer el formulario
+    const form = document.getElementById('paymentForm');
+    form.reset(); // Esto vaciará todos los inputs
+
+    // Limpiar el contenedor de usuarios seleccionados
+    const selectedUsersContainer = document.getElementById('selected-users');
+    selectedUsersContainer.innerHTML = ''; // Vacía el contenido del div dinámico
+
+    // Mostrar mensaje predeterminado cuando está vacío
+    const noUsersMessage = document.createElement('div');
+    noUsersMessage.textContent = 'No hay participantes seleccionados.';
+    selectedUsersContainer.appendChild(noUsersMessage);
+
+    // Limpieza de errores
+    const errorMessage = document.getElementById('error-message');
+    if (errorMessage) {
+        errorMessage.textContent = ''; // Limpia el mensaje de error, si existe
+    }
+});
