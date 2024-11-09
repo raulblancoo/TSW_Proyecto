@@ -15,7 +15,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
 
     private final ExpenseShareMapper expenseShareMapper;
 
-    public void save(UserDto user, ExpensesDto expenseDto) {
+    public void save(UserDto user, ExpensesDto expenseDto, Double debt) {
 
         ExpensesShareDto expenseShareDto = new ExpensesShareDto();
 
@@ -24,6 +24,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
 
         expenseShareDto.setExpense(expenseDto);
 
+        expenseShareDto.setDebt(debt);
 
         expenseShareRepository.save(expenseShareMapper.toEntity(expenseShareDto));
     }
