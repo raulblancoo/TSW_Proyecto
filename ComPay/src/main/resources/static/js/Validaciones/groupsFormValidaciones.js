@@ -12,12 +12,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para validar el campo de nombre del grupo
     function validateGroupName() {
+        toret = "";
+        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
+        var userGroups = document.getElementById('userGroups').getAttribute('user-group');
         if (!groupNameInput.value.trim()) {
-            return "El nombre del grupo es obligatorio.";
-        } else if (groupNameInput.value.length > 20) {
-            return "El nombre del grupo no debe exceder 20 caracteres.";
+            toret = toret.concat("El nombre del grupo es obligatorio. ");
+        }if (groupNameInput.value.length > 20) {
+            toret = toret.concat("El nombre del grupo no debe exceder 20 caracteres. ");
+        }if(userGroups.includes(groupNameInput.value)){
+            toret = toret.concat("El nombre de este grupo ya existe. ")
+        }if(!regexGroupName.test(groupNameInput.value)){
+            toret = toret.concat("El nombre del grupo tiene caracteres no permitidos");
         }
-        return null;
+        return toret;
     }
 
     // Evento para añadir un email a la lista
@@ -29,8 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (emailValue && emailRegex.test(emailValue)) {
             const existingEmails = Array.from(emailList.children).map(li => li.querySelector("span").textContent);
-            var groupName = document.getElementById('userEmail').getAttribute('user-email');
-            if (!existingEmails.includes(emailValue) && !emailValue.includes(groupName)) {
+            var userEmail = document.getElementById('userEmail').getAttribute('user-email');
+            if (!existingEmails.includes(emailValue) && !emailValue.includes(userEmail)) {
                 const li = document.createElement("li");
                 li.classList.add("flex", "justify-between", "items-center", "text-sm", "text-slate-700", "bg-gray-100", "border", "border-slate-300", "p-2", "rounded-md", "mb-2");
                 li.innerHTML = `
@@ -57,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             } else if(existingEmails.includes(emailValue)){
                 generalErrorContainer.textContent = "Este email ya ha sido añadido.";
             }
-            else if(emailValue.includes(groupName)){
+            else if(emailValue.includes(userEmail)){
                 generalErrorContainer.textContent = "No puedes añadirte a la lista de participantes.";
             }
         } else {

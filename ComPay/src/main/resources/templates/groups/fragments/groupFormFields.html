@@ -23,6 +23,7 @@
             </div>
         </div>
         <div id="userEmail" th:user-email="${usuario.email}"></div>
+        <div id="userGroups" th:user-group="${usuario.group}"></div>
 
         <!-- Lista de emails -->
         <input type="hidden" id="emails" name="emails" field="*{emails}"/>
@@ -41,4 +42,4 @@
     </form>
 </div>
 
-<script th:src="@{/js/groups.js}"></script>
+<script th:src="@{/js/Validaciones/groupsFormValidaciones.js}"></script>
