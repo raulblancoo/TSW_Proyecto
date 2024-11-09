@@ -14,4 +14,9 @@ public enum ExpenseMethodEnum {
     public String getCode() {
         return code;
     }
+
+    @Override
+    public String toString() {
+        return this.code.replaceAll("([a-z])([A-Z])", "$1 $2").replaceAll("([a-zA-Z])([0-9])", "$1 $2");
+    }
 }

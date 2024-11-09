@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ExpenseShareService {
 
-    void save(UserDto user, ExpensesDto expenseDto);
+    void save(UserDto user, ExpensesDto expenseDto, Double debt);
 }
