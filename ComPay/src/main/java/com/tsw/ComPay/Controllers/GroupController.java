@@ -25,16 +25,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/groups")
 public class GroupController {
-
-
     private final GroupService groupService;
-
-
     private final GroupMembersService groupMembersService;
-
-
     private final UserService userService;
-
 
     @GetMapping("")
     public String showGroups(Model model) {
@@ -66,15 +59,6 @@ public class GroupController {
 
         return "redirect:/groups";
     }
-
-    // TODO: función edit
-//    @GetMapping("/{groupId}/edit")
-//    public String editGroup(@PathVariable("groupId") Long groupId, Model model) {
-//        GroupDto group = groupService.findGroupById(groupId);
-//        model.addAttribute("group", group);
-//
-//        return "";
-//    }
 
     // TODO: comprobar endpoint para luego hacer expenses
     /*@GetMapping("/{groupId}")

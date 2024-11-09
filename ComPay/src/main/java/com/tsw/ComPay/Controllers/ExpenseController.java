@@ -47,13 +47,11 @@ public class ExpenseController {
         model.addAttribute("users", users);
         model.addAttribute("expense", new NewExpenseDto());
 
-        expenses.isEmpty();
-
         return "expenses/expenses";
     }
 
     @PostMapping("/create/{groupId}")
-    public String createGroup(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
+    public String createExpense(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
         newExpenseDto.setGroup(groupService.findGroupById(groupId));
         newExpenseDto.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
 

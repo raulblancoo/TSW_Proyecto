@@ -1,0 +1,42 @@
+<div th:fragment="newMemberModal" id="newMemberModal" tabindex="-1" aria-hidden="true"
+     class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden">
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-2xl max-h-[100vh] overflow-y-auto">
+        <div class="flex justify-between items-center p-5 border-b border-gray-200 rounded-t">
+            <h3 class="text-xl font-medium text-slate-700 uppercase">Añadir Miembro</h3>
+            <button type="button" class="text-gray-400 hover:text-gray-900" data-modal-hide="newMemberModal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="p-6 space-y-4 w-full">
+
+            <!-- DIV PARA MOSTRAR MIEMBROS -->
+            <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow-lg">
+                <div class="flex items-center justify-center mb-4">
+                    <h5 class="text-xl font-bold text-gray-900">Miembros</h5>
+                </div>
+                <div class="flex flex-wrap gap-6 justify-center mt-6">
+                    <!-- Iteramos sobre la lista de usuarios y llamamos al fragmento de usuarios para cada uno -->
+                    <div th:each="user : ${users}" class="w-full sm:w-auto">
+                        <div th:replace="~{expenses/fragments/showMembers :: showMembers(${user})}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="newMembersForm" th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">
+                <!-- Incluir el fragmento de campo de email -->
+                <div th:replace="~{expenses/fragments/addMember :: addMember}"></div>
+
+                <!-- Modal Footer -->
+                <div class="flex justify-end p-5 border-t border-gray-200">
+                    <button type="submit"
+                            class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
