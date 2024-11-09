@@ -55,14 +55,17 @@ public class ExpenseController {
         newExpenseDto.setGroup(groupService.findGroupById(groupId));
         newExpenseDto.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
 
-        // Crear la fecha de hoy y convertirla a Date en formato sin hora
+
         Date todayDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
         newExpenseDto.setExpense_date(todayDate);
 
         ExpensesDto expense = expensesService.save(newExpenseDto);
 
         for (Long userId : newExpenseDto.getDestinationUsers()) {
-            expenseShareService.save(userService.findByUserId(userId), expense);
+            expenseShareService.save(userService.findByUserId(userId), expense,
+                            newExpenseDto.getShare_method().equals(ExpenseMethodEnum.PORCENTAJES)
+                            ? newExpenseDto.getDebts()[userId.intValue()] * expense.getAmount() / 100
+                            : newExpenseDto.getDebts()[userId.intValue()]);
         }
 
         return "redirect:/group/expenses/" + groupId;

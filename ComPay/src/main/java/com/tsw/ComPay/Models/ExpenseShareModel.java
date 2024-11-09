@@ -26,4 +26,6 @@ public class ExpenseShareModel {
     @ManyToOne(cascade = CascadeType.MERGE)
     private UserModel destinyUser;
 
+    private Double debt;
+
 }

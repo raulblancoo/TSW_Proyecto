@@ -37,7 +37,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) ->
                         {
-                            authorize.requestMatchers("/", "/login", "/register","/css/**", "/js/**", "/images/**").permitAll()
+                            authorize.requestMatchers("/", "/login", "/register","/css/**", "/js/**", "/images/**", "/resources/**" ).permitAll()
                             //        .requestMatchers("/perfil").hasAnyAuthority("ADMIN")
                                     .anyRequest().authenticated();
                         }
@@ -47,8 +47,13 @@ public class SecurityConfig {
                                 form.loginPage("/login").permitAll()
                                       .loginProcessingUrl("/login")
                                         .defaultSuccessUrl("/groups", true)
-                          //        .failureForwardUrl("/login/error")
+                                 .failureForwardUrl("/login")
 
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")     // Redirección tras logout
+                        .permitAll()
                 );
 
         return http.build();

@@ -10,4 +10,5 @@ import lombok.Setter;
 public class ExpensesShareDto {
     private ExpensesDto expense;
     private UserDto destinyUser;
+    private Double debt;
 }
