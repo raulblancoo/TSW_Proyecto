@@ -25,7 +25,8 @@
                 </div>
             </div>
 
-            <form id="newMembersForm" th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">
+            <form id="newMembersForm" th:object="${members}"
+                  th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">
                 <!-- Incluir el fragmento de campo de email -->
                 <div th:replace="~{expenses/fragments/addMember :: addMember}"></div>
 

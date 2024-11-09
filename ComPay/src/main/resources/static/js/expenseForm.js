@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById("paymentForm").addEventListener("submit", function(event) {
     // Evita el comportamiento predeterminado del formulario (reenvío y borrado de campos)
     event.preventDefault();
+    alert("hola");
+    alert(new FormData(document.getElementById("paymentForm")).get("debts[2]"))
+
 
     // Aquí puedes agregar lógica para mantener el estado de los campos, si es necesario
     // Por ejemplo, podrías recoger los valores de los correos electrónicos y almacenarlos para restaurarlos
@@ -51,7 +54,7 @@ function updateSelectedUsers() {
             nameSpan.textContent = user.userName;
 
 
-            const userDebtInput = document.createElement('div');
+            const userDebtInput = document.createElement('input');
             userDebtInput.textContent = equalShare;
 
             userDebtInput.classList.add('py-2', 'px-0', 'w-40', 'text-sm', 'text-slate-700', 'bg-transparent',
@@ -59,9 +62,11 @@ function updateSelectedUsers() {
                 'focus:outline-none', 'focus:ring-0', 'focus:border-sky-500', 'peer');
 
             userDebtInput.setAttribute('name', `debts[${user.userId}]`);
-            userDebtInput.setAttribute('field', `*{debts[${user.userId}]}`);
+            userDebtInput.setAttribute('readonly', `readonly`);
 
             debts[user.id] = equalShare;
+
+            userDebtInput.value = equalShare;
 
             userDiv.appendChild(nameSpan);
             userDiv.appendChild(userDebtInput);
@@ -88,7 +93,7 @@ function updateSelectedUsers() {
                 'focus:border-sky-500', 'peer');
 
             userDebtInput.setAttribute('name', `debts[${user.userId}]`);
-            userDebtInput.setAttribute('field', `*{debts[${user.userId}]}`);
+            userDebtInput.setAttribute('step','any');
 
             debts[user.id] = 0;
 
@@ -127,7 +132,8 @@ function updateSelectedUsers() {
                 'focus:border-sky-500', 'peer');
 
             userDebtInput.setAttribute('name', `debts[${user.userId}]`);
-            userDebtInput.setAttribute('field', `*{debts[${user.userId}]}`);
+            userDebtInput.setAttribute('step','any');
+            // userDebtInput.setAttribute('field', `*{debts[${user.userId}]}`);
 
             debts[user.id] = 0;
 

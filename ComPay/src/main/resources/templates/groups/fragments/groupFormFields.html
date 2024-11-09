@@ -3,7 +3,7 @@
     <form th:action="@{/groups/create}" method="post" th:object="${group}" id="group-form">
         <div class="mb-4">
             <label for="group-name" class="block text-sm font-medium text-gray-700 uppercase">Nombre del grupo</label>
-            <input type="text" id="group-name" name="groupName" field="*{groupName}"
+            <input type="text" id="group-name"  th:field="*{groupName}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                    placeholder="Introduzca un nombre" required/>
         </div>
@@ -24,7 +24,7 @@
         </div>
 
         <!-- Lista de emails -->
-        <input type="hidden" id="emails" name="emails" field="*{emails}"/>
+        <input type="hidden" th:field="*{emails}"/>
         <ul id="email-list" class="mb-4 text-sm text-slate-700 p-4 space-y-2 hidden"></ul>
 
         <div th:replace="~{groups/fragments/currencySelector :: currencySelector}"></div>

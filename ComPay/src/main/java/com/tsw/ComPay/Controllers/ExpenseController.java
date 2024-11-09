@@ -32,7 +32,7 @@ public class ExpenseController {
     private final GroupMembersService groupMembersService;
 
     @GetMapping("/{groupId}")
-    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
+    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
@@ -45,7 +45,6 @@ public class ExpenseController {
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
         model.addAttribute("users", users);
-        model.addAttribute("expense", new NewExpenseDto());
 
         return "expenses/expenses";
     }

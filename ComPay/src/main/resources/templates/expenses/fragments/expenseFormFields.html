@@ -3,7 +3,7 @@
           th:object="${expense}">
         <div class="mb-4">
             <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
-            <select required id="payer_select" field="*{originUserId}" name="originUserId"
+            <select required id="payer_select" th:field="*{originUserId}"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
                 <th:block th:each="user : ${users}">
                     <!-- Mostrar nombre y apellido en una sola opción -->
@@ -30,7 +30,7 @@
 
         <div class="mb-4">
             <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
-            <input type="text" id="payment_concept" field="*{name}" name="name"
+            <input type="text" id="payment_concept" th:field="*{name}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                    placeholder="Escriba un concepto" required/>
         </div>
@@ -38,7 +38,7 @@
         <div class="mb-4">
             <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
             <div class="flex items-center">
-                <input type="number" name="amount" id="payment_amount" field="*{amount}" onchange="updateSelectedUsers()"
+                <input type="number" step="any" id="payment_amount" th:field="*{amount}" onchange="updateSelectedUsers()"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                        placeholder="Introduzca la cantidad" required/>
                 <div class="ml-2 flex-shrink-0">
@@ -55,8 +55,8 @@
             <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
             <select required id="divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                    name="share_method" field="*{share_method}" onchange="updateSelectedUsers()">
-                <option hidden selected></option>
+                    th:field="*{share_method}" onchange="updateSelectedUsers()">
+                <option hidden selected value=""></option>
                 <option th:each="expenseMethod : ${expenseMethods}"
                         th:value="${expenseMethod.getCode()}"
                         th:text="${expenseMethod}">
