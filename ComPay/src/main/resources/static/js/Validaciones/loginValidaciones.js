@@ -1,39 +1,47 @@
-document.addEventListener("DOMContentLoaded", function (){
+document.addEventListener("DOMContentLoaded", function () {
     const formLogin = document.getElementById("login-form");
     const formRegister = document.getElementById("register-form");
 
+    // Crear contenedores de errores para login y registro con menos espacio inferior
     const errorLoginContainer = document.createElement("div");
-    errorLoginContainer.className = "text-red-500 text-sm mt-4";
+    errorLoginContainer.style.color = "#dc2626"; // Color rojo intenso
+    errorLoginContainer.style.marginTop = "10px"; // Espaciado superior
+
     formLogin.appendChild(errorLoginContainer);
 
     const errorRegisterContainer = document.createElement("div");
-    errorRegisterContainer.className = "text-red-500 text-sm mt-4";
+    errorRegisterContainer.style.color = "#dc2626";
+    errorRegisterContainer.style.marginTop = "10px"; //
+
     formRegister.appendChild(errorRegisterContainer);
 
+    // Expresiones regulares para validar email y caracteres de nombre
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const regexNames = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
 
-
-    function validacionesLogin(){
-        toret = "\n";
+    // Validación de formulario de login
+    function validacionesLogin() {
+        let errors = [];
 
         const loginEmail = document.getElementById("loginEmail").value;
         const loginPsw = document.getElementById("loginPsw").value;
-        if(!loginEmail.trim()){
-            toret = toret.concat("El email no puede ir vacío. ")
-        }else if (!emailRegex.test(loginEmail)){
-            toret = toret.concat("El formato del email es incorrecto. ")
+
+        if (!loginEmail.trim()) {
+            errors.push("El email no puede ir vacío.");
+        } else if (!emailRegex.test(loginEmail)) {
+            errors.push("El formato del email es incorrecto.");
         }
 
-
-        if(!loginPsw.trim()){
-            toret = toret.concat("La contraseña no puede ir vacía. ")
+        if (!loginPsw.trim()) {
+            errors.push("La contraseña no puede ir vacía.");
         }
-        return toret;
 
+        return errors;
     }
-    function validacionesRegister(){
-        toret = "";
+
+    // Validación de formulario de registro
+    function validacionesRegister() {
+        let errors = [];
 
         const registerName = document.getElementById("registerName").value;
         const registerEmail = document.getElementById("registerEmail").value;
@@ -41,59 +49,44 @@ document.addEventListener("DOMContentLoaded", function (){
         const registerSurName = document.getElementById("registerSurname").value;
         const registerPsw = document.getElementById("registerPsw").value;
 
-        if (!regexNames.test(registerName) || !regexNames.test(registerUserName) || !regexNames.test(registerSurName)){
-            toret = toret.concat("Caracter introducido inválido. ");
+        if (!regexNames.test(registerName) || !regexNames.test(registerUserName) || !regexNames.test(registerSurName)) {
+            errors.push("Caracter introducido inválido.");
         }
-        if (registerName.length > 20 || registerUserName.length > 20 || registerSurName.length > 20){
-            toret = toret.concat("El tamaño máximo por campo es de 20 caracteres. ");
+        if (registerName.length > 20 || registerUserName.length > 20 || registerSurName.length > 20) {
+            errors.push("El tamaño máximo por campo es de 20 caracteres.");
+        }
+        if (!registerName.trim() || !registerUserName.trim() || !registerPsw.trim() || !registerEmail.trim() || !registerSurName.trim()) {
+            errors.push("Ningún campo puede ir vacío.");
+        } else if (!emailRegex.test(registerEmail)) {
+            errors.push("El formato del email es incorrecto.");
         }
 
-        if (!registerName.trim() || !registerUserName.trim() || !registerPsw.trim() || !registerEmail.trim() || !registerSurName.trim()){
-            toret = toret.concat("Ningún campo puede ir vacío. ")
-        }else if (!emailRegex.test(registerEmail)){
-            toret = toret.concat("El formato del email es incorrecto. ")
-        }
-
-        return toret;
+        return errors;
     }
-    // Validar antes de enviar el formulario
-    formLogin.addEventListener("submit", function (event) {
-        event.preventDefault(); // Detener envío para validar primero
-        errorLoginContainer.innerHTML = ""; // Limpiar errores previos
-        let errors = [];
 
-        // Validar nombre del grupo
-        const loginError = validacionesLogin();
-        if (loginError) {
-            errors.push(loginError);
-        }
-        // Mostrar errores si hay alguno
-        if (errors.length > 0) {
-            errorLoginContainer.innerHTML = errors.map(error => `<p>${error}</p>`).join("");
-            errorLoginContainer.classList.add('text-red-900');
+    // Validación y visualización de errores en el formulario de login
+    formLogin.addEventListener("submit", function (event) {
+        event.preventDefault();
+        errorLoginContainer.innerHTML = ""; // Limpiar errores previos
+        const loginErrors = validacionesLogin();
+
+        if (loginErrors.length > 0) {
+            errorLoginContainer.innerHTML = loginErrors.map(error => `${error}</p>`).join("");
         } else {
-            form.submit(); // Enviar formulario si no hay errores
+            formLogin.submit(); // Enviar formulario si no hay errores
         }
     });
-    formRegister.addEventListener("submit", function (event){
-        event.preventDefault(); // Detener envío para validar primero
+
+    // Validación y visualización de errores en el formulario de registro
+    formRegister.addEventListener("submit", function (event) {
+        event.preventDefault();
         errorRegisterContainer.innerHTML = ""; // Limpiar errores previos
-        let errors = [];
+        const registerErrors = validacionesRegister();
 
-        // Validar nombre del grupo
-        const loginError = validacionesRegister();
-        if (loginError) {
-            errors.push(loginError);
-        }
-        // Mostrar errores si hay alguno
-        if (errors.length > 0) {
-            errorRegisterContainer.innerHTML = errors.map(error => `<p>${error}</p>`).join("");
-            errorRegisterContainer.classList.add('text-red-600');
+        if (registerErrors.length > 0) {
+            errorRegisterContainer.innerHTML = registerErrors.map(error => `${error}</p>`).join("");
         } else {
-            form.submit(); // Enviar formulario si no hay errores
+            formRegister.submit(); // Enviar formulario si no hay errores
         }
-    })
-
-
-
+    });
 });

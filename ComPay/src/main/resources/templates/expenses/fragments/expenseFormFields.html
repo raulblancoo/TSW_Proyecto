@@ -3,7 +3,7 @@
           th:object="${expense}">
         <div class="mb-4">
             <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
-            <select required id="payer_select" field="*{originUserId}" name="originUserId"
+            <select  id="payer_select" field="*{originUserId}" name="originUserId"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
                 <th:block th:each="user : ${users}">
                     <!-- Mostrar nombre y apellido en una sola opción -->
@@ -17,7 +17,7 @@
             <div class="grid grid-cols-3 gap-2">
                 <div th:each="user : ${users}">
                     <div class="flex items-center">
-                        <input type="checkbox" name="destinationUsers" th:value="${user.id}"
+                        <input id="checkbox" type="checkbox" name="destinationUsers" th:value="${user.id}"
                                class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500">
                         <label th:for="${'user_' + user.id}" class="ml-2 text-slate-700 whitespace-nowrap"
                                th:text="${user.name + ' ' + user.surname}"></label>
@@ -31,7 +31,7 @@
             <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
             <input type="text" id="payment_concept" field="*{name}" name="name"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                   placeholder="Escriba un concepto" required/>
+                   placeholder="Escriba un concepto" />
         </div>
 
         <div class="mb-4">
@@ -39,7 +39,7 @@
             <div class="flex items-center">
                 <input type="number" name="amount" id="payment_amount" field="*{amount}"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                       placeholder="Introduzca la cantidad" required/>
+                       placeholder="Introduzca la cantidad" />
                 <div class="ml-2 flex-shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="w-6 h-6 text-gray-700">
@@ -52,7 +52,7 @@
 
         <div class="mb-4">
             <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
-            <select required id="divided_payment"
+            <select id="divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                     name="share_method" field="*{share_method}">
                 <option hidden selected></option>
@@ -75,6 +75,17 @@
                 </div>
             </th:block>
         </div>
+        <div id="divErrores" style="display: none;" class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <div class="flex items-center">
+                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="font-medium">Errores: </span>
+            </div>
+            <div>
+                <ul class="mt-1.5 list-disc list-inside" id="errorList"></ul>
+            </div>
+        </div>
 
         <!-- Modal Footer -->
         <div class="flex justify-end p-5 border-t border-gray-200">
@@ -85,7 +96,7 @@
         </div>
     </form>
 </div>
-
+<script th:src="@{/js/Validaciones/expendValidaciones.js}"></script>
 <script>
     document.getElementById("paymentForm").addEventListener("submit", function(event) {
         // Evita el comportamiento predeterminado del formulario (reenvío y borrado de campos)

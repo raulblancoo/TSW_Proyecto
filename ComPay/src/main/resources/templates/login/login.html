@@ -31,23 +31,23 @@
     <!--Formulario de Login y registro-->
     <div class="contenedor__login-register">
       <!--Login-->
-      <form method="post" th:action="@{/login}" th:object="${login}" class="formulario__login">
+      <form method="post" th:action="@{/login}" th:object="${login}" class="formulario__login" >
         <h2>Iniciar Sesión</h2>
-        <input type="text" field="*{email}" placeholder="Correo Electronico" name="email">
-        <input type="password" field="*{password}" placeholder="Contraseña" name="password">
+        <input type="text" field="*{email}" placeholder="Correo Electrónico" name="email" >
+        <input type="password" field="*{password}" placeholder="Contraseña" name="password" >
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button>Entrar</button>
       </form>
 
       <!--Register-->
-      <form method="post" th:action="@{/register}" th:object="${user}" class="formulario__register">
+      <form method="post" th:action="@{/register}" th:object="${user}" class="formulario__register" >
         <h2>Regístrarse</h2>
         <!-- <input type="text" th:field="*{}" placeholder="Nombre completo"> -->
-        <input type="text" field="*{name}" placeholder="Nombre" name="name" required>
-        <input type="text" field="*{surname}" placeholder="Apellidos" name="surname" required>
-        <input type="text" field="*{email}" placeholder="Correo Electronico" name="email" required>
-        <input type="text" field="*{username}" placeholder="Usuario" name="username">
-        <input type="password" field="*{password}" placeholder="Contraseña" name="password">
+        <input type="text" field="*{name}" placeholder="Nombre" name="name"  required>
+        <input type="text" field="*{surname}" placeholder="Apellidos" name="surname"  required>
+        <input type="text" field="*{email}" placeholder="Correo Electronico" name="email"  required>
+        <input type="text" field="*{username}" placeholder="Usuario" name="username" >
+        <input type="password" field="*{password}" placeholder="Contraseña" name="password" >
         <button>Regístrarse</button>
       </form>
     </div>
@@ -56,5 +56,6 @@
 </main>
 
 <script th:src="@{/js/script.js}"></script>
+
 </body>
 </html>
