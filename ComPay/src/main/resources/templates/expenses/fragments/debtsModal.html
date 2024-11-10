@@ -1,6 +1,6 @@
 <!-- Modal para Crear Pago -->
 <div th:fragment="debtsModal" id="debtsModal" tabindex="-1" aria-hidden="true"
-     class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden">
+     class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden overflow-y-auto">
     <div class="relative bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-2xl max-h-[100vh] overflow-y-auto">
         <!-- Modal Header -->
         <div class="flex justify-between items-center p-5 border-b border-gray-200 rounded-t">
@@ -14,20 +14,7 @@
         </div>
         <!-- Modal Body -->
         <div class="p-6 space-y-4 w-full">
-
-            <!-- DIV PARA MOSTRAR MIEMBROS -->
-            <div class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow-lg">
-                <div class="flex items-center justify-center mb-4">
-                    <h5 class="text-xl font-bold text-gray-900">Miembros</h5>
-                </div>
-                <div class="flex flex-wrap gap-6 justify-center mt-6">
-                    <!-- Iteramos sobre la lista de usuarios y llamamos al fragmento de usuarios para cada uno -->
-                    <div th:each="user : ${users}" class="w-full sm:w-auto">
-                        <div th:replace="~{expenses/fragments/showMembers :: showMembers(${user})}"></div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- Información de pagos y deudas -->
             <div class="w-full bg-slate-300 rounded-lg shadow p-4 md:p-6">
                 <div class="flex justify-between border-gray-200 border-b dark:border-gray-700 pb-3">
                     <dl>
@@ -36,16 +23,40 @@
                     </dl>
                 </div>
 
-                <div class="grid grid-cols-2 py-3">
-                    <dl>
-                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400 pb-1">Income</dt>
-                        <dd class="leading-none text-xl font-bold text-green-500 dark:text-green-400">$23,635</dd>
-                    </dl>
-                    <dl>
-                        <dt class="text-base font-normal text-gray-500 dark:text-gray-400 pb-1">Expense</dt>
-                        <dd class="leading-none text-xl font-bold text-red-600 dark:text-red-500">-$18,230</dd>
-                    </dl>
+                <!-- Lista de usuarios con información de deudas -->
+                <div th:each="user : ${users}" class="grid grid-cols-3 gap-4 items-center py-3">
+                    <!-- Información del usuario -->
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full" th:src="${user.avatarURL}" th:alt="${user.username}">
+                        <div class="ml-4">
+                            <p th:text="${user.name + ' ' + user.surname}"
+                               class="text-sm sm:text-md font-medium text-gray-900 truncate">Nombre</p>
+                            <p th:text="${user.email}" class="text-sm text-gray-500 truncate">Email</p>
+                        </div>
+                    </div>
+
+                    <!-- LE DEBEN -->
+                    <div class="text-center">
+                        <dt class="text-base font-normal text-slate-700 pb-1">LE DEBEN</dt>
+                        <dd class="leading-none text-xl font-bold text-green-500">$23,635</dd>
+                    </div>
+
+                    <!-- DEBE -->
+                    <div class="text-right">
+                        <dt class="text-base font-normal text-slate-700 pb-1">DEBE</dt>
+                        <dd class="leading-none text-xl font-bold text-red-600">-$18,230</dd>
+                    </div>
                 </div>
+            </div>
+
+            <div class="w-full bg-slate-300 rounded-lg shadow p-4 md:p-6">
+                <span>TU DEUDA: </span>
+
+            </div>
+
+            <div class="w-full bg-slate-300 rounded-lg shadow p-4 md:p-6">
+                <span>DEUDAS DEL GRUPO: </span>
+
             </div>
 
         </div>
