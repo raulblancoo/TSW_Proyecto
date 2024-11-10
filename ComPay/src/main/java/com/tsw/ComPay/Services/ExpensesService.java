@@ -13,5 +13,5 @@ public interface ExpensesService {
     List<ExpensesDto> findAllExpenses();
     ExpensesDto save(NewExpenseDto expenseDto);
     List<ExpensesDto> findByGroup(Long groupId);
-    List<ExpensesDto> findExpensesByPayerId_Username(String username);
+    List<ExpensesDto> findExpensesByPayerId(Long userId);
 }

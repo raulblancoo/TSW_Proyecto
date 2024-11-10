@@ -1,8 +1,10 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.ExpensesDto;
+import com.tsw.ComPay.Dto.ExpensesShareDto;
 import com.tsw.ComPay.Dto.UserAuthDto;
 import com.tsw.ComPay.Services.ExpensesService;
+import com.tsw.ComPay.Services.ExpenseShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,26 +17,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GlobalExpenseController {
     private final ExpensesService expensesService;
+    private final ExpenseShareService expenseShareService;
 
     @GetMapping("/expenses")
     public String viewExpenses(Model model){
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<ExpensesDto> expenses = expensesService.findExpensesByPayerId_Username(authenticatedUser.getUsername());
+        List<ExpensesDto> expenses = expensesService.findExpensesByPayerId(authenticatedUser.getId());
 
         model.addAttribute("usuario",authenticatedUser);
-        model.addAttribute("expenses", expenses);
+        model.addAttribute("expenses",expenses);
 
         return "expenses/allExpenses";
     }
 
     @GetMapping("/debts")
-    public String viewDebts(Model model){
+    public String viewDebts(Model model) {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<ExpensesDto> debts = expensesService.findExpensesByPayerId_Username(authenticatedUser.getUsername());
+        List<ExpensesShareDto> debts = expenseShareService.findByDestinyUserId(authenticatedUser.getId());
 
-        model.addAttribute("usuario",authenticatedUser);
+        // Filtrar deudas donde el originUser es el usuario autenticado
+        debts.removeIf(debt -> debt.getExpense().getOriginUser().getId().equals(authenticatedUser.getId()));
+
+        model.addAttribute("usuario", authenticatedUser);
         model.addAttribute("debts", debts);
 
         return "expenses/allDebts";
     }
+
 }

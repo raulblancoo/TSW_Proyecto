@@ -36,6 +36,7 @@ public class ExpenseController {
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
+        List<ExpensesShareDto> expensesShare = expenseShareService.findByGroupId(groupId);
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         List<ExpenseMethodEnum> expenseMethods = Arrays.asList(ExpenseMethodEnum.values());
@@ -43,7 +44,8 @@ public class ExpenseController {
 
         model.addAttribute("usuario", authenticatedUser);
         model.addAttribute("group", group);
-        model.addAttribute("expenses", expenses);
+        model.addAttribute("expenses", expenses); // HARIA FALTA?
+        model.addAttribute("expensesShare", expensesShare);
         model.addAttribute("users", users);
 
         return "expenses/expenses";

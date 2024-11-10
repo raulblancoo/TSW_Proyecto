@@ -36,6 +36,21 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
         return expenseShareMapper.toListDto(expenseShareRepository.findByExpense_Id(expenseId));
     }
 
+    @Override
+    public List<ExpensesShareDto> findByGroupId(Long groupId) {
+        return expenseShareMapper.toListDto(expenseShareRepository.findByExpense_GroupId(groupId));
+    }
+
+    @Override
+    public List<ExpensesShareDto> findByPayerId(Long payerId) {
+        return expenseShareMapper.toListDto(expenseShareRepository.findExpenseShareModelsByExpenseOriginUserId(payerId));
+    }
+
+    @Override
+    public List<ExpensesShareDto> findByDestinyUserId(Long userAuthId) {
+        return expenseShareMapper.toListDto(expenseShareRepository.findExpenseShareModelsByDestinyUserId(userAuthId));
+    }
+
 
 }
 
