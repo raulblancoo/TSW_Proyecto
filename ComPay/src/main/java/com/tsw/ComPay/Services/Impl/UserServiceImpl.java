@@ -1,9 +1,11 @@
 package com.tsw.ComPay.Services.Impl;
 
+import com.tsw.ComPay.Dto.ExpensesShareDto;
 import com.tsw.ComPay.Dto.UserDto;
 import com.tsw.ComPay.Mapper.UserMapper;
 import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Repositories.UserRepository;
+import com.tsw.ComPay.Services.ExpenseShareService;
 import com.tsw.ComPay.Services.UserService;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
 
     private final UserMapper userMapper;
-
+    private final ExpenseShareService expenseShareService;
 
 
     public void saveUser(UserDto userDto) {
@@ -54,5 +58,10 @@ public class UserServiceImpl implements UserService {
 
     public UserDto findByUserId(Long id) {
         return userMapper.toDto(userRepository.findByid(id));
+    }
+
+    @Override
+    public List<UserDto> getUserByExpenseId(Long id) {
+        return expenseShareService.findByExpenseId(id).stream().map(ExpensesShareDto::getDestinyUser).toList();
     }
 }

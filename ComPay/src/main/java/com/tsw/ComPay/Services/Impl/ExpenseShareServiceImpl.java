@@ -7,6 +7,8 @@ import com.tsw.ComPay.Services.ExpenseShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ExpenseShareServiceImpl implements ExpenseShareService {
@@ -28,5 +30,12 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
 
         expenseShareRepository.save(expenseShareMapper.toEntity(expenseShareDto));
     }
+
+    @Override
+    public List<ExpensesShareDto> findByExpenseId(Long expenseId) {
+        return expenseShareMapper.toListDto(expenseShareRepository.findByExpense_Id(expenseId));
+    }
+
+
 }
 
