@@ -32,7 +32,7 @@ public class ExpenseController {
     private final GroupMembersService groupMembersService;
 
     @GetMapping("/{groupId}")
-    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
+    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
@@ -45,13 +45,12 @@ public class ExpenseController {
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
         model.addAttribute("users", users);
-        model.addAttribute("expense", new NewExpenseDto());
 
         return "expenses/expenses";
     }
 
     @PostMapping("/create/{groupId}")
-    public String createGroup(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
+    public String createExpense(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
         newExpenseDto.setGroup(groupService.findGroupById(groupId));
         newExpenseDto.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
 
@@ -70,6 +69,21 @@ public class ExpenseController {
 
         return "redirect:/group/expenses/" + groupId;
     }
+
+
+    // TODO : Logica del edit
+    @PutMapping("update/{groupId}/{expenseId}")
+    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute ExpensesDto expenses) {
+        // Redireccionar a la vista de gastos del grupo
+        return "redirect:/group/expenses/" + groupId;
+    }
+
+    // TODO : Logica del delete
+    @DeleteMapping("delete/{groupId}/{expenseId}")
+    public String deleteExpense(@PathVariable Long groupId, @PathVariable Long expenseId) {
+        return "redirect:/group/expenses/" + groupId;
+    }
+
 }
 
 

@@ -25,5 +25,4 @@ document.addEventListener("DOMContentLoaded", function () {
             expensesForm.reportValidity(); // Mostrar validaciones del formulario
         }
     })
-
 });
