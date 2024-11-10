@@ -19,32 +19,41 @@
                 <div class="flex justify-between border-gray-200 border-b dark:border-gray-700 pb-3">
                     <dl>
                         <dt class="text-base text-gray-500 pb-1 uppercase font-bold">Gasto total</dt>
-                        <dd class="leading-none text-3xl font-bold text-slate-700">$5,405</dd>
+                        <dd class="leading-none text-3xl font-bold text-slate-700">
+                            <span th:text="${group.amount}"></span>
+                            <span th:text="${group.currency == 'EURO' ? '€' : '$'}"></span>
+                        </dd>
                     </dl>
                 </div>
 
-                <!-- Lista de usuarios con información de deudas -->
-                <div th:each="user : ${users}" class="grid grid-cols-3 gap-4 items-center py-3">
-                    <!-- Información del usuario -->
+                <div th:each="debt : ${debts}" class="grid grid-cols-3 gap-4 items-center py-3">
                     <div class="flex items-center">
-                        <img class="w-10 h-10 rounded-full" th:src="${user.avatarURL}" th:alt="${user.username}">
+                        <img class="w-10 h-10 rounded-full" th:src="${debt.user.avatarURL}" th:alt="${debt.user.avatarURL}">
                         <div class="ml-4">
-                            <p th:text="${user.name + ' ' + user.surname}"
+                            <p th:text="${debt.user.name + ' ' + debt.user.surname}"
                                class="text-sm sm:text-md font-medium text-gray-900 truncate">Nombre</p>
-                            <p th:text="${user.email}" class="text-sm text-gray-500 truncate">Email</p>
+                            <p th:text="${debt.user.email}" class="text-sm text-gray-500 truncate">Email</p>
                         </div>
                     </div>
 
                     <!-- LE DEBEN -->
                     <div class="text-center">
-                        <dt class="text-base font-normal text-slate-700 pb-1">LE DEBEN</dt>
-                        <dd class="leading-none text-xl font-bold text-green-500">$23,635</dd>
+                        <dt class="text-base font-normal text-slate-700 pb-1">
+                            LE DEBEN
+                        </dt>
+                        <dd class="leading-none text-xl font-bold text-green-500">
+                            <span th:text="${debt.loanAmount}"></span>
+                            <span th:text="${group.currency == 'EURO' ? '€' : '$'}"></span>
+                        </dd>
                     </div>
 
                     <!-- DEBE -->
                     <div class="text-right">
                         <dt class="text-base font-normal text-slate-700 pb-1">DEBE</dt>
-                        <dd class="leading-none text-xl font-bold text-red-600">-$18,230</dd>
+                        <dd class="leading-none text-xl font-bold text-red-600">
+                            <span th:text="${debt.debtAmount}"></span>
+                            <span th:text="${group.currency == 'EURO' ? '€' : '$'}"></span>
+                        </dd>
                     </div>
                 </div>
             </div>

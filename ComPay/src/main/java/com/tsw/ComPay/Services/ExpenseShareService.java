@@ -12,4 +12,5 @@ public interface ExpenseShareService {
     List<ExpensesShareDto> findByGroupId(Long groupId);
     List<ExpensesShareDto> findByPayerId(Long payerId);
     List<ExpensesShareDto> findByDestinyUserId(Long userAuthId);
+    List<DebtDto> findUsersDebtByGroupId(Long groupId);
 }
