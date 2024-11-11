@@ -15,4 +15,5 @@ public interface ExpenseShareRepository extends JpaRepository<ExpenseShareModel,
             value = " SELECT s FROM ExpenseShareModel s WHERE s.expense.group.id = :groupId"
     )
     List<ExpenseShareModel> findExpensesByGroup(Long groupId);
+    void deleteByExpenseId(Long expenseId);
 }

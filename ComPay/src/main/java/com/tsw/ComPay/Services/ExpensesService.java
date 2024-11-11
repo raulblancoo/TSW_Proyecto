@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public interface ExpensesService {
+    void delete(Long id);
     List<ExpensesDto> findAllExpenses();
     ExpensesDto save(NewExpenseDto expenseDto);
     List<ExpensesDto> findByGroup(Long groupId);
