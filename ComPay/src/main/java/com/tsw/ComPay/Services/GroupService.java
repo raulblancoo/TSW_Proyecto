@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface GroupService {
-    void saveGroup(NewGroupDto group);
+    Long saveGroup(NewGroupDto group);
 
     List<GroupDto> findAllGroups();
     GroupDto findGroupById(Long groupId);

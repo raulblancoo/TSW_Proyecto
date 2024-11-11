@@ -47,10 +47,10 @@ public class GroupServiceImpl implements GroupService {
     );
 
     @Override
-    public void saveGroup(NewGroupDto groupDto) {
-        groupDto.setImgURL(getNextImageUrl());
-
-        groupRepository.save(newGroupMapper.toEntity(groupDto));
+    public Long saveGroup(NewGroupDto groupDto) {
+        groupDto.setImgURL(getImageUrl());
+        GroupModel group = groupRepository.save(newGroupMapper.toEntity(groupDto));
+        return group.getId();
     }
 
     @Override
@@ -89,13 +89,13 @@ public class GroupServiceImpl implements GroupService {
         return groupRepository.findGroupModelById(groupDto.getId());
     }
 
-    private String getNextImageUrl() {
+    private String getImageUrl() {
         return IMG_URLS.get(getRandomNumber(IMG_URLS.size()));
     }
 
     private int getRandomNumber(int size) {
         Random random = new Random();
-        return random.nextInt(size) + 1;
+        return random.nextInt(size);
     }
 
 }
