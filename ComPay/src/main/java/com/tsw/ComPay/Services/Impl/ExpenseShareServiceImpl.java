@@ -6,6 +6,7 @@ import com.tsw.ComPay.Repositories.ExpenseShareRepository;
 import com.tsw.ComPay.Services.ExpenseShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
         expenseShareDto.setDebt(debt);
 
         expenseShareRepository.save(expenseShareMapper.toEntity(expenseShareDto));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        expenseShareRepository.deleteByExpenseId(id);
     }
 
     @Override

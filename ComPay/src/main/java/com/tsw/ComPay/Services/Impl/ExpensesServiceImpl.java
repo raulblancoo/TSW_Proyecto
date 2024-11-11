@@ -12,6 +12,7 @@ import com.tsw.ComPay.Services.ExpensesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public class ExpensesServiceImpl implements ExpensesService {
         ExpensesModel expense =  expensesRepository.save(newExpenseMapper.toEntity(expensesDto));
 
         return expenseMapper.toDto(expense);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        expensesRepository.deleteById(id);
     }
   
     @Override

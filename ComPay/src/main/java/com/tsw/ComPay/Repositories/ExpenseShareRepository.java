@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ExpenseShareRepository extends JpaRepository<ExpenseShareModel, Long> {
     List<ExpenseShareModel> findByExpense_Id(Long id);
+    void deleteByExpenseId(Long expenseId);
 }

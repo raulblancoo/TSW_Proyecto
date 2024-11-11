@@ -78,9 +78,11 @@ public class ExpenseController {
         return "redirect:/group/expenses/" + groupId;
     }
 
-    // TODO : Logica del delete
-    @DeleteMapping("delete/{groupId}/{expenseId}")
+    @GetMapping("delete/{groupId}/{expenseId}")
     public String deleteExpense(@PathVariable Long groupId, @PathVariable Long expenseId) {
+        expenseShareService.delete(expenseId);
+        expensesService.delete(expenseId);
+
         return "redirect:/group/expenses/" + groupId;
     }
 
