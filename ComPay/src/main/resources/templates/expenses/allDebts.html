@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Lista de Gastos</title>
+    <title>Historial de deudas</title>
     <link th:href="@{/main.css}" rel="stylesheet"/>
 </head>
 
@@ -15,13 +15,12 @@
 <main class="flex-grow overflow-y-auto pb-24">
     <div class="max-w-6xl mx-auto my-8">
         <div class="container mx-auto px-6">
-            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Historial de mis
-                pagos</h3>
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Historial de mis deudas</h3>
 
-            <!-- Componente de gastos -->
+            <!-- Componente de deudas -->
             <div class="container mx-auto px-6 mt-8 h-100">
-                <div th:each="expense : ${expenses}">
-                    <div th:replace="~{expenses/fragments/expenseItem :: expenseCard(${expense})}"></div>
+                <div th:each="debt : ${debts}">
+                    <div th:replace="~{expenses/fragments/debtItem.html :: debtCard(${debt})}"></div>
                 </div>
             </div>
         </div>

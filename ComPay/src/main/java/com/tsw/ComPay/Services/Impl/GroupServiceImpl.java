@@ -46,15 +46,14 @@ public class GroupServiceImpl implements GroupService {
             "/images/bg9.jpg", "/images/bg10.jpg"
     );
 
-    // Índice cíclico para las URLs de imágenes
-    private static final AtomicInteger imageIndex = new AtomicInteger(0);
-
+    @Override
     public void saveGroup(NewGroupDto groupDto) {
         groupDto.setImgURL(getNextImageUrl());
 
         groupRepository.save(newGroupMapper.toEntity(groupDto));
     }
 
+    @Override
     public GroupDto findGroupByName(String groupName) {
         return groupMapper.toDto(groupRepository.findByGroupName(groupName));
     }
@@ -69,14 +68,13 @@ public class GroupServiceImpl implements GroupService {
         return groupMapper.toDto(groupRepository.findGroupModelById(groupId));
     }
 
+    @Override
     public GroupDto existingGroup(GroupDto groupDto) {
         return groupMapper.toDto(existingGroupModel(groupDto));
     }
 
-    public GroupModel existingGroupModel(GroupDto groupDto) {
-        return groupRepository.findGroupModelById(groupDto.getId());
-    }
 
+    @Override
     public List<GroupDto> actualizarGrupos(String email) {
         List<GroupMembersDto> groupsMembers = groupMembersMapper.toListDto(
                 groupMembersRepository.findByUser(
@@ -87,9 +85,11 @@ public class GroupServiceImpl implements GroupService {
         return groups;
     }
 
+    private GroupModel existingGroupModel(GroupDto groupDto) {
+        return groupRepository.findGroupModelById(groupDto.getId());
+    }
 
     private String getNextImageUrl() {
-//        int index = GroupServiceImpl.imageIndex.getAndUpdate(i -> (i + 1) % IMG_URLS.size());
         return IMG_URLS.get(getRandomNumber(IMG_URLS.size()));
     }
 

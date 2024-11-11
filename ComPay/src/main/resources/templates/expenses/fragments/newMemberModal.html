@@ -25,19 +25,21 @@
                 </div>
             </div>
 
-            <form id="newMembersForm" th:object="${members}"
-                  th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">
-                <!-- Incluir el fragmento de campo de email -->
-                <div th:replace="~{expenses/fragments/addMember :: addMember}"></div>
+            <div th:replace="~{expenses/fragments/addMember :: addMember}"></div>
 
-                <!-- Modal Footer -->
-                <div class="flex justify-end p-5 border-t border-gray-200">
-                    <button type="submit"
-                            class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                        Guardar
-                    </button>
-                </div>
-            </form>
+<!--            <form id="newMembersForm" th:object="${members}"-->
+<!--                  th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">-->
+<!--                &lt;!&ndash; Incluir el fragmento de campo de email &ndash;&gt;-->
+<!--                <div th:replace="~{expenses/fragments/addMember :: addMember}"></div>-->
+
+<!--                &lt;!&ndash; Modal Footer &ndash;&gt;-->
+<!--                <div class="flex justify-end p-5 border-t border-gray-200">-->
+<!--                    <button type="submit"-->
+<!--                            class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">-->
+<!--                        Guardar-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </form>-->
         </div>
     </div>
 </div>

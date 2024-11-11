@@ -5,13 +5,16 @@
 
     <img class="hidden md:flex w-9 rounded-full" th:src="${expense.originUser.avatarURL}" th:alt="${expense.originUser.username}">
 
-    <p class="text-gray-700 font-thin sm:me-6">
-        <span class="font-bold uppercase" th:text="${expense.originUser.username}">usuario</span>
-        pagó
-        <span class="text-green-600 font-bold" th:text="${expense.amount + ' ' + expense.group.currency}"></span>
-        por
-        <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
-    </p>
+    <div class="flex justify-items-start">
+        <p class="text-gray-700 font-thin sm:me-6">
+            <span class="font-bold uppercase" th:text="${expense.originUser.username}">usuario</span>
+            pagó
+            <span class="text-green-600 font-bold" th:text="${expense.amount + (expense.group.currency == 'EURO' ? ' €' : (expense.group.currency == 'DOLAR' ? ' $' : ' ' + expense.group.currency))}">
+            </span>
+            por
+            <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
+        </p>
+    </div>
 
     <span th:text="${#dates.format(expense.expense_date, 'dd MMM yyyy')}"></span>
 </div>

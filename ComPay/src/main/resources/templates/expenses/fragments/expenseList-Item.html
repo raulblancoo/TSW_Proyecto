@@ -53,8 +53,15 @@
         <ul class="py-2 text-sm text-gray-700" th:attr="aria-labelledby='dropdownMenuIconButton-' + ${expense.id}">
             <li>
 <!--                TODO: LOGICA DE EDIT-->
-                <a href="#" class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
-                   data-id="${expense.id}" onclick="openEditExpenseModal(this)">Editar</a>
+                <a href="#"
+                   class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
+                   data-id="${expense.id}"
+                   data-modal-target="editPaymentModal"
+                   data-modal-toggle="editPaymentModal">
+<!--                   onclick="openEditExpenseModal(this)"-->
+
+                    Editar
+                </a>
             </li>
             <li>
                 <a th:href="@{/group/expenses/delete/{groupId}/{expenseId}(groupId=${group.id}, expenseId=${expense.id})}"

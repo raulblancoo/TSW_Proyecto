@@ -4,7 +4,7 @@
     <div class="flex items-end justify-end h-56 w-full bg-cover"
          th:style="|background-image: url('@{${group.imgURL}}');|">
         <a th:href="@{/group/expenses/{groupId}(groupId=${group.id})}"
-                class="p-2 flex justify-center items-center rounded-full bg-sky-500 text-white mx-5 -mb-4 hover:bg-cyan-700 focus:outline-none focus:bg-blue-500">
+           class="p-2 flex justify-center items-center rounded-full bg-sky-500 text-white mx-5 -mb-4 hover:bg-cyan-700 focus:outline-none focus:bg-blue-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                  stroke="currentColor" class="size-6 ml-3">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -15,9 +15,8 @@
     </div>
     <div class="px-5 py-3">
         <h3 class="text-gray-700 uppercase" th:text="${group.groupName}">Nombre del grupo</h3>
-        <span th:classappend="${group.amount > 0} ? 'text-green-600' : 'text-red-600'"
-              class="mt-2"
-              th:text="${group.currency + ' ' + group.amount}">$0
+        <span class="text-slate-600 mt-2"
+              th:text="${group.amount + (group.currency == 'EURO' ? ' €' : (group.currency == 'DOLAR' ? ' $' : ' ' + group.currency))}">
         </span>
     </div>
 </div>

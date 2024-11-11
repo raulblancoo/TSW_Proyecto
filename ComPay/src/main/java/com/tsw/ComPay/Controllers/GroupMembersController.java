@@ -22,25 +22,24 @@ public class GroupMembersController {
     private final GroupMembersService groupMembersService;
 
 
-    @GetMapping("/group/expenses/{groupId}/addMember")
-    public String view(Model model, @PathVariable("groupId") Long groupId, @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto) {
-        GroupDto grupo = groupService.findGroupById(groupId);
+//    @GetMapping("/group/expenses/{groupId}/addMember")
+//    public String view(Model model, @PathVariable("groupId") Long groupId, @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto) {
+//        GroupDto grupo = groupService.findGroupById(groupId);
+//
+//        for (String email : newGroupMemberDto.getEmails()) {
+//            // TODO LOGICA PARA SACAR LOS USERDTO A PARTIR DE EMAILS
+//            UserDto user = userService.findByEmail(email);
+//        }
+//
+//        return "redirect:/group/expenses/" + groupId;
+//    }
 
-        for (String email : newGroupMemberDto.getEmails()) {
-            // TODO LOGICA PARA SACAR LOS USERDTO A PARTIR DE EMAILS
-            UserDto user = userService.findByEmail(email);
-        }
 
-        return "redirect:/group/expenses/" + groupId;
-    }
-
-    // TODO: hacer introducir miembro en el grupo
     @PostMapping("/group/expenses/{groupId}/addMember")
     public String createNewGroupMember(Model model, @PathVariable("groupId") Long groupId, @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto) {
         GroupDto grupo = groupService.findGroupById(groupId);
 
         for (String email : newGroupMemberDto.getEmails()) {
-            // TODO LOGICA PARA SACAR LOS USERDTO A PARTIR DE EMAILS
             UserDto user = userService.findByEmail(email);
             groupMembersService.saveGroupMember(grupo, user);
         }

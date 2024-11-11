@@ -32,7 +32,7 @@
                 <div class="space-x-6 ml-6 hidden sm:flex">
                     <a th:href="@{/groups}" class="text-sky-500 px-3 py-2">Grupos</a>
                     <a th:href="@{/expenses}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Pagos</a>
-                    <a href="#" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Deudas</a>
+                    <a th:href="@{/debts}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Deudas</a>
                 </div>
             </div>
             <!-- Botones en la parte derecha -->
@@ -54,7 +54,7 @@
            class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
             Pagos
         </a>
-        <a href="#"
+        <a th:href="@{/debts}"
            class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
             Deudas
         </a>

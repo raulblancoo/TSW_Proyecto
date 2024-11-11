@@ -3,6 +3,8 @@ package com.tsw.ComPay.Controllers;
 import com.tsw.ComPay.Dto.*;
 import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import com.tsw.ComPay.Mapper.NewExpenseMapper;
+import com.tsw.ComPay.Repositories.ExpenseShareRepository;
+import com.tsw.ComPay.Repositories.ExpensesRepository;
 import com.tsw.ComPay.Repositories.GroupMembersRepository;
 import com.tsw.ComPay.Services.*;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +32,23 @@ public class ExpenseController {
     private final GroupMembersRepository groupMembersRepository;
     private final UserService userService;
     private final GroupMembersService groupMembersService;
+    private final ExpensesRepository expensesRepository;
+    private final ExpenseShareRepository expenseShareRepository;
 
     @GetMapping("/{groupId}")
-    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
+    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,
+                                   @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto,
+                                   @PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
+        group.setAmount(expensesService.calculateTotalExpenseByGroupId(groupId));
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
+//        List<ExpensesShareDto> expensesShare = expenseShareService.findByGroupId(groupId);
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+
+        List<DebtDto> debts = expenseShareService.findUsersDebtByGroupId(groupId);
+        List<BizumsDto> bizums  = expenseShareService.findUsersBizumsByGroupId(groupId);
 
         List<ExpenseMethodEnum> expenseMethods = Arrays.asList(ExpenseMethodEnum.values());
         model.addAttribute("expenseMethods", expenseMethods);
@@ -44,6 +56,8 @@ public class ExpenseController {
         model.addAttribute("usuario", authenticatedUser);
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
+        model.addAttribute("debts", debts);
+        model.addAttribute("bizums", bizums);
         model.addAttribute("users", users);
 
         return "expenses/expenses";
@@ -73,7 +87,7 @@ public class ExpenseController {
 
     // TODO : Logica del edit
     @PutMapping("update/{groupId}/{expenseId}")
-    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute ExpensesDto expenses) {
+    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute("expense") NewExpenseDto newExpenseDto) {
         // Redireccionar a la vista de gastos del grupo
         return "redirect:/group/expenses/" + groupId;
     }

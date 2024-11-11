@@ -21,7 +21,7 @@
     <div>
         <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
         <div th:if="${expenses.isEmpty()}">
-            <div th:replace="~{expenses/fragments/expensesEmpty :: emptyMessage('No hay gastos registrados para este grupo.')}"></div>
+            <div th:replace="~{base/fragments/emptyMessage :: emptyMessage('No hay gastos registrados para este grupo.')}"></div>
         </div>
 
         <!-- Fragmento que muestra la lista cuando hay gastos -->
@@ -38,6 +38,7 @@
 </div>
 
 <div th:replace="~{expenses/fragments/expensesModal :: expensesModal}"></div>
+<div th:replace="~{expenses/fragments/expensesEditModal :: expensesEditModal}"></div>
 <div th:replace="~{expenses/fragments/newMemberModal :: newMemberModal}"></div>
 <div th:replace="~{expenses/fragments/debtsModal :: debtsModal}"></div>
 

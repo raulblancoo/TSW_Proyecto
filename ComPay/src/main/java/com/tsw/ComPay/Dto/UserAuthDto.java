@@ -10,6 +10,7 @@ import java.util.List;
 
 @Data
 public class UserAuthDto implements UserDetails {
+    private Long id;
     private String name;
     private String surname;
     private String username;
@@ -19,6 +20,7 @@ public class UserAuthDto implements UserDetails {
     private String avatarURL;
 
     public UserAuthDto(UserDto user, List<GroupDto> group) {
+        this.id = user.getId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.name = user.getName();

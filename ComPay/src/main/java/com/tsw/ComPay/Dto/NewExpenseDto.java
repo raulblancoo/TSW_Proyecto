@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Data
 public class NewExpenseDto {
-
+    private Long id;
     private GroupDto group;
     private Long originUserId;
     private Long[] destinationUsers;

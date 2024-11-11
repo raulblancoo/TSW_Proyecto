@@ -5,6 +5,7 @@ import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.NewExpenseDto;
 import com.tsw.ComPay.Mapper.ExpenseMapper;
 import com.tsw.ComPay.Mapper.NewExpenseMapper;
+import com.tsw.ComPay.Models.ExpenseShareModel;
 import com.tsw.ComPay.Models.ExpensesModel;
 
 import com.tsw.ComPay.Repositories.ExpensesRepository;
@@ -44,13 +45,24 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     @Override
     public List<ExpensesDto> findByGroup(Long groupId) {
-        return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_Id(groupId));
+        // TODO
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_IdOrderByExpense_dateDesc(groupId));
     }
 
     @Override
-    public List<ExpensesDto> findExpensesByPayerId_Username(String username) {
-        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_Username(username));
+    public List<ExpensesDto> findExpensesByPayerId(Long userId) {
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_IdOrderByExpense_dateDesc(userId));
     }
 
+    @Override
+    public double calculateTotalExpenseByGroupId(Long groupId) {
+        List<ExpensesDto> expenses = findByGroup(groupId);
+        double total = 0;
 
+        for(ExpensesDto expense : expenses){
+            total += expense.getAmount();
+        }
+
+        return total;
+    }
 }
