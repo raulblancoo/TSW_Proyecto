@@ -2,26 +2,15 @@
 <div th:fragment="expenseList(expenses)" class="max-w-6xl mx-auto">
     <div class="container mx-auto px-6">
         <div th:each="expense, stat : ${expenses}">
-            <!-- Mostrar el fragmento de fecha solo si es el primer gasto de un grupo por fecha -->
+            <!-- Mostrar la fecha solo si es el primer gasto de un grupo por fecha -->
             <div th:if="${stat.index == 0 or expense.expense_date != expenses[stat.index - 1].expense_date}">
                 <div th:replace="~{expenses/fragments/expenseDate :: expenseDate(${expense})}"></div>
             </div>
 
-
+            <!-- Lista de gastos individuales -->
             <div class="mt-8 h-100">
                 <div th:replace="~{expenses/fragments/expenseList-Item :: expenseCard(${expense})}"></div>
-
-                <div class="flex items-center my-8">
-                    <hr class="flex-grow border-gray-300">
-                    <span class="px-4 bg-white text-gray-500">10 Nov 2023</span>
-                    <hr class="flex-grow border-gray-300">
-                </div>
             </div>
         </div>
     </div>
 </div>
-
-<!--  SCRIPT PARA BOTÓN DROPDOWN   -->
-<script src="https://flowbite.com/docs/flowbite.min.js"></script>
-
-

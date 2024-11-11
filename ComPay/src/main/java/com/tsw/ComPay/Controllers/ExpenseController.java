@@ -32,7 +32,7 @@ public class ExpenseController {
     private final GroupMembersService groupMembersService;
 
     @GetMapping("/{groupId}")
-    public String viewGroupDetails(@PathVariable("groupId") Long groupId, Model model) {
+    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
@@ -45,28 +45,47 @@ public class ExpenseController {
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
         model.addAttribute("users", users);
-        model.addAttribute("expense", new NewExpenseDto());
 
         return "expenses/expenses";
     }
 
     @PostMapping("/create/{groupId}")
-    public String createGroup(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
+    public String createExpense(@ModelAttribute("expense") NewExpenseDto newExpenseDto, @PathVariable("groupId") Long groupId, Model model) {
         newExpenseDto.setGroup(groupService.findGroupById(groupId));
         newExpenseDto.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
 
-        // Crear la fecha de hoy y convertirla a Date en formato sin hora
+
         Date todayDate = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
         newExpenseDto.setExpense_date(todayDate);
 
         ExpensesDto expense = expensesService.save(newExpenseDto);
 
         for (Long userId : newExpenseDto.getDestinationUsers()) {
-            expenseShareService.save(userService.findByUserId(userId), expense);
+            expenseShareService.save(userService.findByUserId(userId), expense,
+                            newExpenseDto.getShare_method().equals(ExpenseMethodEnum.PORCENTAJES)
+                            ? newExpenseDto.getDebts()[userId.intValue()] * expense.getAmount() / 100
+                            : newExpenseDto.getDebts()[userId.intValue()]);
         }
 
         return "redirect:/group/expenses/" + groupId;
     }
+
+
+    // TODO : Logica del edit
+    @PutMapping("update/{groupId}/{expenseId}")
+    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute ExpensesDto expenses) {
+        // Redireccionar a la vista de gastos del grupo
+        return "redirect:/group/expenses/" + groupId;
+    }
+
+    @GetMapping("delete/{groupId}/{expenseId}")
+    public String deleteExpense(@PathVariable Long groupId, @PathVariable Long expenseId) {
+        expenseShareService.delete(expenseId);
+        expensesService.delete(expenseId);
+
+        return "redirect:/group/expenses/" + groupId;
+    }
+
 }
 
 

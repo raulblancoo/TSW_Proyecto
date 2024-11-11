@@ -12,6 +12,7 @@ import com.tsw.ComPay.Services.ExpensesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class ExpensesServiceImpl implements ExpensesService {
 
         return expenseMapper.toDto(expense);
     }
+
+    @Transactional
+    public void delete(Long id) {
+        expensesRepository.deleteById(id);
+    }
   
     @Override
     public List<ExpensesDto> findAllExpenses() {
@@ -40,4 +46,11 @@ public class ExpensesServiceImpl implements ExpensesService {
     public List<ExpensesDto> findByGroup(Long groupId) {
         return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_Id(groupId));
     }
+
+    @Override
+    public List<ExpensesDto> findExpensesByPayerId_Username(String username) {
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_Username(username));
+    }
+
+
 }

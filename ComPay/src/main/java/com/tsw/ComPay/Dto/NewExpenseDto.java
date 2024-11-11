@@ -16,4 +16,6 @@ public class NewExpenseDto {
     private UserDto originUser;
     private ExpenseMethodEnum share_method;
     private Date expense_date;
+    private Double[] debts;
+    private Double debt;
 }
