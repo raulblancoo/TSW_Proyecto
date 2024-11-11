@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
 document.getElementById("paymentForm").addEventListener("submit", function(event) {
     // Evita el comportamiento predeterminado del formulario (reenvío y borrado de campos)
     event.preventDefault();
-    alert("hola");
-    alert(new FormData(document.getElementById("paymentForm")).get("debts[2]"))
-
-
     // Aquí puedes agregar lógica para mantener el estado de los campos, si es necesario
     // Por ejemplo, podrías recoger los valores de los correos electrónicos y almacenarlos para restaurarlos
 
