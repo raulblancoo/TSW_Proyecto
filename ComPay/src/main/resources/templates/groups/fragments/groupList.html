@@ -3,6 +3,12 @@
     <div class="container mx-auto px-6">
         <div class="mt-16">
             <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase">Mis grupos</h3>
+
+            <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
+            <div th:if="${groups.isEmpty()}">
+                <div th:replace="~{base/fragments/emptyMessage :: emptyMessage('No hay ningún grupo.')}"></div>
+            </div>
+
             <!-- COMPONENTE DE GRUPO -->
             <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 mt-6">
                 <!-- Iteramos sobre la lista de grupos y llamamos al fragmento de grupo para cada uno -->
