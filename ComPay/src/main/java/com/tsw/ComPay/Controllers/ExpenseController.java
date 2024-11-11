@@ -43,7 +43,7 @@ public class ExpenseController {
         group.setAmount(expensesService.calculateTotalExpenseByGroupId(groupId));
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
-        List<ExpensesShareDto> expensesShare = expenseShareService.findByGroupId(groupId);
+//        List<ExpensesShareDto> expensesShare = expenseShareService.findByGroupId(groupId);
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
 

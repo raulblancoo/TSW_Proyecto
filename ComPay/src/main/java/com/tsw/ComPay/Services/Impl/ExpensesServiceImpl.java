@@ -39,7 +39,8 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     @Override
     public List<ExpensesDto> findByGroup(Long groupId) {
-        return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_Id(groupId));
+        // TODO
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_IdOrderByExpense_dateDesc(groupId));
     }
 
     @Override
