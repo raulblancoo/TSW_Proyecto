@@ -14,4 +14,5 @@ public interface ExpensesService {
     ExpensesDto save(NewExpenseDto expenseDto);
     List<ExpensesDto> findByGroup(Long groupId);
     List<ExpensesDto> findExpensesByPayerId(Long userId);
+    double calculateTotalExpenseByGroupId(Long groupId);
 }

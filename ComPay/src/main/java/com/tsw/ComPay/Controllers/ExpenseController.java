@@ -38,6 +38,7 @@ public class ExpenseController {
     @GetMapping("/{groupId}")
     public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
+        group.setAmount(expensesService.calculateTotalExpenseByGroupId(groupId));
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
         List<UserDto> users = groupMembersService.getAllFromGroup(groupId);
         List<ExpensesShareDto> expensesShare = expenseShareService.findByGroupId(groupId);
@@ -45,14 +46,16 @@ public class ExpenseController {
 
 
         List<DebtDto> debts = expenseShareService.findUsersDebtByGroupId(groupId);
+        List<BizumsDto> bizums  = expenseShareService.findUsersBizumsByGroupId(groupId);
 
         List<ExpenseMethodEnum> expenseMethods = Arrays.asList(ExpenseMethodEnum.values());
         model.addAttribute("expenseMethods", expenseMethods);
 
         model.addAttribute("usuario", authenticatedUser);
         model.addAttribute("group", group);
-        model.addAttribute("expenses", expenses); // HARIA FALTA?
+        model.addAttribute("expenses", expenses);
         model.addAttribute("debts", debts);
+        model.addAttribute("bizums", bizums);
         model.addAttribute("users", users);
 
         return "expenses/expenses";
