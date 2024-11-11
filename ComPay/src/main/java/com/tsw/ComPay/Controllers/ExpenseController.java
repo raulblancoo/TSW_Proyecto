@@ -36,7 +36,9 @@ public class ExpenseController {
     private final ExpenseShareRepository expenseShareRepository;
 
     @GetMapping("/{groupId}")
-    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,@PathVariable("groupId") Long groupId, Model model) {
+    public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,
+                                   @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto,
+                                   @PathVariable("groupId") Long groupId, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         group.setAmount(expensesService.calculateTotalExpenseByGroupId(groupId));
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
