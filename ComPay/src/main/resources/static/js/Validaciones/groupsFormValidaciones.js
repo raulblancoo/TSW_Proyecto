@@ -4,25 +4,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const emailList = document.getElementById("email-list");
     const emailsField = document.getElementById("emails");
     const groupNameInput = document.getElementById("group-name");
+    const currency = document.getElementById("currency")
 
     // Crear contenedor de errores al final del formulario
-    const generalErrorContainer = document.createElement("div");
-    generalErrorContainer.className = "text-red-500 text-sm mt-4";
-    form.appendChild(generalErrorContainer);
+    const generalErrorContainer = document.getElementById("divErrores"); // Asumiendo que ya existe en el HTML
+    generalErrorContainer.style.display = "none"; // Asegurarse que está oculto inicialmente
 
     // Función para validar el campo de nombre del grupo
     function validateGroupName() {
-        toret = "";
-        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
+        let toret = "";
+        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED\s]*$/;
         var userGroups = document.getElementById('userGroups').getAttribute('user-group');
         if (!groupNameInput.value.trim()) {
             toret = toret.concat("El nombre del grupo es obligatorio. ");
-        }if (groupNameInput.value.length > 20) {
-            toret = toret.concat("El nombre del grupo no debe exceder 20 caracteres. ");
-        }if(userGroups.includes(groupNameInput.value)){
-            toret = toret.concat("El nombre de este grupo ya existe. ")
-        }if(!regexGroupName.test(groupNameInput.value)){
-            toret = toret.concat("El nombre del grupo tiene caracteres no permitidos");
+        } else {
+            const groupName = userGroups.split('groupName=')[1].split(',')[0];
+
+            if ((groupName.toLowerCase() === groupNameInput.value.toLocaleLowerCase())) {
+                toret = toret.concat("El nombre de este grupo ya existe. ");
+            }
+            if (groupNameInput.value.length > 20) {
+                toret = toret.concat("El nombre del grupo no debe exceder 20 caracteres. ");
+            }
+            if (!regexGroupName.test(groupNameInput.value)) {
+                toret = toret.concat("El nombre del grupo tiene caracteres no permitidos");
+            }
         }
         return toret;
     }
@@ -32,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const emailValue = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        generalErrorContainer.textContent = ""; // Limpiar mensaje de error general
+        generalErrorContainer.style.display = "none"; // Limpiar y ocultar el mensaje de error general
 
         if (emailValue && emailRegex.test(emailValue)) {
             const existingEmails = Array.from(emailList.children).map(li => li.querySelector("span").textContent);
@@ -61,21 +67,31 @@ document.addEventListener("DOMContentLoaded", function () {
                         emailList.classList.add("hidden");
                     }
                 });
-            } else if(existingEmails.includes(emailValue)){
-                generalErrorContainer.textContent = "Este email ya ha sido añadido.";
-            }
-            else if(emailValue.includes(userEmail)){
-                generalErrorContainer.textContent = "No puedes añadirte a la lista de participantes.";
+            } else if (existingEmails.includes(emailValue)) {
+                generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+                addErrorMessage("Este email ya ha sido añadido.");
+            } else if (emailValue.includes(userEmail)) {
+                generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+                addErrorMessage("No puedes añadirte a la lista de participantes.");
             }
         } else {
-            generalErrorContainer.textContent = "Por favor, introduce una dirección de correo válida.";
+            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            addErrorMessage("Por favor, introduce una dirección de correo válida.");
         }
     });
+
+    // Función para agregar un mensaje de error
+    function addErrorMessage(message) {
+        const errorItem = document.createElement("li");
+        errorItem.textContent = message;
+        generalErrorContainer.querySelector("ul").appendChild(errorItem);
+    }
 
     // Validar antes de enviar el formulario
     form.addEventListener("submit", function (event) {
         event.preventDefault(); // Detener envío para validar primero
-        generalErrorContainer.innerHTML = ""; // Limpiar errores previos
+        generalErrorContainer.style.display = "none"; // Limpiar y ocultar errores previos
+        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
         let errors = [];
 
         // Validar nombre del grupo
@@ -88,11 +104,14 @@ document.addEventListener("DOMContentLoaded", function () {
         if (emailList.children.length === 0) {
             errors.push("Debes añadir al menos un email antes de enviar el formulario.");
         }
-
+        //Validar que la moneda sea valida
+        if(currency.value !== "DOLLAR" && currency.value != "EURO"){
+            errors.push("La moneda seleccionada no esta permitida")
+        }
         // Mostrar errores si hay alguno
         if (errors.length > 0) {
-            generalErrorContainer.innerHTML = errors.map(error => `<p>${error}</p>`).join("");
-            generalErrorContainer.classList.add('text-red-600');
+            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            errors.forEach(error => addErrorMessage(error));
         } else {
             form.submit(); // Enviar formulario si no hay errores
         }
@@ -105,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
         emailsField.value = "";
         emailList.classList.add("hidden");
 
-        generalErrorContainer.innerHTML = ""; // Limpiar mensajes de error
+        generalErrorContainer.style.display = "none"; // Limpiar mensajes de error
+        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
     });
 });
