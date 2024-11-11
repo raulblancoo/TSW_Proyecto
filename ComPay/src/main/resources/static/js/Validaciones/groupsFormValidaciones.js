@@ -82,9 +82,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Función para agregar un mensaje de error
     function addErrorMessage(message) {
-        const errorItem = document.createElement("li");
-        errorItem.textContent = message;
-        generalErrorContainer.querySelector("ul").appendChild(errorItem);
+        const errorList = generalErrorContainer.querySelector("ul");
+        const existingErrors = Array.from(errorList.children).map(item => item.textContent);
+        if (!existingErrors.includes(message)) {
+            const errorItem = document.createElement("li");
+            errorItem.textContent = message;
+            errorList.appendChild(errorItem);
+        }
     }
 
     // Validar antes de enviar el formulario
