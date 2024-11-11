@@ -1,0 +1,91 @@
+<div th:fragment="expensesEditFormFields" class="max-w-xl mx-auto p-6">
+<!--     TODO: Cambiar acción para la que quieras-->
+    <form id="editPaymentForm"
+          th:action="@{/group/expenses/update/{groupId}/{expenseId}(groupId=${group.id}, expenseId=${expense.id})}"
+          th:object="${expense}" method="post">
+        <div class="mb-4">
+            <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
+            <select required id="payer_select" th:field="*{originUserId}"
+                    class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
+
+                <option selected th:value="${usuario.id}"
+                        th:text="${usuario.name + ' ' + usuario.surname}">
+                </option>
+
+                <option th:each="user : ${users}" th:if="${user.id != usuario.id}" th:value="${user.id}"
+                        th:text="${user.name + ' ' + user.surname}">
+                </option>
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700">PARTICIPANTES</label>
+            <div class="grid grid-cols-2">
+                <div th:each="user : ${users}">
+                    <div class="flex items-center">
+                        <input type="checkbox" name="destinationUsers" th:value="${user.id}"
+                               th:id="${'user_' + user.id}"
+                               class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500 user-checkbox"
+                               onchange="updateSelectedUsers()">
+                        <label th:for="${'user_' + user.id}" class="ml-2 text-slate-700 whitespace-nowrap"
+                               th:text="${user.name + ' ' + user.surname}"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="mb-4">
+            <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
+            <input type="text" id="payment_concept" th:field="*{name}"
+                   class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+                   placeholder="Escriba un concepto" required/>
+        </div>
+
+        <div class="mb-4">
+            <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
+            <div class="flex items-center">
+                <input type="number" step="any" id="payment_amount" th:field="*{amount}"
+                       onchange="updateSelectedUsers()"
+                       class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+                       placeholder="Introduzca la cantidad" required/>
+                <div class="ml-2 flex-shrink-0">
+                    <span th:text="${group.currency == 'EURO' ? '€' : (group.currency == 'DOLAR' ? '$' : '')}" class="text-gray-700 text-xl"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4">
+            <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
+            <select required id="divided_payment"
+                    class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
+                    th:field="*{share_method}" onchange="updateSelectedUsers()">
+                <!-- Primer option seleccionado por defecto -->
+                <option selected th:value="${expenseMethods[0].getCode()}"
+                        th:text="${expenseMethods[0]}">
+                </option>
+
+                <!-- Bucle para iterar sobre el resto de expenseMethods -->
+                <option th:each="expenseMethod, iterStat : ${expenseMethods}"
+                        th:if="${iterStat.index > 0}"
+                        th:value="${expenseMethod.getCode()}"
+                        th:text="${expenseMethod}">
+                </option>
+            </select>
+        </div>
+
+        <!-- Div oculto que contiene el formulario adicional -->
+        <div id="selected-users" class="mt-4 p-2 border border-gray-300 bg-gray-100 text-slate-700">
+            No hay participantes seleccionados.
+        </div>
+
+<!--         Modal Footer-->
+        <div class="flex justify-end p-5 border-t border-gray-200">
+            <button type="submit"
+                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                Guardar
+            </button>
+        </div>
+    </form>
+</div>
+

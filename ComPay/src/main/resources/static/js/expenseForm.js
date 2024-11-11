@@ -3,13 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.getElementById("paymentForm").addEventListener("submit", function(event) {
-    // Evita el comportamiento predeterminado del formulario (reenvío y borrado de campos)
     event.preventDefault();
-    // Aquí puedes agregar lógica para mantener el estado de los campos, si es necesario
-    // Por ejemplo, podrías recoger los valores de los correos electrónicos y almacenarlos para restaurarlos
-
-    // Llamar a la función para enviar el formulario usando AJAX, si es necesario
-    // Si no es necesario usar AJAX, puedes omitir el preventDefault y dejar que el formulario se envíe.
     this.submit();
 });
 

@@ -87,7 +87,7 @@ public class ExpenseController {
 
     // TODO : Logica del edit
     @PutMapping("update/{groupId}/{expenseId}")
-    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute ExpensesDto expenses) {
+    public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute("expense") NewExpenseDto newExpenseDto) {
         // Redireccionar a la vista de gastos del grupo
         return "redirect:/group/expenses/" + groupId;
     }
