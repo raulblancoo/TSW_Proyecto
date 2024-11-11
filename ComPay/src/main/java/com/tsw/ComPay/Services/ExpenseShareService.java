@@ -12,5 +12,7 @@ import java.util.List;
 public interface ExpenseShareService {
 
     void save(UserDto user, ExpensesDto expenseDto, Double debt);
+    void delete(Long expenseId);
     List<ExpensesShareDto> findByExpenseId(Long expenseId);
+
 }
