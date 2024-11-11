@@ -5,10 +5,14 @@
             <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
             <select required id="payer_select" th:field="*{originUserId}"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
-                <th:block th:each="user : ${users}">
-                    <!-- Mostrar nombre y apellido en una sola opción -->
-                    <option th:value="${user.id}" th:text="${user.name + ' ' + user.surname}"></option>
-                </th:block>
+
+                <option selected th:value="${usuario.id}"
+                        th:text="${usuario.name + ' ' + usuario.surname}">
+                </option>
+
+                <option th:each="user : ${users}" th:if="${user.id != usuario.id}" th:value="${user.id}"
+                        th:text="${user.name + ' ' + user.surname}">
+                </option>
             </select>
         </div>
 
@@ -17,9 +21,10 @@
             <div class="grid grid-cols-2">
                 <div th:each="user : ${users}">
                     <div class="flex items-center">
-                        <input type="checkbox" name="destinationUsers" th:value="${user.id}" th:id="${'user_' + user.id}"
+                        <input type="checkbox" name="destinationUsers" th:value="${user.id}"
+                               th:id="${'user_' + user.id}"
                                class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500 user-checkbox"
-                               onchange="updateSelectedUsers()" >
+                               onchange="updateSelectedUsers()">
                         <label th:for="${'user_' + user.id}" class="ml-2 text-slate-700 whitespace-nowrap"
                                th:text="${user.name + ' ' + user.surname}"></label>
                     </div>
@@ -38,7 +43,8 @@
         <div class="mb-4">
             <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
             <div class="flex items-center">
-                <input type="number" step="any" id="payment_amount" th:field="*{amount}" onchange="updateSelectedUsers()"
+                <input type="number" step="any" id="payment_amount" th:field="*{amount}"
+                       onchange="updateSelectedUsers()"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                        placeholder="Introduzca la cantidad" required/>
                 <div class="ml-2 flex-shrink-0">
@@ -56,8 +62,14 @@
             <select required id="divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                     th:field="*{share_method}" onchange="updateSelectedUsers()">
-                <option hidden selected value=""></option>
-                <option th:each="expenseMethod : ${expenseMethods}"
+                <!-- Primer option seleccionado por defecto -->
+                <option selected th:value="${expenseMethods[0].getCode()}"
+                        th:text="${expenseMethods[0]}">
+                </option>
+
+                <!-- Bucle para iterar sobre el resto de expenseMethods -->
+                <option th:each="expenseMethod, iterStat : ${expenseMethods}"
+                        th:if="${iterStat.index > 0}"
                         th:value="${expenseMethod.getCode()}"
                         th:text="${expenseMethod}">
                 </option>
