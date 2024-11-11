@@ -44,7 +44,7 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     @Override
     public List<ExpensesDto> findExpensesByPayerId(Long userId) {
-        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_Id(userId));
+        return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_IdOrderByExpense_dateDesc(userId));
     }
 
     @Override
