@@ -1,25 +1,39 @@
 <div th:fragment="addMember">
-  <label for="search" class="block text-sm font-medium text-gray-700 uppercase">Añadir miembros al grupo</label>
-  <div class="mb-4 flex items-center w-full">
-    <div class="relative w-full">
-      <!-- Icono de búsqueda -->
-      <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
-      </div>
-      <!-- Campo de entrada para el email -->
-      <input type="email" id="search" placeholder="Introduzca email"
-             class="block w-full py-2 px-10 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500"/>
-      <!-- Botón para añadir email -->
-      <button type="button" id="add-email-btn-expenses"
-              class="absolute right-2.5 bottom-2.5 bg-sky-500 text-white font-medium text-sm px-4 py-1.5 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-        Añadir
-      </button>
-    </div>
-  </div>
-  <!-- Lista de emails añadidos -->
-  <input type="hidden" id="emails" name="emails" field="*{emails}"/>
-  <ul id="email-list" class="mb-4 text-sm text-slate-700 p-4 space-y-2 hidden"></ul>
+    <form id="newMembersForm" th:object="${members}"
+          th:action="@{/group/expenses/{groupId}/addMember(groupId=${group.id})}" method="post">
+
+        <label for="search" class="block text-sm font-medium text-gray-700 uppercase">Añadir miembros al grupo</label>
+        <div class="mb-4 flex items-center w-full">
+            <div class="relative w-full">
+                <!-- Icono de búsqueda -->
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <!-- Campo de entrada para el email -->
+                <input type="email" id="search" placeholder="Introduzca email"
+                       class="block w-full py-2 px-10 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500"/>
+                <!-- Botón para añadir email -->
+                <button type="button" id="add-email-btn-expenses"
+                        class="absolute right-2.5 bottom-2.5 bg-sky-500 text-white font-medium text-sm px-4 py-1.5 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                    Añadir
+                </button>
+            </div>
+        </div>
+        <!-- Lista de emails añadidos -->
+        <input type="hidden" id="emails" th:field="*{emails}"/>
+        <ul id="email-list" class="mb-4 text-sm text-slate-700 p-4 space-y-2 hidden"></ul>
+
+        <!-- Modal Footer -->
+        <div class="flex justify-end p-5 border-t border-gray-200">
+            <button type="submit"
+                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
+                Guardar
+            </button>
+        </div>
+    </form>
 </div>
+
