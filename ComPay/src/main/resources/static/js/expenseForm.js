@@ -37,7 +37,7 @@ function updateSelectedUsers() {
 
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
+            userDiv.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2','gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');
@@ -67,7 +67,7 @@ function updateSelectedUsers() {
     } else if (shareMethod === 'PARTESDESIGUALES') {
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
+            userDiv.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');
@@ -106,7 +106,7 @@ function updateSelectedUsers() {
     } else if (shareMethod === 'PORCENTAJES') {
         selectedUsers.forEach((user) => {
             const userDiv = document.createElement('div');
-            userDiv.classList.add('grid', 'grid-cols-3', 'gap-4', 'items-center', 'mb-2');
+            userDiv.classList.add('grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-4', 'items-center', 'mb-2');
 
             const nameSpan = document.createElement('span');
             nameSpan.classList.add('mr-4');
