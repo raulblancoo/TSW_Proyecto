@@ -9,8 +9,8 @@
                  th:alt="${debt.expense.originUser.username}">
             <div class="ml-4">
                 <p class="text-sm font-semibold text-gray-900"
-                   th:text="${debt.expense.originUser.name + ' ' + debt.expense.originUser.surname}">Nombre del usuario</p>
-                <p class="text-sm text-gray-500" th:text="${debt.expense.originUser.email}">Email del usuario</p>
+                   th:text="${debt.expense.originUser.name + ' ' + debt.expense.originUser.surname}"></p>
+                <p class="text-sm text-gray-500" th:text="${debt.expense.originUser.email}"></p>
             </div>
         </div>
 
@@ -24,14 +24,14 @@
             <p class="text-slate-600">
                 <!-- Motivo del gasto para pantallas grandes -->
                 <span class="hidden md:flex text-lg font-semibold">
-                    <span th:text="${debt.expense.expense_name}">Motivo del gasto</span>
+                    <span th:text="${debt.expense.expense_name}"></span>
                     (<span th:text="${debt.expense.amount}"></span>
                     <span th:text="${debt.expense.group.currency == 'EURO' ? '€' : (debt.expense.group.currency == 'DOLAR' ? '$' : debt.expense.group.currency)}"></span>)
                 </span>
 
                 <!-- Motivo del gasto para pantallas pequeñas -->
                 <span class="flex md:hidden text-sm">
-                    <span th:text="${debt.expense.expense_name}">Motivo del gasto</span>
+                    <span th:text="${debt.expense.expense_name}"></span>
                 </span>
             </p>
         </div>
@@ -40,7 +40,7 @@
         <div>
             <!-- Deuda en pantallas grandes -->
             <p class="hidden md:flex text-red-600 font-bold uppercase">
-                <span th:text="${'Deuda: ' + debt.debt}"></span>
+                <span th:text="#{text.allDebts.debt(${debt.debt})}"></span>
                 <span th:text="${debt.expense.group.currency == 'EURO' ? '€' : (debt.expense.group.currency == 'DOLAR' ? '$' : debt.expense.group.currency)}"></span>
             </p>
 
