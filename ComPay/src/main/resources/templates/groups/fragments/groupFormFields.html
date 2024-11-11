@@ -2,14 +2,17 @@
 <div th:fragment="formFields">
     <form th:action="@{/groups/create}" method="post" th:object="${group}" id="group-form">
         <div class="mb-4">
-            <label for="group-name" class="block text-sm font-medium text-gray-700 uppercase">Nombre del grupo</label>
+            <label for="group-name" class="block text-sm font-medium text-gray-700 uppercase"
+            th:text="#{text.groups.form.name}">
+            </label>
             <input type="text" id="group-name"  th:field="*{groupName}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                   placeholder="Introduzca un nombre" />
+                   th:placeholder="#{text.groups.form.name.placeholder}"/>
         </div>
 
         <!-- Añadir miembros al grupo -->
-        <label for="search" class="block text-sm font-medium text-gray-700 uppercase">Añadir miembros al grupo</label>
+        <label for="search" class="block text-sm font-medium text-gray-700 uppercase"
+               th:text="#{text.groups.form.groumembers}"></label>
         <div class="mb-4 flex items-center w-full">
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -17,9 +20,9 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="email" id="search" placeholder="Introduzca email"
+                <input type="email" id="search" th:placeholder="#{text.groups.form.groumembers.placeholder}"
                        class="block w-full py-2 px-10 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500"/>
-                <button type="button" id="add-email-btn" class="absolute right-2.5 bottom-2.5 bg-sky-500 text-white font-medium text-sm px-4 py-1.5 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">Añadir</button>
+                <button type="button" id="add-email-btn" class="absolute right-2.5 bottom-2.5 bg-sky-500 text-white font-medium text-sm px-4 py-1.5 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300" th:text="#{text.groups.form.groumembers.add}"></button>
             </div>
         </div>
         <div id="userEmail" th:user-email="${usuario.email}"></div>
@@ -46,8 +49,7 @@
         <!-- Modal Footer -->
         <div class="flex justify-end p-5 border-t border-gray-200">
             <button type="submit"
-                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                Guardar
+                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300" th:text="#{text.groups.save.button}">
             </button>
         </div>
 

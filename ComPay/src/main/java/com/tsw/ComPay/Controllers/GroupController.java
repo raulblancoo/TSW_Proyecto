@@ -10,6 +10,7 @@ import com.tsw.ComPay.Services.ExpensesService;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
 import com.tsw.ComPay.Services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,7 +33,8 @@ public class GroupController {
     private final ExpensesService expensesService;
 
     @GetMapping("")
-    public String showGroups(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String showGroups(Model model, @ModelAttribute("group") NewGroupDto newGroupDto, HttpServletRequest request) {
+        model.addAttribute("currentUri", request.getRequestURI());
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         for(GroupDto group : authenticatedUser.getGroup()){
@@ -40,6 +42,7 @@ public class GroupController {
         }
 
         model.addAttribute("groups", authenticatedUser.getGroup());
+        model.addAttribute("currentUri", request.getRequestURI());
         model.addAttribute("usuario", authenticatedUser);
 
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());

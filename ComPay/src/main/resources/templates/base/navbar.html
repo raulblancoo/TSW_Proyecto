@@ -5,12 +5,6 @@
                 <button data-collapse-toggle="navbar-collapse" type="button"
                         class="text-slate-500 hover:bg-sky-500 hover:text-slate-100 transition-colors rounded p-1 -ml-1 focus:ring-2"
                         aria-controls="navbar-collapse" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-<!--                    <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"-->
-<!--                         viewBox="0 0 20 14">-->
-<!--                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                              d="M1 1h15M1 7h15M1 13h15"/>-->
-<!--                    </svg>-->
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -30,9 +24,9 @@
 
                 <!-- Menú de navegación horizontal -->
                 <div class="space-x-6 ml-6 hidden sm:flex">
-                    <a th:href="@{/groups}" class="text-sky-500 px-3 py-2">Grupos</a>
-                    <a th:href="@{/expenses}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Pagos</a>
-                    <a th:href="@{/debts}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Deudas</a>
+                    <a th:href="@{/groups}" class="text-sky-500 px-3 py-2" th:text="#{text.groups.header.groups}"></a>
+                    <a th:href="@{/expenses}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors" th:text="#{text.groups.header.payments}"></a>
+                    <a th:href="@{/debts}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors" th:text="#{text.groups.header.debts}"></a>
                 </div>
             </div>
             <!-- Botones en la parte derecha -->
@@ -47,16 +41,13 @@
     </div>
     <!-- Menú desplegable en pantallas pequeñas -->
     <div class="space-y-1 pb-3 border-t-3 pt-2 sm:hidden" id="navbar-collapse">
-        <a th:href="@{/groups}" class="block bg-sky-500 text-white px-3 py-2 rounded-md transition-color">
-            Grupos
+        <a th:href="@{/groups}" class="block bg-sky-500 text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.groups}">
         </a>
         <a th:href="@{/expenses}"
-           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
-            Pagos
+           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.payments}">
         </a>
         <a th:href="@{/debts}"
-           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
-            Deudas
+           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.debts}">
         </a>
     </div>
 </nav>

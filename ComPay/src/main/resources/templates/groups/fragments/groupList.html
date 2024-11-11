@@ -2,8 +2,9 @@
 <div th:fragment="groupList" class="max-w-6xl mx-auto my-8">
     <div class="container mx-auto px-6">
         <div class="mt-16">
-            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase">Mis grupos</h3>
-
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase"
+                th:text="#{text.groups.title}">
+            </h3>
             <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
             <div th:if="${groups.isEmpty()}">
                 <div th:replace="~{base/fragments/emptyMessage :: emptyMessage('No hay ningún grupo.')}"></div>

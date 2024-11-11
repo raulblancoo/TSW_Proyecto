@@ -1,18 +1,5 @@
-<!-- fragments/currency-selector.html -->
-<!--<div th:fragment="currencySelector" class="mb-6">
-    <p class="text-sm font-medium mb-2">Set group currency</p>
-    <select class="w-full p-3 bg-gray-700 rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            name="currency" field="*{currency}">
-        <option value="" disabled selected>Select a currency</option>
-        <option th:each="currency : ${currencies}"
-                th:value="${currency.name()}"
-                th:text="${currency.getCode()}">
-        </option>
-    </select>
-</div>-->
-
 <div th:fragment="currencySelector" class="mb-4">
-    <label for="currency" class="block text-sm font-medium text-gray-700 uppercase">Selecciona una divisa</label>
+    <label for="currency" class="block text-sm font-medium text-gray-700 uppercase" th:text="#{text.groups.form.currency}"></label>
     <select id="currency"
             class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
             th:field="*{currency}">
