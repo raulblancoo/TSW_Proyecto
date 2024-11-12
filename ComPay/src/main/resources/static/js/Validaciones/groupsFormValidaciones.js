@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const imgElement = document.getElementById("main-lang-flag").getAttribute("src");
         language = "sp";
         toret = "";
-        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
+        const regexGroupName = /^[\x20\x21-\xA8\xAD\xE0-\xED]*$/;
         var userGroups = document.getElementById('userGroups').getAttribute('user-group');
         if(imgElement.includes("united")){
             language = "unit";
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 // Validar que la moneda sea válida
-        if (currency.value !== "DOLLAR" && currency.value !== "EURO") {
+        if (currency.value !== "DOLAR" && currency.value !== "EURO") {
             let errorMessage = "";
             switch (language) {
                 case "sp":
