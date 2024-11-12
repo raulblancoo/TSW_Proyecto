@@ -7,10 +7,7 @@ import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Repositories.UserRepository;
 import com.tsw.ComPay.Services.ExpenseShareService;
 import com.tsw.ComPay.Services.UserService;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

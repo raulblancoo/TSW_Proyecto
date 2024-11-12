@@ -1,18 +1,15 @@
 package com.tsw.ComPay.Services.Impl;
 
 import com.tsw.ComPay.Dto.ExpensesDto;
-import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.NewExpenseDto;
 import com.tsw.ComPay.Mapper.ExpenseMapper;
 import com.tsw.ComPay.Mapper.NewExpenseMapper;
-import com.tsw.ComPay.Models.ExpenseShareModel;
 import com.tsw.ComPay.Models.ExpensesModel;
 
 import com.tsw.ComPay.Repositories.ExpensesRepository;
 import com.tsw.ComPay.Services.ExpensesService;
 import com.tsw.ComPay.Services.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

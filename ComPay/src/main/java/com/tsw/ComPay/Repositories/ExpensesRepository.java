@@ -3,12 +3,10 @@ package com.tsw.ComPay.Repositories;
 import com.tsw.ComPay.Models.ExpensesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
 public interface ExpensesRepository extends JpaRepository<ExpensesModel, Long> {
-    //ExpensesModel findExpensesModelById(Long id);
     void deleteById(Long id);
     ExpensesModel findExpensesModelById(Long id);
     List<ExpensesModel> findExpensesModelByGroupId(Long id);

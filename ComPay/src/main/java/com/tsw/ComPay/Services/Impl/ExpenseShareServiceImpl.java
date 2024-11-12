@@ -1,10 +1,8 @@
 package com.tsw.ComPay.Services.Impl;
 
 import com.tsw.ComPay.Dto.*;
-import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import com.tsw.ComPay.Mapper.ExpenseShareMapper;
 import com.tsw.ComPay.Models.ExpenseShareModel;
-import com.tsw.ComPay.Models.ExpensesModel;
 import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Repositories.ExpenseShareRepository;
 import com.tsw.ComPay.Repositories.ExpensesRepository;

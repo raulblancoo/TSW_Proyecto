@@ -2,7 +2,6 @@
 package com.tsw.ComPay.Controllers;
 
 import com.tsw.ComPay.Dto.GroupDto;
-import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
 import com.tsw.ComPay.Dto.UserAuthDto;
 import com.tsw.ComPay.Enums.CurrencyEnum;
@@ -12,7 +11,6 @@ import com.tsw.ComPay.Services.GroupService;
 import com.tsw.ComPay.Services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
