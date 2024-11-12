@@ -80,10 +80,6 @@ function closeModal() {
         modal.classList.add("hidden")
     }
 }
-document.getElementById("editPaymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    this.submit();
-});
 
 function editUpdateSelectedUsers() {
     const checkboxes = document.querySelectorAll('.user-edit-checkbox');
@@ -229,7 +225,7 @@ function editValidateAmount(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
+     //   document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
     } else {
         document.getElementById('error-message').textContent = '';
     }
@@ -246,7 +242,7 @@ function editValidateAmountPorcentaje(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de los porcentajes no es igual al 100%.';
+       // document.getElementById('error-message').textContent = 'La suma de los porcentajes no es igual al 100%.';
     } else {
         document.getElementById('error-message').textContent = '';
     }

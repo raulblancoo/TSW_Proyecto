@@ -95,11 +95,21 @@ public class ExpenseController {
         List<Double> debts = expenseShareService.findByExpenseId(expenseId).stream().map(ExpensesShareDto::getDebt).toList();
 
         Map<String, Object> response = new HashMap<>();
+        List<Double> porcentajes = new ArrayList<>();
+
+        if (expense.getShare_method().equals(ExpenseMethodEnum.PORCENTAJES) ) {
+            for (Double debt: debts) {
+                porcentajes.add(debt * 100 / expense.getAmount() );
+            }
+
+            response.put("debts", porcentajes);
+        } else {
+            response.put("debts", debts);
+        }
 
         response.put("users", users);
         response.put("expense", expense);
         response.put("group", group);
-        response.put("debts", debts);
 
         return ResponseEntity.ok(response);
 

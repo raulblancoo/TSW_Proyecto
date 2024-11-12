@@ -2,16 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSelectedUsers();
 });
 
-document.getElementById("paymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    this.submit();
-});
-
 function updateSelectedUsers() {
+
     const checkboxes = document.querySelectorAll('.user-checkbox');
     const selectedUsersContainer = document.getElementById('selected-users');
     const amount = parseFloat(document.getElementById('payment_amount').value) || 0;
     const shareMethod = document.getElementById('divided_payment').value || "PARTESIGUALES";
+    errorMessage = true;
 
     selectedUsersContainer.innerHTML = '';
     let selectedUsers = [];
@@ -142,6 +139,7 @@ function updateSelectedUsers() {
             selectedUsersContainer.appendChild(userDiv);
         });
     }
+
 }
 
 
@@ -156,7 +154,7 @@ function validateAmount(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
+        //document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
     } else {
         document.getElementById('error-message').textContent = '';
     }
@@ -173,7 +171,7 @@ function validateAmountPorcentaje(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
+        //document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
     } else {
         document.getElementById('error-message').textContent = '';
     }

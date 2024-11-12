@@ -158,7 +158,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
         for (ExpenseShareModel expense : listExpenses) {
             UserModel loaner = expense.getExpense().getOriginUser();
             if (!expense.getDestinyUser().equals(loaner)) {
-                loanMap.put(loaner, loanMap.getOrDefault(loaner, 0.0) + expense.getDebt());
+                loanMap.put(loaner, loanMap.getOrDefault(loaner, 0.0) + Math.round(expense.getDebt()));
             }
         }
 
@@ -173,7 +173,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
             UserModel payer = expense.getDestinyUser();
             UserModel loaner = expense.getExpense().getOriginUser();
             if (!loaner.equals(payer)) {
-                debtMap.put(payer, debtMap.getOrDefault(payer, 0.0) + expense.getDebt());
+                debtMap.put(payer, debtMap.getOrDefault(payer, 0.0) + Math.round(expense.getDebt()));
             }
         }
 

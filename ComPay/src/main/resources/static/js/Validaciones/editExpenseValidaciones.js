@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("paymentForm");
+    const form = document.getElementById("editPaymentForm");
 
-    const payerSelect = document.getElementById("payer_select");
-    const pagoCantidad = document.getElementById("payment_amount");
-    const conceptoPago = document.getElementById("payment_concept");
-    const dividedPayment = document.getElementById("divided_payment");
+    const payerSelect = document.getElementById("edit_payer_select");
+    const pagoCantidad = document.getElementById("edit_payment_amount");
+    const conceptoPago = document.getElementById("edit_payment_amount");
+    const dividedPayment = document.getElementById("edit_divided_payment");
 
 
-    const generalErrorContainer = document.getElementById("divErrores");
+    const generalErrorContainer = document.getElementById("editDivErrores");
     generalErrorContainer.style.display = "none";
 
     function addErrorMessage(message) {
@@ -122,13 +122,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     function sumasReparto(){
         totalEnteredAmount = 0;
-        document.querySelectorAll('.user-input').forEach(input => {
+        document.querySelectorAll('.edit-user-input').forEach(input => {
             totalEnteredAmount += parseFloat(input.value) || 0;
         });
         return totalEnteredAmount;
     }
 
 
-    });
+});
 
 
