@@ -2,10 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSelectedUsers();
 });
 
-document.getElementById("paymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    this.submit();
-});
 
 function updateSelectedUsers() {
     const checkboxes = document.querySelectorAll('.user-checkbox');
