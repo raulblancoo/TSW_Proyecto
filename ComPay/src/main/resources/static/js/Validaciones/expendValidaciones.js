@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
                     errors.push("Ningún campo puede ir vacío.");
                 } else if (sumasReparto() != pagoCantidad.value) {
-                    //errors.push("El reparto especificado no suma la cantidad total");
+                    errors.push("El reparto especificado no suma la cantidad total");
                 }
                 if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
                     errors.push("No existe este método de división del pago.");
@@ -147,12 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
     function sumasReparto(){
-        const inputsReparto = document.querySelectorAll("#userValuesForm input[type='number']");
-        toret = 0;
-        for (let input of inputsReparto) {
-            toret+=parseFloat(input.value);
-        }
-        return toret;
+        document.querySelectorAll('.user-input').forEach(input => {
+            totalEnteredAmount += parseFloat(input.value) || 0;
+        });
+        return totalEnteredAmount/2;
     }
 
 
