@@ -64,7 +64,8 @@ function openEditModal(event) {
             const modal = document.getElementById('editPaymentModal');
 
             if (modal) {
-                modal.style.display = 'block';
+                modal.classList.remove("hidden")
+                modal.classList.add("h-screen")
             } else {
                 console.error("El modal no se encontró en el DOM.");
             }
@@ -75,9 +76,9 @@ function openEditModal(event) {
 }
 
 function closeModal() {
-    const modal = document.getElementById('editModal');
+    const modal = document.getElementById('editPaymentModal');
     if (modal) {
-        modal.style.display = 'none';  // Ocultar el modal
+        modal.classList.add("hidden")
     }
 }
 document.getElementById("editPaymentForm").addEventListener("submit", function(event) {

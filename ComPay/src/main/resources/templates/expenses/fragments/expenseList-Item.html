@@ -54,11 +54,8 @@
             <li>
                 <a href="#"
                    class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
-                   data-id="${expense.id}"
-                   data-modal-target="editPaymentModal"
-                   data-modal-toggle="editPaymentModal"
-                   th:text="#{text.expenses.edit}">
-<!--                    th:attr="data-id=${expense.id}, data-group-id=${group.id}"-->
+                   th:text="#{text.expenses.edit}"
+                   th:attr="data-id=${expense.id}, data-group-id=${group.id}">
                 </a>
             </li>
             <li>
