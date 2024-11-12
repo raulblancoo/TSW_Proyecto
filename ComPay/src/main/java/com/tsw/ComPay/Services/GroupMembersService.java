@@ -13,4 +13,5 @@ import java.util.List;
 public interface GroupMembersService {
     void saveGroupMember(GroupDto groupDto, UserDto user);
     List<UserDto> getAllFromGroup(Long group_id);
+    boolean isMemberOfGroup(GroupDto group, UserDto user);
 }

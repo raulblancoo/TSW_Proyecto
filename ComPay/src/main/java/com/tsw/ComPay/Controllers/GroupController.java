@@ -10,12 +10,14 @@ import com.tsw.ComPay.Services.ExpensesService;
 import com.tsw.ComPay.Services.GroupMembersService;
 import com.tsw.ComPay.Services.GroupService;
 import com.tsw.ComPay.Services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.ArrayList;
@@ -32,7 +34,8 @@ public class GroupController {
     private final ExpensesService expensesService;
 
     @GetMapping("")
-    public String showGroups(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String showGroups(Model model, @ModelAttribute("group") NewGroupDto newGroupDto, HttpServletRequest request) {
+        model.addAttribute("currentUri", request.getRequestURI());
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         for(GroupDto group : authenticatedUser.getGroup()){
@@ -40,6 +43,7 @@ public class GroupController {
         }
 
         model.addAttribute("groups", authenticatedUser.getGroup());
+        model.addAttribute("currentUri", request.getRequestURI());
         model.addAttribute("usuario", authenticatedUser);
 
         List<CurrencyEnum> currencies = Arrays.asList(CurrencyEnum.values());
@@ -49,18 +53,25 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto, RedirectAttributes redirectAttributes) {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        groupService.saveGroup(newGroupDto);
         List<String> emails = new ArrayList<>(List.of(newGroupDto.getEmails()));
         emails.add(authenticatedUser.getEmail());
 
-        // TODO: TIENE QUE SER FINDGROUPBYID (PARA QUE DOS USUARIOS DIFERENES PUEDAN CREAR GRUPOS CON EL MISMO NOMBRE AL QUE YA ESTÁN)
         for (String email : emails) {
-            groupMembersService.saveGroupMember(groupService.findGroupByName(newGroupDto.getGroupName()), userService.findByEmail(email));
+            if (userService.findByEmail(email) == null) {
+                redirectAttributes.addFlashAttribute("error", "An error occurred");
+                return "redirect:/groups";
+            }
         }
 
-        authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail())); // Actualiza la sesión con los grupos nuevos
+        long id = groupService.saveGroup(newGroupDto);
+
+        for (String email : emails) {
+            groupMembersService.saveGroupMember(groupService.findGroupById(id), userService.findByEmail(email));
+        }
+
+        authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail()));
 
         return "redirect:/groups";
     }

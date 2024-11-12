@@ -2,7 +2,8 @@
     <form id="paymentForm" th:action="@{/group/expenses/create/{groupId}(groupId=${group.id})}" method="post"
           th:object="${expense}">
         <div class="mb-4">
-            <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
+            <label for="payer_select" class="block text-sm font-medium text-gray-700"
+                   th:text="#{text.expenses.form.create.paid}"></label>
             <select required id="payer_select" th:field="*{originUserId}"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
 
@@ -17,16 +18,14 @@
         </div>
 
         <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-700">PARTICIPANTES</label>
+            <label class="block text-sm font-medium text-gray-700"
+                   th:text="#{text.expenses.form.create.participants}"></label>
             <div class="grid grid-cols-2">
                 <div th:each="user : ${users}">
                     <div class="flex items-center">
-
-                    <!--    <input  id="checkbox" type="checkbox" name="destinationUsers" th:value="${user.id}"
-                               th:id="${'user_' + user.id}" -->
-
-                        <input id="checkbox" type="checkbox" name="destinationUsers" th:value="${user.id}" th:id="${'user_' + user.id}"
-
+                        <label for="checkbox"></label>
+                        <input id="checkbox" type="checkbox" name="destinationUsers" th:value="${user.id}"
+                               th:id="${'user_' + user.id}"
                                class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500 user-checkbox"
                                onchange="updateSelectedUsers()">
                         <label th:for="${'user_' + user.id}" class="ml-2 text-slate-700 whitespace-nowrap"
@@ -38,27 +37,28 @@
 
 
         <div class="mb-4">
-            <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
+            <label for="payment_concept" class="block text-sm font-medium text-gray-700" th:text="#{text.expenses.form.create.description}"></label>
             <input type="text" id="payment_concept" th:field="*{name}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                   placeholder="Escriba un concepto" />
+                   th:placeholder="#{text.expenses.form.create.description.placeholder}"/>
         </div>
 
         <div class="mb-4">
-            <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
+            <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1" th:text="#{text.expenses.form.create.amount}"></label>
             <div class="flex items-center">
                 <input type="number" step="any" id="payment_amount" th:field="*{amount}"
                        onchange="updateSelectedUsers()"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                       placeholder="Introduzca la cantidad" />
+                       th:placeholder="#{text.expenses.form.create.amount.placeholder}"/>
                 <div class="ml-2 flex-shrink-0">
-                    <span th:text="${group.currency == 'EURO' ? '€' : (group.currency == 'DOLAR' ? '$' : '')}" class="text-gray-700 text-xl"></span>
+                    <span th:text="${group.currency == 'EURO' ? '€' : (group.currency == 'DOLAR' ? '$' : '')}"
+                          class="text-gray-700 text-xl"></span>
                 </div>
             </div>
         </div>
 
         <div class="mb-4">
-            <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
+            <label for="divided_payment" class="block text-sm font-medium text-gray-700" th:text="#{text.expenses.form.create.division}"></label>
             <select id="divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                     th:field="*{share_method}" onchange="updateSelectedUsers()">
@@ -78,14 +78,17 @@
 
         <!-- Div oculto que contiene el formulario adicional -->
         <div id="selected-users" class="mt-4 p-2 border border-gray-300 bg-gray-100 text-slate-700">
-            No hay participantes seleccionados.
+            <span th:text="#{text.expenses.form.create.notSelectedParticipants}"></span>
         </div>
-        <div id="divErrores" style="display: none;" class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+        <div id="divErrores" style="display: none;"
+             class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+             role="alert">
             <div class="flex items-center">
-                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                 </svg>
-                <span class="font-medium">Errores: </span>
+                <span class="font-medium" th:text="#{text.expenses.form.create.errors}"></span>
             </div>
             <div>
                 <ul class="mt-1.5 list-disc list-inside" id="errorList"></ul>
@@ -95,10 +98,16 @@
         <!-- Modal Footer -->
         <div class="flex justify-end p-5 border-t border-gray-200">
             <button type="submit"
-                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                Guardar
+                    class="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300"
+                    th:text="#{text.expenses.form.create.saveButton}">
             </button>
         </div>
     </form>
 </div>
+
+<!-- TODO: COMPROBAR SI ESTO ME SIRVE PARA PASARLE ERRORES AL JS Y PODER METERLOS DESDE AHI-->
+<script th:inline="javascript">
+    const noParticipantsMessage = /*[[${noParticipantsMessage}]]*/ '';
+    const errorMessage = /*[[${errorMessage}]]*/ '';
+</script>
 <script th:src="@{/js/Validaciones/expendValidaciones.js}"></script>

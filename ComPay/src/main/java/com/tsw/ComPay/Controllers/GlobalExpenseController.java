@@ -5,6 +5,7 @@ import com.tsw.ComPay.Dto.ExpensesShareDto;
 import com.tsw.ComPay.Dto.UserAuthDto;
 import com.tsw.ComPay.Services.ExpensesService;
 import com.tsw.ComPay.Services.ExpenseShareService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -20,18 +21,19 @@ public class GlobalExpenseController {
     private final ExpenseShareService expenseShareService;
 
     @GetMapping("/expenses")
-    public String viewExpenses(Model model){
+    public String viewExpenses(Model model, HttpServletRequest request){
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<ExpensesDto> expenses = expensesService.findExpensesByPayerId(authenticatedUser.getId());
 
         model.addAttribute("usuario",authenticatedUser);
+        model.addAttribute("currentUri", request.getRequestURI());
         model.addAttribute("expenses",expenses);
 
         return "expenses/allExpenses";
     }
 
     @GetMapping("/debts")
-    public String viewDebts(Model model) {
+    public String viewDebts(Model model, HttpServletRequest request) {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<ExpensesShareDto> debts = expenseShareService.findByDestinyUserId(authenticatedUser.getId());
 
@@ -39,6 +41,7 @@ public class GlobalExpenseController {
         debts.removeIf(debt -> debt.getExpense().getOriginUser().getId().equals(authenticatedUser.getId()));
 
         model.addAttribute("usuario", authenticatedUser);
+        model.addAttribute("currentUri", request.getRequestURI());
         model.addAttribute("debts", debts);
 
         return "expenses/allDebts";

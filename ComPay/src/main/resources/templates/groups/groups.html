@@ -13,13 +13,25 @@
 
 
 <main class="flex-grow overflow-y-auto pb-24">
+    <!-- Mostrar el mensaje de error si existe -->
+    <div th:if="${error}" class="flex items-center justify-center mx-auto mt-3">
+        <div class="flex items-center p-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <div class="ml-3">
+                <span class="font-medium" th:text="#{error.groups.invalidUser}"></span>
+            </div>
+        </div>
+    </div>
+
+
     <div th:replace="~{groups/fragments/groupList :: groupList}"></div>
 
     <!-- Botón Fijado al Centro Inferior de la Página -->
     <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
         <button data-modal-target="groupModal" data-modal-toggle="groupModal"
-                class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-            Añadir Grupo
+                class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300" th:text="#{text.groups.addgroup}">
         </button>
     </div>
 
@@ -34,4 +46,5 @@
 </html>
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
+<script th:src="@{/js/languageSelector.js}"></script>
 <script th:src="@{/js/Validaciones/groupsFormValidaciones.js}"></script>

@@ -7,9 +7,9 @@
 
     <p class="text-gray-700 font-thin sm:me-6">
         <span class="font-bold uppercase" th:text="${expense.originUser.username}">usuario</span>
-        pagó
-        <span class="text-green-600 font-bold" th:text="${expense.amount + ' ' + expense.group.currency}">$0</span>
-        por
+        <span th:text="#{text.expenses.item.first}"></span>
+        <span class="text-green-600 font-bold" th:text="${expense.amount + (expense.group.currency == 'EURO' ? ' €' : (expense.group.currency == 'DOLAR' ? ' $' : ' ' + expense.group.currency))}"></span>
+        <span th:text="#{text.expenses.item.second}"></span>
         <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
     </p>
 
@@ -54,13 +54,17 @@
             <li>
                 <a href="#"
                    class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
+                   data-id="${expense.id}"
+                   data-modal-target="editPaymentModal"
+                   data-modal-toggle="editPaymentModal"
+                   th:text="#{text.expenses.edit}">
                    th:attr="data-id=${expense.id}, data-group-id=${group.id}">
-                    Editar
                 </a>
             </li>
             <li>
                 <a th:href="@{/group/expenses/delete/{groupId}/{expenseId}(groupId=${group.id}, expenseId=${expense.id})}"
-                   class="block px-4 py-2 hover:bg-gray-100 hover:text-black">Borrar</a>
+                   class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
+                   th:text="#{text.expenses.delete}"></a>
             </li>
         </ul>
     </div>

@@ -55,4 +55,9 @@ public class GroupMembersServiceImpl implements GroupMembersService {
         return groupMembersMapper.toListDto(groupMembersRepository.findByGroup_Id(groupId))
                 .stream().map(GroupMembersDto::getUser).toList();
     }
+
+    public boolean isMemberOfGroup(GroupDto group, UserDto user) {
+        // Comprobamos si el usuario ya es miembro del grupo
+        return getAllFromGroup(group.getId()).stream().anyMatch(member -> member.getId().equals(user.getId()));
+    }
 }

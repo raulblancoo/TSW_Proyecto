@@ -15,8 +15,12 @@
 <main class="flex-grow overflow-y-auto pb-24">
     <div class="max-w-6xl mx-auto my-8">
         <div class="container mx-auto px-6">
-            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16">Historial de mis
-                pagos</h3>
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16"
+            th:text="#{text.allExpenses.history}"></h3>
+
+            <div th:if="${expenses.isEmpty()}">
+                <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.allExpenses.noExpenses}"></p>
+            </div>
 
             <!-- Componente de gastos -->
             <div class="container mx-auto px-6 mt-8 h-100">
@@ -34,4 +38,5 @@
 </body>
 </html>
 
+<script th:src="@{/js/languageSelector.js}"></script>
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
