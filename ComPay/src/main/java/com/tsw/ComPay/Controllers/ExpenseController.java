@@ -109,19 +109,12 @@ public class ExpenseController {
 
         ExpensesDto expense = expensesService.update(newExpenseDto, expenseId);
         expenseShareService.delete(expenseId);
-        int i= 0;
-
-        Double[] validDebts = Arrays.stream(newExpenseDto.getDebts())
-                .filter(debt -> debt != null)
-                .toArray(Double[]::new);
-
         for (Long userId : newExpenseDto.getDestinationUsers()) {
                 expenseShareService.save(userService.findByUserId(userId), expense,
                         newExpenseDto.getShare_method().equals(ExpenseMethodEnum.PORCENTAJES)
-                                ? validDebts[i] * expense.getAmount() / 100
-                                : validDebts[i]);
+                                ? newExpenseDto.getDebts()[userId.intValue()] * expense.getAmount() / 100
+                                : newExpenseDto.getDebts()[userId.intValue()]);
 
-            i++;
         }
 
         return "redirect:/group/expenses/" + groupId;
