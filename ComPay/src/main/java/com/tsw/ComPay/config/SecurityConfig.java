@@ -37,7 +37,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) ->
                         {
-                            authorize.requestMatchers("/", "/login", "/register","/css/**", "/js/**", "/images/**", "/resources/**" ).permitAll()
+                            authorize.requestMatchers("/", "/login/**", "/register","/css/**", "/js/**", "/images/**", "/resources/**" ).permitAll()
                             //        .requestMatchers("/perfil").hasAnyAuthority("ADMIN")
                                     .anyRequest().authenticated();
                         }
@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 form.loginPage("/login").permitAll()
                                       .loginProcessingUrl("/login")
                                         .defaultSuccessUrl("/groups?lang=es", true)
-                                 .failureForwardUrl("/login")
+                                 .failureUrl("/login/error")
 
                 )
                 .logout(logout -> logout
