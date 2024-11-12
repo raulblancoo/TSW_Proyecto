@@ -112,6 +112,9 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("add-email-btn").addEventListener("click", function () {
         const emailValue = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const imgElement = document.getElementById("main-lang-flag").getAttribute("src");
+        language = "sp";
+        toret = "";
 
         generalErrorContainer.style.display = "none";
 
