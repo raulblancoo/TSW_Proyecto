@@ -2,24 +2,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const formLogin = document.getElementById("login-form");
     const formRegister = document.getElementById("register-form");
 
-    // Crear contenedores de errores para login y registro con menos espacio inferior
     const errorLoginContainer = document.createElement("div");
-    errorLoginContainer.style.color = "#dc2626"; // Color rojo intenso
-    errorLoginContainer.style.marginTop = "10px"; // Espaciado superior
+    errorLoginContainer.style.color = "#dc2626";
+    errorLoginContainer.style.marginTop = "10px";
 
     formLogin.appendChild(errorLoginContainer);
 
     const errorRegisterContainer = document.createElement("div");
     errorRegisterContainer.style.color = "#dc2626";
-    errorRegisterContainer.style.marginTop = "10px"; //
+    errorRegisterContainer.style.marginTop = "10px";
 
     formRegister.appendChild(errorRegisterContainer);
 
-    // Expresiones regulares para validar email y caracteres de nombre
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const regexNames = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
 
-    // Validación de formulario de login
     function validacionesLogin() {
         let errors = [];
 
@@ -39,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
         return errors;
     }
 
-    // Validación de formulario de registro
     function validacionesRegister() {
         let errors = [];
 
@@ -64,29 +60,27 @@ document.addEventListener("DOMContentLoaded", function () {
         return errors;
     }
 
-    // Validación y visualización de errores en el formulario de login
     formLogin.addEventListener("submit", function (event) {
         event.preventDefault();
-        errorLoginContainer.innerHTML = ""; // Limpiar errores previos
+        errorLoginContainer.innerHTML = "";
         const loginErrors = validacionesLogin();
 
         if (loginErrors.length > 0) {
             errorLoginContainer.innerHTML = loginErrors.map(error => `${error}</p>`).join("");
         } else {
-            formLogin.submit(); // Enviar formulario si no hay errores
+            formLogin.submit();
         }
     });
 
-    // Validación y visualización de errores en el formulario de registro
     formRegister.addEventListener("submit", function (event) {
         event.preventDefault();
-        errorRegisterContainer.innerHTML = ""; // Limpiar errores previos
+        errorRegisterContainer.innerHTML = "";
         const registerErrors = validacionesRegister();
 
         if (registerErrors.length > 0) {
             errorRegisterContainer.innerHTML = registerErrors.map(error => `${error}</p>`).join("");
         } else {
-            formRegister.submit(); // Enviar formulario si no hay errores
+            formRegister.submit();
         }
     });
 });

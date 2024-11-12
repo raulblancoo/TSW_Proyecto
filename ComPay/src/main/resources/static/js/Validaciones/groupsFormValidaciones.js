@@ -6,9 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const groupNameInput = document.getElementById("group-name");
     const currency = document.getElementById("currency")
 
-    // Crear contenedor de errores al final del formulario
-    const generalErrorContainer = document.getElementById("divErrores"); // Asumiendo que ya existe en el HTML
-    generalErrorContainer.style.display = "none"; // Asegurarse que está oculto inicialmente
+    const generalErrorContainer = document.getElementById("divErrores");
+    generalErrorContainer.style.display = "none";
     function validateGroupName() {
         toret = "";
         const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
@@ -25,12 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return toret;
     }
 
-    // Evento para añadir un email a la lista
     document.getElementById("add-email-btn").addEventListener("click", function () {
         const emailValue = emailInput.value.trim();
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        generalErrorContainer.style.display = "none"; // Limpiar y ocultar el mensaje de error general
+        generalErrorContainer.style.display = "none";
 
         if (emailValue && emailRegex.test(emailValue)) {
             const existingEmails = Array.from(emailList.children).map(li => li.querySelector("span").textContent);
@@ -49,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 emailsArray.push(emailValue);
                 emailsField.value = emailsArray.join(",");
 
-                emailInput.value = "";  // Limpiar el input de email
+                emailInput.value = "";
 
                 li.querySelector(".remove-email-btn").addEventListener("click", function () {
                     li.remove();
@@ -60,19 +58,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
             } else if (existingEmails.includes(emailValue)) {
-                generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+                generalErrorContainer.style.display = "block";
                 addErrorMessage("Este email ya ha sido añadido.");
             } else if (emailValue.includes(userEmail)) {
-                generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+                generalErrorContainer.style.display = "block";
                 addErrorMessage("No puedes añadirte a la lista de participantes.");
             }
         } else {
-            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            generalErrorContainer.style.display = "block";
             addErrorMessage("Por favor, introduce una dirección de correo válida.");
         }
     });
 
-    // Función para agregar un mensaje de error
     function addErrorMessage(message) {
         const errorList = generalErrorContainer.querySelector("ul");
         const existingErrors = Array.from(errorList.children).map(item => item.textContent);
@@ -83,44 +80,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Validar antes de enviar el formulario
+
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Detener envío para validar primero
-        generalErrorContainer.style.display = "none"; // Limpiar y ocultar errores previos
-        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
+        event.preventDefault();
+        generalErrorContainer.style.display = "none";
+        generalErrorContainer.querySelector("ul").innerHTML = "";
         let errors = [];
 
-        // Validar nombre del grupo
         const groupNameError = validateGroupName();
         if (groupNameError) {
             errors.push(groupNameError);
         }
 
-        // Validar si hay al menos un email en la lista
         if (emailList.children.length === 0) {
             errors.push("Debes añadir al menos un email antes de enviar el formulario.");
         }
-        //Validar que la moneda sea valida
         if(currency.value !== "DOLLAR" && currency.value != "EURO"){
             errors.push("La moneda seleccionada no esta permitida")
         }
-        // Mostrar errores si hay alguno
         if (errors.length > 0) {
-            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            generalErrorContainer.style.display = "block";
             errors.forEach(error => addErrorMessage(error));
         } else {
-            form.submit(); // Enviar formulario si no hay errores
+            form.submit();
         }
     });
 
-    // Limpiar el formulario y los emails al cerrar la modal
     document.querySelector('[data-modal-hide="groupModal"]').addEventListener("click", function () {
         form.reset();
         emailList.innerHTML = "";
         emailsField.value = "";
         emailList.classList.add("hidden");
 
-        generalErrorContainer.style.display = "none"; // Limpiar mensajes de error
-        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
+        generalErrorContainer.style.display = "none";
+        generalErrorContainer.querySelector("ul").innerHTML = "";
     });
 });

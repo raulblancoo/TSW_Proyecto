@@ -45,7 +45,6 @@ function openEditModal(event) {
                 document.querySelectorAll('.user-edit-checkbox').forEach(checkbox => {
                     const userId = checkbox.value;
 
-                    // Comprobamos si el checkbox debe estar marcado
                     if (data.users && data.users.includes(parseInt(userId))) {
                         checkbox.checked = true;
                     }
@@ -92,28 +91,25 @@ function editUpdateSelectedUsers() {
     const amount = parseFloat(document.getElementById('edit_payment_amount').value) || 0;
     const shareMethod = document.getElementById('edit_divided_payment').value || "PARTESIGUALES";
 
-    selectedUsersContainer.innerHTML = ''; // Limpiar contenido previo
+    selectedUsersContainer.innerHTML = '';
 
     let selectedUsers = [];
     const debts = [];
 
-    // Recorremos las checkboxes y recogemos los usuarios seleccionados
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
             const label = document.querySelector(`label[for="${checkbox.id}"]`);
             const userName = label ? label.textContent : '';
-            const userId = checkbox.value; // Usa el valor del checkbox como userId
+            const userId = checkbox.value;
             selectedUsers.push({ userName, userId });
         }
     });
 
-    // Si no hay usuarios seleccionados, mostrar el mensaje predeterminado
     if (selectedUsers.length === 0) {
         selectedUsersContainer.innerHTML = 'No hay participantes seleccionados.';
         return;
     }
 
-    // Lógica según el método de división de la cantidad
     if (shareMethod === 'PARTESIGUALES') {
         const equalShare = (amount / selectedUsers.length).toFixed(2);
 
@@ -166,7 +162,6 @@ function editUpdateSelectedUsers() {
 
             debts[user.userId] = 0;
 
-            // Escuchar cambios en los inputs de deuda
             userDebtInput.addEventListener('input', function () {
                 let totalEnteredAmount = 0;
 
@@ -205,7 +200,6 @@ function editUpdateSelectedUsers() {
 
             debts[user.userId] = 0;
 
-            // Escuchar cambios en los inputs de porcentaje
             userDebtInput.addEventListener('input', function () {
                 let totalEnteredAmount = 0;
 
@@ -224,7 +218,6 @@ function editUpdateSelectedUsers() {
     }
 }
 
-// Función para validar que la cantidad ingresada coincida con la cantidad total
 function editValidateAmount(totalEnteredAmount, amount) {
     const errorMessageElement = document.getElementById('error-message');
 
@@ -242,7 +235,6 @@ function editValidateAmount(totalEnteredAmount, amount) {
     }
 }
 
-// Función para validar el porcentaje
 function editValidateAmountPorcentaje(totalEnteredAmount, amount) {
     const errorMessageElement = document.getElementById('error-message');
 
@@ -260,25 +252,20 @@ function editValidateAmountPorcentaje(totalEnteredAmount, amount) {
     }
 }
 
-// Limpiar el formulario y los emails al cerrar la modal
 document.querySelector('[data-modal-hide="editPaymentModal"]').addEventListener('click', function() {
-    // Restablecer el formulario
     const form = document.getElementById('editPaymentForm');
-    form.reset(); // Esto vaciará todos los inputs
+    form.reset();
 
-    // Limpiar el contenedor de usuarios seleccionados
     const selectedUsersContainer = document.getElementById('edit-selected-users');
-    selectedUsersContainer.innerHTML = ''; // Vacía el contenido del div dinámico
+    selectedUsersContainer.innerHTML = '';
 
-    // Mostrar mensaje predeterminado cuando está vacío
     const noUsersMessage = document.createElement('div');
     noUsersMessage.textContent = 'No hay participantes seleccionados.';
     selectedUsersContainer.appendChild(noUsersMessage);
 
-    // Limpieza de errores
     const errorMessage = document.getElementById('error-message');
     if (errorMessage) {
-        errorMessage.textContent = ''; // Limpia el mensaje de error, si existe
+        errorMessage.textContent = '';
     }
 });
 
