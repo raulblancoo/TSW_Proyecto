@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const conceptoPago = document.getElementById("payment_concept");
     const dividedPayment = document.getElementById("divided_payment");
 
-    const generalErrorContainer = document.getElementById("divErrores"); // Asumiendo que ya existe en el HTML
-    generalErrorContainer.style.display = "none"; // Asegurarse que está oculto inicialmente
+    const generalErrorContainer = document.getElementById("divErrores");
+    generalErrorContainer.style.display = "none";
 
     function addErrorMessage(message) {
         const errorList = generalErrorContainer.querySelector("ul");
@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
         language = "sp";
         event.preventDefault();
         let errors = [];
-        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
-        generalErrorContainer.style.display = "none"; // Limpiar y ocultar errores previos
+        generalErrorContainer.querySelector("ul").innerHTML = "";
+        generalErrorContainer.style.display = "none";
         if(imgElement.includes("united")){
             language = "unit";
         }else if(imgElement.includes("ita")){
@@ -109,21 +109,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 break;
         }
         if (errors.length > 0) {
-            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            generalErrorContainer.style.display = "block";
             errors.forEach(error => addErrorMessage(error));
         } else {
-            form.submit(); // Enviar formulario si no hay errores
+            form.submit();
         }
 
     });
     function comprobacionCheckbox(){
-        // Seleccionar todos los checkboxes con el name "destinationUsers"
+
         const checkboxes = document.querySelectorAll('input[name="destinationUsers"]');
 
-        // Filtrar los checkboxes que están marcados
+
         const selectedUsers = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value); // Obtener el valor (id del usuario) de los seleccionados
+            .map(checkbox => checkbox.value);
 
         if (selectedUsers.length > 0) {
             return true;
