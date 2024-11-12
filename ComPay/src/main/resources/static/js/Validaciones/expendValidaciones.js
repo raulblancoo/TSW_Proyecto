@@ -40,8 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
                     errors.push("Ningún campo puede ir vacío.");
-                } else if (sumasReparto() != pagoCantidad.value) {
+                } else if (sumasReparto() != pagoCantidad.value &&  dividedPayment.value == "PARTESDESIGUALES") {
                     errors.push("El reparto especificado no suma la cantidad total");
+                }else if(sumasReparto() != 100 &&  dividedPayment.value == "PORCENTAJES"){
+                    errors.push("Los porcentajes especificado no suma el 100%");
                 }
                 if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
                     errors.push("No existe este método de división del pago.");
@@ -54,8 +56,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
                     errors.push("Nessun campo può essere vuoto.");
-                } else if (sumasReparto() != pagoCantidad.value) {
+                } else if (sumasReparto() != pagoCantidad.value &&  dividedPayment.value == "PARTESDESIGUALES") {
                     errors.push("La ripartizione specificata non corrisponde all'importo totale.");
+                }
+                else if(sumasReparto() != 100 &&  dividedPayment.value == "PORCENTAJES"){
+                    errors.push("El porsintage specificata non corrisponde all cen por cento.");
                 }
                 if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
                     errors.push("Metodo di divisione del pagamento non esistente.");
@@ -68,8 +73,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
                     errors.push("No field can be empty.");
-                } else if (sumasReparto() != pagoCantidad.value) {
+                } else if (sumasReparto() != pagoCantidad.value &&  dividedPayment.value == "PARTESDESIGUALES") {
                     errors.push("The specified distribution does not sum to the total amount.");
+                }
+                else if(sumasReparto() != 100 &&  dividedPayment.value == "PORCENTAJES"){
+                    errors.push("The specified porcentage does not add up to 100%.");
                 }
                 if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
                     errors.push("This payment division method does not exist.");
@@ -113,10 +121,11 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
     function sumasReparto(){
+        totalEnteredAmount = 0;
         document.querySelectorAll('.user-input').forEach(input => {
             totalEnteredAmount += parseFloat(input.value) || 0;
         });
-        return totalEnteredAmount/2;
+        return totalEnteredAmount;
     }
 
 
