@@ -33,17 +33,11 @@ document.addEventListener("DOMContentLoaded", () => {
             case "es":
                 flagUrl = "https://cdn.icon-icons.com/icons2/1531/PNG/512/3253482-flag-spain-icon_106784.png";
                 break;
-            case "pt":
-                flagUrl = "https://cdn.icon-icons.com/icons2/107/PNG/512/portugal_18280.png";
-                break;
             case "en":
                 flagUrl = "https://cdn.icon-icons.com/icons2/107/PNG/512/united_kingdom_flag_flags_18060.png";
                 break;
             case "it":
                 flagUrl = "https://cdn.icon-icons.com/icons2/107/PNG/512/italy_18275.png";
-                break;
-            case "cs":
-                flagUrl = "https://cdn.icon-icons.com/icons2/107/PNG/512/czech_republic_18215.png";
                 break;
             default:
                 return;

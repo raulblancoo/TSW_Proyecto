@@ -32,11 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
             language = "unit";
         }else if(imgElement.includes("ita")){
             language = "ita";
-        }else if(imgElement.includes("cz")){
-            language = "cz"
-        }else if(imgElement.includes("port")){
-            language = "por"
-
         }
         switch (language) {
             case "sp": // Español
@@ -80,35 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     errors.push("This payment division method does not exist.");
                 }
                 break;
-
-            case "por": // Portugués
-                if (pagoCantidad.value <= 0) {
-                    errors.push("O valor do pagamento não pode ser 0.");
-                }
-                if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
-                    errors.push("Nenhum campo pode estar vazio.");
-                } else if (sumasReparto() != pagoCantidad.value) {
-                    errors.push("A divisão especificada não soma ao valor total.");
-                }
-                if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
-                    errors.push("Método de divisão do pagamento não existente.");
-                }
-                break;
-
-            case "cz": // Checo
-                if (pagoCantidad.value <= 0) {
-                    errors.push("Částka platby nemůže být 0.");
-                }
-                if (!payerSelect.value.trim() || !pagoCantidad.value.trim() || !conceptoPago.value.trim() || !validarReparto() || !comprobacionCheckbox()) {
-                    errors.push("Žádné pole nemůže být prázdné.");
-                } else if (sumasReparto() != pagoCantidad.value) {
-                    errors.push("Uvedené rozdělení nesouhlasí s celkovou částkou.");
-                }
-                if (dividedPayment.value !== "PARTESIGUALES" && dividedPayment.value !== "PARTESDESIGUALES" && dividedPayment.value !== "PORCENTAJES") {
-                    errors.push("Tento způsob rozdělení platby neexistuje.");
-                }
-                break;
-
             default:
                 break;
         }
