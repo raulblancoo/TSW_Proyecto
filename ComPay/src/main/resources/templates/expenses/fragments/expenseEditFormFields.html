@@ -4,7 +4,7 @@
           th:object="${expense}" method="post">
         <div class="mb-4">
             <label for="edit_payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
-            <select required id="edit_payer_select" th:field="*{originUserId}"
+            <select  id="edit_payer_select" th:field="*{originUserId}"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
 
                 <option selected th:value="${usuario.id}"
@@ -40,7 +40,7 @@
             <label for="edit_payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
             <input type="text" id="edit_payment_concept" th:field="*{name}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                   placeholder="Escriba un concepto" required/>
+                   placeholder="Escriba un concepto" />
         </div>
 
         <div class="mb-4">
@@ -49,7 +49,7 @@
                 <input type="number" step="any" id="edit_payment_amount" th:field="*{amount}"
                        onchange="editUpdateSelectedUsers()"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                       placeholder="Introduzca la cantidad" required/>
+                       placeholder="Introduzca la cantidad" />
                 <div class="ml-2 flex-shrink-0">
                     <span th:text="${group.currency == 'EURO' ? '€' : (group.currency == 'DOLAR' ? '$' : '')}" class="text-gray-700 text-xl"></span>
                 </div>
@@ -58,7 +58,7 @@
 
         <div class="mb-4">
             <label for="edit_divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
-            <select required id="edit_divided_payment"
+            <select  id="edit_divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                     th:field="*{share_method}" onchange="editUpdateSelectedUsers()()">
                 <!-- Primer option seleccionado por defecto -->
@@ -78,6 +78,21 @@
         <!-- Div oculto que contiene el formulario adicional -->
         <div id="edit-selected-users" class="mt-4 p-2 border border-gray-300 bg-gray-100 text-slate-700">
             No hay participantes seleccionados.
+        </div>
+
+        <div id="editDivErrores" style="display: none;"
+             class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+             role="alert">
+            <div class="flex items-center">
+                <svg class="flex-shrink-0 w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                     fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="font-medium" th:text="#{text.expenses.form.create.errors}"></span>
+            </div>
+            <div>
+                <ul class="mt-1.5 list-disc list-inside" id="errorList"></ul>
+            </div>
         </div>
 
 <!--         Modal Footer-->

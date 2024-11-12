@@ -80,10 +80,6 @@ function closeModal() {
         modal.classList.add("hidden")
     }
 }
-document.getElementById("editPaymentForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    this.submit();
-});
 
 function editUpdateSelectedUsers() {
     const checkboxes = document.querySelectorAll('.user-edit-checkbox');
