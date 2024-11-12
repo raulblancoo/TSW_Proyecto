@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     formRegister.appendChild(errorRegisterContainer);
 
+
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const regexNames = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
 
@@ -60,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return errors;
     }
 
+
     formLogin.addEventListener("submit", function (event) {
         event.preventDefault();
         errorLoginContainer.innerHTML = "";
@@ -71,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formLogin.submit();
         }
     });
+
 
     formRegister.addEventListener("submit", function (event) {
         event.preventDefault();
