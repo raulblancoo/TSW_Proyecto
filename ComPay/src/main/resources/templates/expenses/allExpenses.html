@@ -2,10 +2,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Lista de Gastos</title>
+    <title>Compay - Historial de Gastos</title>
     <link th:href="@{/main.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/png" th:href="@{/images/favicon/favicon-96x96.png}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon/favicon.svg}"/>
+    <link rel="shortcut icon" th:href="@{/images/favicon/favicon.ico}"/>
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicon/apple-touch-icon.png}"/>
+    <meta name="apple-mobile-web-app-title" content="ComPay" />
+    <link rel="manifest" th:href="@{/images/favicon/site.webmanifest}"/>
 </head>
-
 
 <body class="min-h-screen flex flex-col">
 <header>
@@ -16,7 +21,7 @@
     <div class="max-w-6xl mx-auto my-8">
         <div class="container mx-auto px-6">
             <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16"
-            th:text="#{text.allExpenses.history}"></h3>
+                th:text="#{text.allExpenses.history}"></h3>
 
             <div th:if="${expenses.isEmpty()}">
                 <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.allExpenses.noExpenses}"></p>

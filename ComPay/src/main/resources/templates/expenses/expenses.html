@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos</title>
+    <title>Compay - Gastos</title>
     <link th:href="@{/main.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/png" th:href="@{/images/favicon/favicon-96x96.png}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon/favicon.svg}"/>
+    <link rel="shortcut icon" th:href="@{/images/favicon/favicon.ico}"/>
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicon/apple-touch-icon.png}"/>
+    <meta name="apple-mobile-web-app-title" content="ComPay" />
+    <link rel="manifest" th:href="@{/images/favicon/site.webmanifest}"/>
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -20,7 +26,8 @@
     <!-- Mostrar el mensaje de error si existe el errorInvalidUser -->
     <div th:if="${errorInvalidUser}" class="flex items-center justify-center mx-auto mt-3">
         <div class="flex items-center p-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
             <div class="ml-3">
@@ -32,7 +39,8 @@
     <!-- Mostrar el mensaje de error si existe el errorAlreadyIn -->
     <div th:if="${errorAlreadyIn}" class="flex items-center justify-center mx-auto mt-3">
         <div class="flex items-center p-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                 fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
             </svg>
             <div class="ml-3">
