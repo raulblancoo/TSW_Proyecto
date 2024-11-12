@@ -33,6 +33,6 @@ public class LoginController {
         userDto.setAvatarURL(avatarURL);
         model.addAttribute("user", userDto);
         userService.saveUser(userDto);
-        return "index";
+        return "login/login";
     }
 }
