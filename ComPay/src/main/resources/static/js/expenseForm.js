@@ -2,12 +2,13 @@ document.addEventListener('DOMContentLoaded', function () {
     updateSelectedUsers();
 });
 
-
 function updateSelectedUsers() {
+
     const checkboxes = document.querySelectorAll('.user-checkbox');
     const selectedUsersContainer = document.getElementById('selected-users');
     const amount = parseFloat(document.getElementById('payment_amount').value) || 0;
     const shareMethod = document.getElementById('divided_payment').value || "PARTESIGUALES";
+    errorMessage = true;
 
     selectedUsersContainer.innerHTML = '';
     let selectedUsers = [];
@@ -138,6 +139,7 @@ function updateSelectedUsers() {
             selectedUsersContainer.appendChild(userDiv);
         });
     }
+
 }
 
 
