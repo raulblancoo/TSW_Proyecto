@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,55 +13,29 @@
     <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicon/apple-touch-icon.png}"/>
     <meta name="apple-mobile-web-app-title" content="ComPay"/>
     <link rel="manifest" th:href="@{/images/favicon/site.webmanifest}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
 
-<main>
+<body class="min-h-screen bg-gradient-to-r from-blue-500 to-blue-900 flex items-center justify-center">
+<div class="text-center">
+    <!-- Título con icono -->
+    <h1 class="text-white text-5xl font-bold flex items-center justify-center gap-2 mb-6">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+             class="size-8">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M15 8.25H9m6 3H9m3 6-3-3h1.5a3 3 0 1 0 0-6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+        </svg>
+        ComPay
+    </h1>
+    <!-- Botón centrado -->
+    <a href="/login">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg focus:ring-4 focus:ring-blue-300">
+            ¡Haz clic aquí!
+        </button>
+    </a>
+</div>
 
-    <div class="contenedor__todo">
-        <div class="caja__trasera">
-            <div class="caja__trasera-login">
-                <h3>¿Ya tienes una cuenta?</h3>
-                <p>Inicia sesión para entrar en la página</p>
-                <button id="btn__iniciar-sesion">Iniciar Sesión</button>
-            </div>
-            <div class="caja__trasera-register">
-                <h3>¿Aún no tienes una cuenta?</h3>
-                <p>Regístrate para que puedas iniciar sesión</p>
-                <button id="btn__registrarse">Regístrarse</button>
-            </div>
-        </div>
-
-        <!--Formulario de Login y registro-->
-        <div class="contenedor__login-register">
-            <!--Login-->
-            <form method="post" th:action="@{/login}" th:object="${login}" class="formulario__login" id="login-form">
-                <h2>Iniciar Sesión</h2>
-                <input type="text" field="*{username}" placeholder="Correo Electronico" name="username" id="loginEmail">
-                <input type="password" field="*{password}" placeholder="Contraseña" name="password" id="loginPsw">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                <button>Entrar</button>
-            </form>
-
-            <!--Register-->
-            <form method="post" th:action="@{/register}" th:object="${user}" class="formulario__register"
-                  id="register-form">
-                <h2>Regístrarse</h2>
-                <!-- <input type="text" th:field="*{}" placeholder="Nombre completo"> -->
-                <input type="text" field="*{name}" placeholder="Nombre" name="name" id="registerName">
-                <input type="text" field="*{surname}" placeholder="Apellidos" name="surname" id="registerSurname">
-                <input type="text" field="*{email}" placeholder="Correo Electronico" name="email" id="registerEmail">
-                <input type="text" field="*{username}" placeholder="Usuario" name="username" id="registerUserName">
-                <input type="password" field="*{password}" placeholder="Contraseña" name="password" id="registerPsw">
-                <button>Regístrarse</button>
-            </form>
-        </div>
-    </div>
-
-</main>
-
-<script th:src="@{/js/script.js}"></script>
-<script th:src="@{/js/Validaciones/loginValidaciones.js}"></script>
-<script th:src="@{/js/languageSelector.js}"></script>
 </body>
 </html>
