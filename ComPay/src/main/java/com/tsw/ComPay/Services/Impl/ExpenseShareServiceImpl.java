@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -106,10 +107,12 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
             Map.Entry<UserModel, Double> creditor = maxHeap.poll();
 
             double amount = Math.min(-debtor.getValue(), creditor.getValue());
+            BigDecimal bdAmount = new BigDecimal(amount).setScale(2, RoundingMode.HALF_UP);
+            amount = bdAmount.doubleValue();
             BizumsDto bizum = new BizumsDto();
             bizum.setDebtUser(createUserDto(debtor.getKey()));
             bizum.setLoanUser(createUserDto(creditor.getKey()));
-            bizum.setAmount(amount);
+            bizum.setAmount(bdAmount.doubleValue());
 
             bizumsTransactions.add(bizum);
 
