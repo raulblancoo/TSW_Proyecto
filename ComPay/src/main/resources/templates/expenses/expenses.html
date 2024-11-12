@@ -21,7 +21,7 @@
     <div>
         <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
         <div th:if="${expenses.isEmpty()}">
-            <div th:replace="~{base/fragments/emptyMessage :: emptyMessage('No hay gastos registrados para este grupo.')}"></div>
+            <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.expenses.noExpenses}"></p>
         </div>
 
         <!-- Fragmento que muestra la lista cuando hay gastos -->
@@ -32,8 +32,8 @@
 <!-- Botón Fijado al Centro Inferior de la Página -->
 <div class="fixed bottom-16 left-1/2 transform -translate-x-1/2 z-50">
     <button data-modal-target="paymentModal" data-modal-toggle="paymentModal"
-            class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300">
-        Añadir Pago
+            class="bg-sky-500 text-white px-6 py-3 rounded-full shadow-lg hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-300"
+            th:text="#{text.expenses.addExpense}">
     </button>
 </div>
 

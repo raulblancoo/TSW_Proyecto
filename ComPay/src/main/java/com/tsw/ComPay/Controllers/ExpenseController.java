@@ -7,6 +7,7 @@ import com.tsw.ComPay.Repositories.ExpenseShareRepository;
 import com.tsw.ComPay.Repositories.ExpensesRepository;
 import com.tsw.ComPay.Repositories.GroupMembersRepository;
 import com.tsw.ComPay.Services.*;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class ExpenseController {
     @GetMapping("/{groupId}")
     public String viewGroupDetails(@ModelAttribute("expense") NewExpenseDto newExpenseDto,
                                    @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto,
-                                   @PathVariable("groupId") Long groupId, Model model) {
+                                   @PathVariable("groupId") Long groupId, HttpServletRequest request, Model model) {
         GroupDto group = groupService.findGroupById(groupId);
         group.setAmount(expensesService.calculateTotalExpenseByGroupId(groupId));
         List<ExpensesDto> expenses = expensesService.findByGroup(groupId);
@@ -53,6 +54,7 @@ public class ExpenseController {
         model.addAttribute("expenseMethods", expenseMethods);
 
         model.addAttribute("usuario", authenticatedUser);
+        model.addAttribute("currentUri", request.getRequestURI());
         model.addAttribute("group", group);
         model.addAttribute("expenses", expenses);
         model.addAttribute("debts", debts);

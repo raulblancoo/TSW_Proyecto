@@ -7,7 +7,7 @@
             </h3>
             <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
             <div th:if="${groups.isEmpty()}">
-                <div th:replace="~{base/fragments/emptyMessage :: emptyMessage('No hay ningún grupo.')}"></div>
+                <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.groups.noGroups}"></p>
             </div>
 
             <!-- COMPONENTE DE GRUPO -->
