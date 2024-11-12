@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     formRegister.appendChild(errorRegisterContainer);
 
 
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const regexNames = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
-
 
     function validacionesLogin() {
         let errors = [];
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return errors;
     }
-
 
     function validacionesRegister() {
         let errors = [];

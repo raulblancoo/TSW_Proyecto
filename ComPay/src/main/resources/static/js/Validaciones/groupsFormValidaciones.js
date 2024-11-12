@@ -223,6 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
+
     function addErrorMessage(message) {
         const errorList = generalErrorContainer.querySelector("ul");
         const existingErrors = Array.from(errorList.children).map(item => item.textContent);
@@ -245,7 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (groupNameError) {
             errors.push(groupNameError);
         }
-
 
         if (emailList.children.length === 0) {
             let errorMessage = "";
@@ -271,6 +271,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             errors.push(errorMessage);
         }
+
 
         if (currency.value !== "DOLAR" && currency.value !== "EURO") {
             let errorMessage = "";

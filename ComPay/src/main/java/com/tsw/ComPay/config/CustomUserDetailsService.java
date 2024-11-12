@@ -4,24 +4,16 @@ import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.UserAuthDto;
 import com.tsw.ComPay.Dto.UserDto;
-import com.tsw.ComPay.Mapper.GroupMapper;
 import com.tsw.ComPay.Mapper.GroupMembersMapper;
-import com.tsw.ComPay.Mapper.NewGroupMapper;
 import com.tsw.ComPay.Mapper.UserMapper;
-import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Repositories.GroupMembersRepository;
-import com.tsw.ComPay.Repositories.GroupRepository;
 import com.tsw.ComPay.Repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

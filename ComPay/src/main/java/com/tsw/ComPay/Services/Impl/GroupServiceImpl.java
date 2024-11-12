@@ -3,7 +3,6 @@ package com.tsw.ComPay.Services.Impl;
 import com.tsw.ComPay.Dto.GroupDto;
 import com.tsw.ComPay.Dto.GroupMembersDto;
 import com.tsw.ComPay.Dto.NewGroupDto;
-import com.tsw.ComPay.Dto.UserDto;
 import com.tsw.ComPay.Mapper.GroupMapper;
 import com.tsw.ComPay.Mapper.GroupMembersMapper;
 import com.tsw.ComPay.Mapper.NewGroupMapper;
@@ -21,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @RequiredArgsConstructor

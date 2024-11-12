@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("paymentForm");
+
     const payerSelect = document.getElementById("payer_select");
     const pagoCantidad = document.getElementById("payment_amount");
     const conceptoPago = document.getElementById("payment_concept");
     const dividedPayment = document.getElementById("divided_payment");
+
 
     const generalErrorContainer = document.getElementById("divErrores");
     generalErrorContainer.style.display = "none";
@@ -23,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         language = "sp";
         event.preventDefault();
         let errors = [];
+
         generalErrorContainer.querySelector("ul").innerHTML = "";
         generalErrorContainer.style.display = "none";
         if(imgElement.includes("united")){
@@ -33,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
             language = "cz"
         }else if(imgElement.includes("port")){
             language = "por"
+
         }
         switch (language) {
             case "sp": // Español

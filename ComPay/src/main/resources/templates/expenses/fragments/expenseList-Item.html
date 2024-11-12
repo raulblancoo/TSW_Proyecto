@@ -13,8 +13,6 @@
         <span class="font-bold uppercase" th:text="${expense.expense_name}">motivo del pago</span>
     </p>
 
-<!--    TODO : cambiar el users por realmente aquellos usuarios que si están incluidos en el pago-->
-
     <!-- Grupo de imágenes para pantallas grandes -->
     <div class="hidden lg:flex items-center mr-1">
         <!-- Iterar solo sobre los dos primeros usuarios -->
@@ -54,11 +52,8 @@
             <li>
                 <a href="#"
                    class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
-                   data-id="${expense.id}"
-                   data-modal-target="editPaymentModal"
-                   data-modal-toggle="editPaymentModal"
-                   th:text="#{text.expenses.edit}">
-<!--                    th:attr="data-id=${expense.id}, data-group-id=${group.id}"-->
+                   th:text="#{text.expenses.edit}"
+                   th:attr="data-id=${expense.id}, data-group-id=${group.id}">
                 </a>
             </li>
             <li>

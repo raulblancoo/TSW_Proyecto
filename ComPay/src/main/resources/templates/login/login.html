@@ -17,7 +17,6 @@
 <body>
 
 <main>
-
   <div class="contenedor__todo">
     <div class="caja__trasera">
       <div class="caja__trasera-login">
@@ -37,8 +36,8 @@
       <!--Login-->
       <form method="post" th:action="@{/login}" th:object="${login}" class="formulario__login" >
         <h2>Iniciar Sesión</h2>
-        <input type="text" field="*{email}" placeholder="Correo Electrónico" name="email" >
-        <input type="password" field="*{password}" placeholder="Contraseña" name="password" >
+        <input type="text" placeholder="Correo Electrónico" name="username" >
+        <input type="password" placeholder="Contraseña" name="password" >
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <button>Entrar</button>
       </form>
