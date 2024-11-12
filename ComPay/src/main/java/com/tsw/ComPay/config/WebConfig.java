@@ -19,7 +19,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         CookieLocaleResolver resolver = new CookieLocaleResolver();
-        //resolver.setDefaultLocale(new Locale("es")); // Idioma por defecto (español)
+        resolver.setDefaultLocale(new Locale("es")); // Idioma por defecto (español)
         //resolver.setCookieName("language");
         //resolver.setCookieMaxAge(3600); // La cookie durará 1 hora
         return resolver;
@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-        messageSource.setBasenames("messages", "messages_en"); // tus archivos de propiedades
+        messageSource.setBasenames("messages", "messages_en" , "messages_es"); // tus archivos de propiedades
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
     }
