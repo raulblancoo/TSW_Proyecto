@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (errors.length > 0) {
-            generalErrorContainer.style.display = "block"; s
+            generalErrorContainer.style.display = "block";
             errors.forEach(error => addErrorMessage(error));
         } else {
             form.submit();
