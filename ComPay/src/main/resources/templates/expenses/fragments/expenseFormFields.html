@@ -105,9 +105,4 @@
     </form>
 </div>
 
-<!-- TODO: COMPROBAR SI ESTO ME SIRVE PARA PASARLE ERRORES AL JS Y PODER METERLOS DESDE AHI-->
-<script th:inline="javascript">
-    const noParticipantsMessage = /*[[${noParticipantsMessage}]]*/ '';
-    const errorMessage = /*[[${errorMessage}]]*/ '';
-</script>
 <script th:src="@{/js/Validaciones/expendValidaciones.js}"></script>

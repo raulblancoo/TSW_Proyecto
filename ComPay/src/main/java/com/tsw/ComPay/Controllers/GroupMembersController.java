@@ -25,21 +25,7 @@ public class GroupMembersController {
     private final UserService userService;
     private final GroupMembersService groupMembersService;
     private final ExpenseShareService expenseShareService;
-
-
-//    @GetMapping("/group/expenses/{groupId}/addMember")
-//    public String view(Model model, @PathVariable("groupId") Long groupId, @ModelAttribute("members") NewGroupMemberDto newGroupMemberDto) {
-//        GroupDto grupo = groupService.findGroupById(groupId);
-//
-//        for (String email : newGroupMemberDto.getEmails()) {
-//            // TODO LOGICA PARA SACAR LOS USERDTO A PARTIR DE EMAILS
-//            UserDto user = userService.findByEmail(email);
-//        }
-//
-//        return "redirect:/group/expenses/" + groupId;
-//    }
-
-
+    
     @PostMapping("/group/expenses/{groupId}/addMember")
     public String createNewGroupMember(
             Model model,

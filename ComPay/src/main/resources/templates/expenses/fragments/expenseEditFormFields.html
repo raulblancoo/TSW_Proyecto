@@ -1,5 +1,4 @@
 <div th:fragment="expensesEditFormFields" class="max-w-xl mx-auto p-6">
-<!--     TODO: Cambiar acción para la que quieras-->
     <form id="editPaymentForm"
           th:action="@{/group/expenses/update/{groupId}/{expenseId}(groupId=${group.id}, expenseId=${expense.id})}"
           th:object="${expense}" method="post">
