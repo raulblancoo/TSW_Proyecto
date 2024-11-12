@@ -4,40 +4,35 @@ package com.tsw.ComPay.Controllers;
 import com.tsw.ComPay.Dto.LoginDto;
 import com.tsw.ComPay.Dto.UserDto;
 import com.tsw.ComPay.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
+@RequiredArgsConstructor
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @GetMapping("/register")
-    public String register(Model model) {
-        return "index";
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("login", new LoginDto());
+        return "login/login";
+    }
+
+    @GetMapping("/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("login", new LoginDto());
+        return "login/login";
     }
 
     @PostMapping("/register")
     public String registerPost(Model model, @ModelAttribute("user") UserDto userDto) {
+        String avatarURL = "https://ui-avatars.com/api?name=" + userDto.getName() + "+" + userDto.getSurname();
+        userDto.setAvatarURL(avatarURL);
         model.addAttribute("user", userDto);
         userService.saveUser(userDto);
-        return "index";
-    }
-
-    /*
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new LoginDto());
-        return "index";
-    }*/
-
-    @PostMapping("/login")
-    public String loginPost(Model model, @ModelAttribute("login") LoginDto loginDto) {
-        model.addAttribute("login", loginDto);
-        return userService.findByEmailPassword(loginDto.getEmail(), loginDto.getPassword()) != null ? "redirect:/groups/show" : "index";
+        return "login/login";
     }
 }

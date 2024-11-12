@@ -16,6 +16,12 @@ public class UserModel {
     @Column(name="id")
     private long id;
 
+    @Column(name="name")
+    private String name;
+
+    @Column(name="surname")
+    private String surname;
+
     @Column(name="username")
     private String username;
 
@@ -25,4 +31,6 @@ public class UserModel {
     @Column(name="password")
     private String password;
 
+    @Column(name="avatarURL")
+    private String avatarURL;
 }

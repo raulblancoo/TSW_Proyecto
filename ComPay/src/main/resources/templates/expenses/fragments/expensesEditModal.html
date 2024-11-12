@@ -1,0 +1,22 @@
+<!-- Modal para Crear Pago -->
+<div th:fragment="expensesEditModal" id="editPaymentModal" tabindex="-1"
+     class="fixed inset-0 items-center justify-center z-50 bg-gray-800 bg-opacity-50 hidden">
+    <div class="relative bg-white rounded-lg shadow-lg w-full max-w-xl md:max-w-2xl max-h-[100vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center p-5 border-b border-gray-200 rounded-t">
+            <h3 class="text-xl font-medium text-gray-900">Editar pago</h3>
+            <button type="button" class="text-gray-400 hover:text-gray-900" onclick="closeModal()" data-modal-hide="editPaymentModal">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                     stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <!-- Modal Body -->
+        <div class="p-6 space-y-4"
+             th:replace="~{expenses/fragments/expenseEditFormFields :: expensesEditFormFields}"
+        ></div>
+    </div>
+</div>
+
+<script src="https://flowbite.com/docs/flowbite.min.js"></script>

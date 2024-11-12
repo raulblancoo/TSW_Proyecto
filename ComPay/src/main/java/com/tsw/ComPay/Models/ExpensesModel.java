@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,15 +19,25 @@ public class ExpensesModel {
     @Column(name="id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name="amount")
     private double amount;
 
-    @Column(name="expenses_name")
-    private String expenses_name;
+    @Column(name="expense_name")
+    private String expense_name;
+
+    @Column(name="expense_date")
+    private Date expense_date;
 
     @ManyToOne
-    @JoinColumn(name = "originUser_id")
+    @JoinColumn(name = "FK_USER")
     private UserModel originUser;
+
+    @ManyToOne
+    @JoinColumn(name="FK_GROUP")
+    private GroupModel group;
+
+    @Column(name="share_method")
+    private String share_method;
 }

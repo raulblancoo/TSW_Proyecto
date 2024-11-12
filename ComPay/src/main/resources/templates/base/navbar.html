@@ -1,64 +1,54 @@
 <nav th:fragment="navbar" class="bg-white shadow">
     <div class="shadow px-5">
-        <div class="flex justify-between h-16 items-center max-w-6xl mx-auto">
-            <!-- BOTÓN MENU -->
-            <button class="text-slate-500 hover:bg-sky-500 hover:text-slate-100 transition-colors rounded p-1 -ml-1 focus:ring-2 ">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                     stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
-                </svg>
-            </button>
-            <div class="flex -mr-4 items-center">
+        <div class="flex justify-between items-center h-16 max-w-6xl mx-auto">
+            <div class="block sm:invisible">
+                <button data-collapse-toggle="navbar-collapse" type="button"
+                        class="text-slate-500 hover:bg-sky-500 hover:text-slate-100 transition-colors rounded p-1 -ml-1 focus:ring-2"
+                        aria-controls="navbar-collapse" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                         stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex items-center">
                 <!-- LOGO COMPAY -->
-                <a class="text-sky-500 hover:rotate-6 duration-200"
-                   href="#">
+                <a class="text-sky-500 hover:rotate-6 duration-200" th:href="@{/groups}">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                          stroke="currentColor" class="size-8">
                         <path stroke-linecap="round" stroke-linejoin="round"
                               d="M15 8.25H9m6 3H9m3 6-3-3h1.5a3 3 0 1 0 0-6M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                     </svg>
-
-
                 </a>
+
+                <!-- Menú de navegación horizontal -->
                 <div class="space-x-6 ml-6 hidden sm:flex">
-                    <a href="#" class="text-sky-500 px-3 py-2 ">Grupos</a>
-                    <a href="#" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Amigos</a>
-                    <a href="#" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Pagos</a>
-                    <a href="#" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors">Deudas</a>
+                    <a th:href="@{/groups}" class="text-sky-500 px-3 py-2" th:text="#{text.groups.header.groups}"></a>
+                    <a th:href="@{/expenses}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors" th:text="#{text.groups.header.payments}"></a>
+                    <a th:href="@{/debts}" class="text-slate-700 px-3 py-2 hover:text-sky-500 transition-colors" th:text="#{text.groups.header.debts}"></a>
                 </div>
             </div>
-            <!-- BOTONES DERECHA -->
-            <div class="flex">
-                <button class="text-slate-500 hover:text-sky-500 transition-colors rounded-full focus:ring-2 focus:ring-slate-200 focus:ring-offset-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                         stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
-                    </svg>
-                </button>
-                <button class="ml-4 text-slate-500 hover:text-sky-500 transition-colors rounded-full focus:ring-2 focus:ring-slate-200 focus:ring-offset-1">
-                    <img class="h6 w-6 rounded-full"
-                         src="https://ui-avatars.com/api?name=Raul+Blanco" alt="RBG">
-                </button>
+            <!-- Botones en la parte derecha -->
+            <div class="flex items-center space-x-4">
+                <!-- Selector de idioma -->
+                <div th:replace="~{base/fragments/languageSelector :: languageSelector}"></div>
+
+                <!-- Avatar -->
+                <div th:replace="~{base/fragments/avatarDropdown :: avatarDropdown}"></div>
             </div>
+
         </div>
     </div>
-    <div class="space-y-1 pb-3 border-t-3 pt-2 sm:hidden">
-        <a href="#" class="block bg-sky-500 text-white px-3 py-2 rounded-md transition-color">
-            Grupos
+    <!-- Menú desplegable en pantallas pequeñas -->
+    <div class="space-y-1 pb-3 border-t-3 pt-2 sm:hidden" id="navbar-collapse">
+        <a th:href="@{/groups}" class="block bg-sky-500 text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.groups}">
         </a>
-        <a href="#"
-           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
-            Amigos
+        <a th:href="@{/expenses}"
+           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.payments}">
         </a>
-        <a href="#"
-           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
-            Pagos
-        </a>
-        <a href="#"
-           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color">
-            Deudas
+        <a th:href="@{/debts}"
+           class="block text-slate-700 hover:bg-sky-500 hover:text-white px-3 py-2 rounded-md transition-color" th:text="#{text.groups.header.debts}">
         </a>
     </div>
 </nav>

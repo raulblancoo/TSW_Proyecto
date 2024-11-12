@@ -1,0 +1,49 @@
+<!-- templates/expenses/allExpenses.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <title>Compay - Historial de deudas</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/png" th:href="@{/images/favicon/favicon-96x96.png}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon/favicon.svg}"/>
+    <link rel="shortcut icon" th:href="@{/images/favicon/favicon.ico}"/>
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/images/favicon/apple-touch-icon.png}"/>
+    <meta name="apple-mobile-web-app-title" content="ComPay" />
+    <link rel="manifest" th:href="@{/images/favicon/site.webmanifest}"/>
+</head>
+
+<body class="min-h-screen flex flex-col">
+<header>
+    <div th:replace="~{base/navbar :: navbar}"></div>
+</header>
+
+<main class="flex-grow overflow-y-auto pb-24">
+    <div class="max-w-6xl mx-auto my-8">
+        <div class="container mx-auto px-6">
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase mt-16"
+                th:text="#{text.allDebts.history}"></h3>
+
+            <div th:if="${debts.isEmpty()}">
+                <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.allDebts.noDebts}"></p>
+            </div>
+
+            <!-- Componente de deudas -->
+            <div class="container mx-auto px-6 mt-8 h-100">
+                <div th:each="debt : ${debts}">
+                    <div th:replace="~{expenses/fragments/debtItem.html :: debtCard(${debt})}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div th:replace="~{base/footer :: footer}"></div>
+</footer>
+</body>
+</html>
+
+<script th:src="@{/js/languageSelector.js}"></script>
+<script th:src="@{/js/Validaciones/expendValidaciones.js}"></script>
+<script th:src="@{/js/Validaciones/editExpenseValidaciones.js}"></script>
+<script src="https://flowbite.com/docs/flowbite.min.js"></script>

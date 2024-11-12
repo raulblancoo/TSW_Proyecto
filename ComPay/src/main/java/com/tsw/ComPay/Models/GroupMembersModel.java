@@ -20,11 +20,9 @@ public class GroupMembersModel {
     private long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
     private UserModel user;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "group_id")
     private GroupModel group;
 }
 

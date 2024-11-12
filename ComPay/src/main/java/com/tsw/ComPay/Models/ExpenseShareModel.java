@@ -20,12 +20,12 @@ public class ExpenseShareModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "expense_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
     private ExpensesModel expense;
 
-    @ManyToOne
-    @JoinColumn(name = "destinyUser_id")
+    @ManyToOne(cascade = CascadeType.MERGE)
     private UserModel destinyUser;
+
+    private Double debt;
 
 }

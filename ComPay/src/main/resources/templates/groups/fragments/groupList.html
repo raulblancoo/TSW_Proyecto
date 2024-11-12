@@ -2,7 +2,14 @@
 <div th:fragment="groupList" class="max-w-6xl mx-auto my-8">
     <div class="container mx-auto px-6">
         <div class="mt-16">
-            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase">Mis grupos</h3>
+            <h3 class="flex justify-center text-2xl text-slate-700 font-medium uppercase"
+                th:text="#{text.groups.title}">
+            </h3>
+            <!-- Fragmento que muestra el mensaje cuando no hay gastos -->
+            <div th:if="${groups.isEmpty()}">
+                <p class="text-gray-500 text-lg text-center mt-10" th:text="#{text.groups.noGroups}"></p>
+            </div>
+
             <!-- COMPONENTE DE GRUPO -->
             <div class="grid gap-6 grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 mt-6">
                 <!-- Iteramos sobre la lista de grupos y llamamos al fragmento de grupo para cada uno -->

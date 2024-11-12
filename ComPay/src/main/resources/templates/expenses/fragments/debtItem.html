@@ -1,0 +1,54 @@
+<!-- templates/expenses/fragments/debtItem.html -->
+<div th:fragment="debtCard(debt)" th:if="${debt != null}">
+    <!-- Contenedor principal del componente de deuda -->
+    <div class="mt-8 shadow rounded-lg bg-gray-200 flex justify-between items-center px-5 py-3 hover:bg-gray-400 cursor-pointer transition duration-300 focus:bg-gray-500 mb-6">
+
+        <!-- Avatar e información del usuario que generó el gasto -->
+        <div class="hidden md:flex items-center">
+            <img class="w-10 h-10 rounded-full" th:src="${debt.expense.originUser.avatarURL}"
+                 th:alt="${debt.expense.originUser.username}">
+            <div class="ml-4">
+                <p class="text-sm font-semibold text-gray-900"
+                   th:text="${debt.expense.originUser.name + ' ' + debt.expense.originUser.surname}"></p>
+                <p class="text-sm text-gray-500" th:text="${debt.expense.originUser.email}"></p>
+            </div>
+        </div>
+
+        <!-- Información del usuario y del gasto en pantallas pequeñas -->
+        <div class="flex md:hidden justify-items-start">
+            <p class="text-sm font-semibold text-gray-900" th:text="${debt.expense.originUser.name + ' ' + debt.expense.originUser.surname}">Nombre del usuario</p>
+        </div>
+
+        <!-- Información del gasto -->
+        <div>
+            <p class="text-slate-600">
+                <!-- Motivo del gasto para pantallas grandes -->
+                <span class="hidden md:flex text-lg font-semibold">
+                    <span th:text="${debt.expense.expense_name}"></span>
+                    (<span th:text="${debt.expense.amount}"></span>
+                    <span th:text="${debt.expense.group.currency == 'EURO' ? '€' : (debt.expense.group.currency == 'DOLAR' ? '$' : debt.expense.group.currency)}"></span>)
+                </span>
+
+                <!-- Motivo del gasto para pantallas pequeñas -->
+                <span class="flex md:hidden text-sm">
+                    <span th:text="${debt.expense.expense_name}"></span>
+                </span>
+            </p>
+        </div>
+
+        <!-- Información de la deuda -->
+        <div>
+            <!-- Deuda en pantallas grandes -->
+            <p class="hidden md:flex text-red-600 font-bold uppercase">
+                <span th:text="#{text.allDebts.debt(${debt.debt})}"></span>
+                <span th:text="${debt.expense.group.currency == 'EURO' ? '€' : (debt.expense.group.currency == 'DOLAR' ? '$' : debt.expense.group.currency)}"></span>
+            </p>
+
+            <!-- Deuda en pantallas pequeñas -->
+            <p class="flex md:hidden text-red-600 font-bold uppercase">
+                <span th:text="${debt.debt}"></span>
+                <span th:text="${debt.expense.group.currency == 'EURO' ? '€' : (debt.expense.group.currency == 'DOLAR' ? '$' : debt.expense.group.currency)}"></span>
+            </p>
+        </div>
+    </div>
+</div>

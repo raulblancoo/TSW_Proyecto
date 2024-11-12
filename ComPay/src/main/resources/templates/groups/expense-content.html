@@ -1,8 +1,0 @@
-<!-- fragments/content.html -->
-<div th:fragment="expense-content">
-    <div class="text-gray-400 mb-4">Total balance: $0.00</div>
-    <div class="space-y-4">
-        <div th:each="expense : ${expenses}" th:replace="~{groups/expense-item :: expenseItem(${expense})}"></div>
-    </div>
-    <button class="mt-8 bg-gray-700 text-white py-2 px-4 rounded-full">Añadir un gasto</button>
-</div>

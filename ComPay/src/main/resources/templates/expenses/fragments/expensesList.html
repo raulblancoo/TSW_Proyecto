@@ -1,0 +1,16 @@
+<!-- templates/expenses/fragments/expensesList.html -->
+<div th:fragment="expenseList(expenses)" class="max-w-6xl mx-auto">
+    <div class="container mx-auto px-6 pb-24">
+        <div th:each="expense, stat : ${expenses}">
+            <!-- Mostrar la fecha solo si es el primer gasto de un grupo por fecha -->
+            <div th:if="${stat.index == 0 or expense.expense_date != expenses[stat.index - 1].expense_date}">
+                <div th:replace="~{expenses/fragments/expenseDate :: expenseDate(${expense})}"></div>
+            </div>
+
+            <!-- Lista de gastos individuales -->
+            <div class="mt-8 h-100">
+                <div th:replace="~{expenses/fragments/expenseList-Item :: expenseCard(${expense})}"></div>
+            </div>
+        </div>
+    </div>
+</div>
