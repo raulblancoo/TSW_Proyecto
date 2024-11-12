@@ -115,6 +115,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const imgElement = document.getElementById("main-lang-flag").getAttribute("src");
         language = "sp";
         toret = "";
+        if(imgElement.includes("united")){
+            language = "unit";
+        }else if(imgElement.includes("ita")){
+            language = "ita";
+        }else if(imgElement.includes("cz")){
+            language = "cz"
+        }else if(imgElement.includes("port")){
+            language = "por"
+
+        }
 
         generalErrorContainer.style.display = "none";
 
