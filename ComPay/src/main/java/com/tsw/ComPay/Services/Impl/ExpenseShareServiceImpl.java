@@ -1,16 +1,19 @@
 package com.tsw.ComPay.Services.Impl;
 
 import com.tsw.ComPay.Dto.*;
+import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import com.tsw.ComPay.Mapper.ExpenseShareMapper;
 import com.tsw.ComPay.Models.ExpenseShareModel;
 import com.tsw.ComPay.Models.ExpensesModel;
 import com.tsw.ComPay.Models.UserModel;
 import com.tsw.ComPay.Repositories.ExpenseShareRepository;
+import com.tsw.ComPay.Repositories.ExpensesRepository;
 import com.tsw.ComPay.Services.ExpenseShareService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 @Service
@@ -19,6 +22,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
 
     private final ExpenseShareRepository expenseShareRepository;
     private final ExpenseShareMapper expenseShareMapper;
+    private final ExpensesRepository expensesRepository;
 
     public void save(UserDto user, ExpensesDto expenseDto, Double debt) {
 
@@ -37,6 +41,14 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
     @Transactional
     public void delete(Long id) {
         expenseShareRepository.deleteByExpenseId(id);
+    }
+
+    @Transactional
+    public void update(NewExpenseDto newExpenseDto, Long expenseId, Long groupId) {
+        expenseShareRepository.deleteByExpenseId(expenseId);
+        int i = 0;
+
+
     }
 
     @Override
@@ -66,6 +78,7 @@ public class ExpenseShareServiceImpl implements ExpenseShareService {
         List<UserModel> uniqueUsers = findUniqueUsers(groupId);
         return createDebtDtos(uniqueUsers, loanMap, debtMap);
     }
+
 
     @Override
     public List<BizumsDto> findUsersBizumsByGroupId(Long groupId) {
