@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const conceptoPago = document.getElementById("payment_concept").value;
     const checkboxUsers = document.getElementById("checkbox");
     const dividedPayment = document.getElementById("divided_payment").value;
-    const generalErrorContainer = document.getElementById("divErrores"); // Asumiendo que ya existe en el HTML
-    generalErrorContainer.style.display = "none"; // Asegurarse que está oculto inicialmente
+    const generalErrorContainer = document.getElementById("divErrores");
+    generalErrorContainer.style.display = "none";
 
     function addErrorMessage(message) {
         const errorItem = document.createElement("li");
@@ -17,8 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     form.addEventListener("submit", function (event){
         event.preventDefault();
         let errors = [];
-        generalErrorContainer.style.display = "none"; // Limpiar y ocultar errores previos
-        generalErrorContainer.querySelector("ul").innerHTML = ""; // Limpiar lista de errores
+        generalErrorContainer.style.display = "none";
+        generalErrorContainer.querySelector("ul").innerHTML = "";
 
         if(!payerSelect.trim() || !pagoCantidad.trim() || !conceptoPago.trim()){
             errors.push("Ningún campo puede ir vacío");
@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
             errors.push("No existe este metodo de división del pago")
         }
         if (errors.length > 0) {
-            generalErrorContainer.style.display = "block"; // Mostrar el contenedor de errores
+            generalErrorContainer.style.display = "block";
             errors.forEach(error => addErrorMessage(error));
         } else {
-            form.submit(); // Enviar formulario si no hay errores
+            form.submit();
         }
 
     });
