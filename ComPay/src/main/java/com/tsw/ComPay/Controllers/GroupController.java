@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.ArrayList;
@@ -52,17 +53,25 @@ public class GroupController {
     }
 
     @PostMapping("/create")
-    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto) {
+    public String createGroup(Model model, @ModelAttribute("group") NewGroupDto newGroupDto, RedirectAttributes redirectAttributes) {
         UserAuthDto authenticatedUser = (UserAuthDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long id = groupService.saveGroup(newGroupDto);
         List<String> emails = new ArrayList<>(List.of(newGroupDto.getEmails()));
         emails.add(authenticatedUser.getEmail());
+
+        for (String email : emails) {
+            if (userService.findByEmail(email) == null) {
+                redirectAttributes.addFlashAttribute("error", "An error occurred");
+                return "redirect:/groups";
+            }
+        }
+
+        long id = groupService.saveGroup(newGroupDto);
 
         for (String email : emails) {
             groupMembersService.saveGroupMember(groupService.findGroupById(id), userService.findByEmail(email));
         }
 
-        authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail())); // Actualiza la sesión con los grupos nuevos
+        authenticatedUser.setGroup(groupService.actualizarGrupos(authenticatedUser.getEmail()));
 
         return "redirect:/groups";
     }
