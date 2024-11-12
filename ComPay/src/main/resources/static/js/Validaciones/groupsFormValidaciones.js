@@ -19,10 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
             language = "unit";
         }else if(imgElement.includes("ita")){
             language = "ita";
-        }else if(imgElement.includes("cz")){
-            language = "cz"
-        }else if(imgElement.includes("port")){
-            language = "por"
         }
         switch (language) {
             case "sp":
@@ -69,37 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     toret = toret.concat("Group name contains invalid characters. ");
                 }
                 break;
-
-            case "por":
-                if (!groupNameInput.value.trim()) {
-                    toret = toret.concat("O nome do grupo é obrigatório. ");
-                }
-                if (groupNameInput.value.length > 20) {
-                    toret = toret.concat("O nome do grupo não deve exceder 20 caracteres. ");
-                }
-                if (userGroups.includes(groupNameInput.value)) {
-                    toret = toret.concat("Este nome de grupo já existe. ");
-                }
-                if (!regexGroupName.test(groupNameInput.value)) {
-                    toret = toret.concat("O nome do grupo contém caracteres não permitidos. ");
-                }
-                break;
-
-            case "cz":
-                if (!groupNameInput.value.trim()) {
-                    toret = toret.concat("Název skupiny je povinný. ");
-                }
-                if (groupNameInput.value.length > 20) {
-                    toret = toret.concat("Název skupiny nesmí přesáhnout 20 znaků. ");
-                }
-                if (userGroups.includes(groupNameInput.value)) {
-                    toret = toret.concat("Název této skupiny již existuje. ");
-                }
-                if (!regexGroupName.test(groupNameInput.value)) {
-                    toret = toret.concat("Název skupiny obsahuje nepovolené znaky. ");
-                }
-                break;
-
             default:
                 toret = "Idioma no soportado.";
                 break;
@@ -119,11 +84,6 @@ document.addEventListener("DOMContentLoaded", function () {
             language = "unit";
         }else if(imgElement.includes("ita")){
             language = "ita";
-        }else if(imgElement.includes("cz")){
-            language = "cz"
-        }else if(imgElement.includes("port")){
-            language = "por"
-
         }
 
         generalErrorContainer.style.display = "none";
@@ -168,12 +128,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     case "unit": // Inglés
                         errorMessage = "This email has already been added.";
                         break;
-                    case "por": // Portugués
-                        errorMessage = "Este email já foi adicionado.";
-                        break;
-                    case "cz": // Checo
-                        errorMessage = "Tento email byl již přidán.";
-                        break;
                     default:
                         errorMessage = "Idioma no soportado.";
                         break;
@@ -192,12 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
                         break;
                     case "unit":
                         errorMessage = "You cannot add yourself to the participant list.";
-                        break;
-                    case "por":
-                        errorMessage = "Você não pode se adicionar à lista de participantes.";
-                        break;
-                    case "cz":
-                        errorMessage = "Nemůžete se přidat do seznamu účastníků.";
                         break;
                     default:
                         errorMessage = "Idioma no soportado.";
@@ -219,12 +167,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 case "unit":
                     errorMessage = "Please enter a valid email address.";
-                    break;
-                case "por":
-                    errorMessage = "Por favor, insira um endereço de e-mail válido.";
-                    break;
-                case "cz":
-                    errorMessage = "Zadejte prosím platnou e-mailovou adresu.";
                     break;
                 default:
                     errorMessage = "Idioma no soportado.";
@@ -272,12 +214,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 case "unit": // Inglés
                     errorMessage = "You must add at least one email before submitting the form.";
                     break;
-                case "por": // Portugués
-                    errorMessage = "Você deve adicionar pelo menos um e-mail antes de enviar o formulário.";
-                    break;
-                case "cz": // Checo
-                    errorMessage = "Musíte přidat alespoň jeden e-mail před odesláním formuláře.";
-                    break;
                 default:
                     errorMessage = "Idioma no soportado.";
                     break;
@@ -297,12 +233,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
                 case "unit":
                     errorMessage = "The selected currency is not allowed.";
-                    break;
-                case "por":
-                    errorMessage = "A moeda selecionada não é permitida.";
-                    break;
-                case "cz":
-                    errorMessage = "Vybraná měna není povolena.";
                     break;
                 default:
                     errorMessage = "Idioma no soportado.";
