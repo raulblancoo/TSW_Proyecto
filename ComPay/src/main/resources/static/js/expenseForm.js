@@ -171,7 +171,7 @@ function validateAmountPorcentaje(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
+        //document.getElementById('error-message').textContent = 'La suma de las cantidades no es igual a la cantidad total.';
     } else {
         document.getElementById('error-message').textContent = '';
     }

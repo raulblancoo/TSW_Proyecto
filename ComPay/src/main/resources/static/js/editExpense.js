@@ -242,7 +242,7 @@ function editValidateAmountPorcentaje(totalEnteredAmount, amount) {
     }
 
     if (totalEnteredAmount !== amount) {
-        document.getElementById('error-message').textContent = 'La suma de los porcentajes no es igual al 100%.';
+       // document.getElementById('error-message').textContent = 'La suma de los porcentajes no es igual al 100%.';
     } else {
         document.getElementById('error-message').textContent = '';
     }
