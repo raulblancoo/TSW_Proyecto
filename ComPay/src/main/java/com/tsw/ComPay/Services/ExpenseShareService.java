@@ -9,6 +9,7 @@ import java.util.List;
 public interface ExpenseShareService {
     void save(UserDto user, ExpensesDto expenseDto, Double debt);
     void delete(Long expenseId);
+    void update(NewExpenseDto newExpenseDto, Long expenseId, Long groupId );
     List<ExpensesShareDto> findByExpenseId(Long expenseId);
     List<ExpensesShareDto> findByGroupId(Long groupId);
     List<ExpensesShareDto> findByPayerId(Long payerId);

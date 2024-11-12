@@ -52,14 +52,9 @@
          class="hidden bg-gray-200 divide-y divide-gray-100 rounded-lg shadow w-40">
         <ul class="py-2 text-sm text-gray-700" th:attr="aria-labelledby='dropdownMenuIconButton-' + ${expense.id}">
             <li>
-<!--                TODO: LOGICA DE EDIT-->
                 <a href="#"
                    class="block px-4 py-2 hover:bg-gray-100 hover:text-black"
-                   data-id="${expense.id}"
-                   data-modal-target="editPaymentModal"
-                   data-modal-toggle="editPaymentModal">
-<!--                   onclick="openEditExpenseModal(this)"-->
-
+                   th:attr="data-id=${expense.id}, data-group-id=${group.id}">
                     Editar
                 </a>
             </li>
@@ -72,3 +67,4 @@
 </div>
 
 <script src="https://flowbite.com/docs/flowbite.min.js"></script>
+

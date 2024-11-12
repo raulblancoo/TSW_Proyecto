@@ -10,6 +10,7 @@ import com.tsw.ComPay.Models.ExpensesModel;
 
 import com.tsw.ComPay.Repositories.ExpensesRepository;
 import com.tsw.ComPay.Services.ExpensesService;
+import com.tsw.ComPay.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +27,26 @@ public class ExpensesServiceImpl implements ExpensesService {
     private final NewExpenseMapper newExpenseMapper;
 
     private final ExpenseMapper expenseMapper;
+    private final UserService userService;
 
     public ExpensesDto save(NewExpenseDto expensesDto) {
         ExpensesModel expense =  expensesRepository.save(newExpenseMapper.toEntity(expensesDto));
 
         return expenseMapper.toDto(expense);
+    }
+
+    public ExpensesDto update(NewExpenseDto newExpenseDto, Long id) {
+
+        ExpensesDto expense = expenseMapper.toDto(expensesRepository.findExpensesModelById(id));
+
+        expense.setExpense_name(newExpenseDto.getName());
+        expense.setAmount(newExpenseDto.getAmount());
+        expense.setOriginUser(userService.findByUserId(newExpenseDto.getOriginUserId()));
+        expense.setShare_method(newExpenseDto.getShare_method());
+
+       ExpensesModel expenseModel = expensesRepository.save(expenseMapper.toEntity(expense));
+
+        return expenseMapper.toDto(expenseModel);
     }
 
     @Transactional
@@ -45,13 +61,16 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     @Override
     public List<ExpensesDto> findByGroup(Long groupId) {
-        // TODO
         return expenseMapper.toListDto(expensesRepository.findExpensesModelByGroup_IdOrderByExpense_dateDesc(groupId));
     }
 
     @Override
     public List<ExpensesDto> findExpensesByPayerId(Long userId) {
         return expenseMapper.toListDto(expensesRepository.findExpensesModelByOriginUser_IdOrderByExpense_dateDesc(userId));
+    }
+
+    public ExpensesDto findById(Long id) {
+        return expenseMapper.toDto(expensesRepository.findExpensesModelById(id));
     }
 
     @Override
