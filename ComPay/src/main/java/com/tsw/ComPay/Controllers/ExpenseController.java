@@ -9,6 +9,7 @@ import com.tsw.ComPay.Repositories.GroupMembersRepository;
 import com.tsw.ComPay.Services.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,11 +86,38 @@ public class ExpenseController {
         return "redirect:/group/expenses/" + groupId;
     }
 
+    @GetMapping("edit/{groupId}/{expenseId}")
+    public ResponseEntity<Map<String, Object>> updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId) {
 
-    // TODO : Logica del edit
-    @PutMapping("update/{groupId}/{expenseId}")
+        ExpensesDto expense  = expensesService.findById(expenseId);
+        GroupDto group = groupService.findGroupById(groupId);
+        List<Long> users = userService.getUserByExpenseId(expenseId).stream().map(UserDto::getId).toList();
+        List<Double> debts = expenseShareService.findByExpenseId(expenseId).stream().map(ExpensesShareDto::getDebt).toList();
+
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("users", users);
+        response.put("expense", expense);
+        response.put("group", group);
+        response.put("debts", debts);
+
+        return ResponseEntity.ok(response);
+
+    }
+
+    @PostMapping("edit/{groupId}/{expenseId}")
     public String updateExpense(@PathVariable Long groupId, @PathVariable Long expenseId, @ModelAttribute("expense") NewExpenseDto newExpenseDto) {
-        // Redireccionar a la vista de gastos del grupo
+
+        ExpensesDto expense = expensesService.update(newExpenseDto, expenseId);
+        expenseShareService.delete(expenseId);
+        for (Long userId : newExpenseDto.getDestinationUsers()) {
+                expenseShareService.save(userService.findByUserId(userId), expense,
+                        newExpenseDto.getShare_method().equals(ExpenseMethodEnum.PORCENTAJES)
+                                ? newExpenseDto.getDebts()[userId.intValue()] * expense.getAmount() / 100
+                                : newExpenseDto.getDebts()[userId.intValue()]);
+
+        }
+
         return "redirect:/group/expenses/" + groupId;
     }
 

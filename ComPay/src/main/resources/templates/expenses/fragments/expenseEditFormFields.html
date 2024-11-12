@@ -4,8 +4,8 @@
           th:action="@{/group/expenses/update/{groupId}/{expenseId}(groupId=${group.id}, expenseId=${expense.id})}"
           th:object="${expense}" method="post">
         <div class="mb-4">
-            <label for="payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
-            <select required id="payer_select" th:field="*{originUserId}"
+            <label for="edit_payer_select" class="block text-sm font-medium text-gray-700">PAGADO POR</label>
+            <select required id="edit_payer_select" th:field="*{originUserId}"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer">
 
                 <option selected th:value="${usuario.id}"
@@ -18,6 +18,8 @@
             </select>
         </div>
 
+        <span id="prueba"></span>
+
         <div class="mb-4">
             <label class="block text-sm font-medium text-gray-700">PARTICIPANTES</label>
             <div class="grid grid-cols-2">
@@ -25,8 +27,8 @@
                     <div class="flex items-center">
                         <input type="checkbox" name="destinationUsers" th:value="${user.id}"
                                th:id="${'user_' + user.id}"
-                               class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500 user-checkbox"
-                               onchange="updateSelectedUsers()">
+                               class="text-sky-500 border-slate-400 focus:ring-0 focus:border-sky-500 user-checkbox user-edit-checkbox"
+                               onchange="editUpdateSelectedUsers()()">
                         <label th:for="${'user_' + user.id}" class="ml-2 text-slate-700 whitespace-nowrap"
                                th:text="${user.name + ' ' + user.surname}"></label>
                     </div>
@@ -36,17 +38,17 @@
 
 
         <div class="mb-4">
-            <label for="payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
-            <input type="text" id="payment_concept" th:field="*{name}"
+            <label for="edit_payment_concept" class="block text-sm font-medium text-gray-700">CONCEPTO DEL PAGO</label>
+            <input type="text" id="edit_payment_concept" th:field="*{name}"
                    class="block py-2 px-0 w-full text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                    placeholder="Escriba un concepto" required/>
         </div>
 
         <div class="mb-4">
-            <label for="payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
+            <label for="edit_payment_amount" class="block text-sm font-medium text-gray-700 mb-1">CANTIDAD</label>
             <div class="flex items-center">
-                <input type="number" step="any" id="payment_amount" th:field="*{amount}"
-                       onchange="updateSelectedUsers()"
+                <input type="number" step="any" id="edit_payment_amount" th:field="*{amount}"
+                       onchange="editUpdateSelectedUsers()"
                        class="py-2 px-0 w-40 text-sm text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 appearance-none focus:outline-none focus:ring-0 focus:border-sky-500 peer"
                        placeholder="Introduzca la cantidad" required/>
                 <div class="ml-2 flex-shrink-0">
@@ -56,10 +58,10 @@
         </div>
 
         <div class="mb-4">
-            <label for="divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
-            <select required id="divided_payment"
+            <label for="edit_divided_payment" class="block text-sm font-medium text-gray-700">DIVISIÓN</label>
+            <select required id="edit_divided_payment"
                     class="block py-2 px-0 w-full text-base text-slate-700 bg-transparent border-0 border-b-2 border-slate-400 focus:outline-none focus:ring-0 focus:border-sky-500 peer"
-                    th:field="*{share_method}" onchange="updateSelectedUsers()">
+                    th:field="*{share_method}" onchange="editUpdateSelectedUsers()()">
                 <!-- Primer option seleccionado por defecto -->
                 <option selected th:value="${expenseMethods[0].getCode()}"
                         th:text="${expenseMethods[0]}">
@@ -75,7 +77,7 @@
         </div>
 
         <!-- Div oculto que contiene el formulario adicional -->
-        <div id="selected-users" class="mt-4 p-2 border border-gray-300 bg-gray-100 text-slate-700">
+        <div id="edit-selected-users" class="mt-4 p-2 border border-gray-300 bg-gray-100 text-slate-700">
             No hay participantes seleccionados.
         </div>
 

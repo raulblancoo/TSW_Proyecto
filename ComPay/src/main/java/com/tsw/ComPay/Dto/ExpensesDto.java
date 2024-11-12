@@ -1,5 +1,6 @@
 package com.tsw.ComPay.Dto;
 
+import com.tsw.ComPay.Enums.ExpenseMethodEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,5 +15,5 @@ public class ExpensesDto {
     private UserDto originUser;
     private GroupDto group;
     private Date expense_date;
-    private String share_method;
+    private ExpenseMethodEnum share_method;
 }

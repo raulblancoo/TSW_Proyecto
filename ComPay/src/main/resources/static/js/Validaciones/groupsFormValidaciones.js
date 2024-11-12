@@ -9,26 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Crear contenedor de errores al final del formulario
     const generalErrorContainer = document.getElementById("divErrores"); // Asumiendo que ya existe en el HTML
     generalErrorContainer.style.display = "none"; // Asegurarse que está oculto inicialmente
-
-    // Función para validar el campo de nombre del grupo
     function validateGroupName() {
-        let toret = "";
-        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED\s]*$/;
+        toret = "";
+        const regexGroupName = /^[\x21-\xA8\xAD\xE0-\xED]*$/;
         var userGroups = document.getElementById('userGroups').getAttribute('user-group');
         if (!groupNameInput.value.trim()) {
             toret = toret.concat("El nombre del grupo es obligatorio. ");
-        } else {
-            const groupName = userGroups.split('groupName=')[1].split(',')[0];
-
-            if ((groupName.toLowerCase() === groupNameInput.value.toLocaleLowerCase())) {
-                toret = toret.concat("El nombre de este grupo ya existe. ");
-            }
-            if (groupNameInput.value.length > 20) {
-                toret = toret.concat("El nombre del grupo no debe exceder 20 caracteres. ");
-            }
-            if (!regexGroupName.test(groupNameInput.value)) {
-                toret = toret.concat("El nombre del grupo tiene caracteres no permitidos");
-            }
+        }if (groupNameInput.value.length > 20) {
+            toret = toret.concat("El nombre del grupo no debe exceder 20 caracteres. ");
+        }if(userGroups.includes(groupNameInput.value)){
+            toret = toret.concat("El nombre de este grupo ya existe. ")
+        }if(!regexGroupName.test(groupNameInput.value)){
+            toret = toret.concat("El nombre del grupo tiene caracteres no permitidos");
         }
         return toret;
     }
